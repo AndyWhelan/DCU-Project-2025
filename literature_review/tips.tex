@@ -1,0 +1,160 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amsmath,amsfonts}
+\usepackage{array}
+\usepackage{balance}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+
+\begin{document}
+
+\section{Tables}
+Note that, for IEEE-style tables, the
+ $\backslash${\tt{caption}} command should come BEFORE the table. Table captions use title case. Articles (a, an, the), coordinating conjunctions (and, but, for, or, nor), and most short prepositions are lowercase unless they are the first or last word. Table text will default to $\backslash${\tt{footnotesize}} as
+ the IEEE normally uses this smaller font for tables.
+ The $\backslash${\tt{label}} must come after $\backslash${\tt{caption}} as always.
+ 
+\begin{table}[!t]
+\caption{An Example of a Table\label{tab:table1}}
+\centering
+\begin{tabular}{|c||c|}
+\hline
+One & Two\\
+\hline
+Three & Four\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Algorithms}
+Algorithms should be numbered and include a short title. They are set off from the text with rules above and below the title and after the last line.
+
+\begin{algorithm}[H]
+\caption{Weighted Tanimoto ELM.}\label{alg:alg1}
+\begin{algorithmic}
+\STATE 
+\STATE {\textsc{TRAIN}}$(\mathbf{X} \mathbf{T})$
+\STATE \hspace{0.5cm}$ \textbf{select randomly } W \subset \mathbf{X}  $
+\STATE \hspace{0.5cm}$ N_\mathbf{t} \gets | \{ i : \mathbf{t}_i = \mathbf{t} \} | $ \textbf{ for } $ \mathbf{t}= -1,+1 $
+\STATE \hspace{0.5cm}$ B_i \gets \sqrt{ \textsc{max}(N_{-1},N_{+1}) / N_{\mathbf{t}_i} } $ \textbf{ for } $ i = 1,...,N $
+\STATE \hspace{0.5cm}$ \hat{\mathbf{H}} \gets  B \cdot (\mathbf{X}^T\textbf{W})/( \mathbb{1}\mathbf{X} + \mathbb{1}\textbf{W} - \mathbf{X}^T\textbf{W} ) $
+\STATE \hspace{0.5cm}$ \beta \gets \left ( I/C + \hat{\mathbf{H}}^T\hat{\mathbf{H}} \right )^{-1}(\hat{\mathbf{H}}^T B\cdot \mathbf{T})  $
+\STATE \hspace{0.5cm}\textbf{return}  $\textbf{W},  \beta $
+\STATE 
+\STATE {\textsc{PREDICT}}$(\mathbf{X} )$
+\STATE \hspace{0.5cm}$ \mathbf{H} \gets  (\mathbf{X}^T\textbf{W} )/( \mathbb{1}\mathbf{X}  + \mathbb{1}\textbf{W}- \mathbf{X}^T\textbf{W}  ) $
+\STATE \hspace{0.5cm}\textbf{return}  $\textsc{sign}( \mathbf{H} \beta )$
+\end{algorithmic}
+\label{alg1}
+\end{algorithm}
+
+\section{Multi-Line Equations and Alignment}
+Here we show several examples of multi-line equations and proper alignments.
+
+\noindent {\bf{A single equation that must break over multiple lines due to length with no specific alignment.}}
+\begin{multline}
+\text{The first line of this example}\\
+\text{The second line of this example}\\
+\text{The third line of this example}
+\end{multline}
+
+\noindent is coded as:
+\begin{verbatim}
+\begin{multline}
+\text{The first line of this example}\\
+\text{The second line of this example}\\
+\text{The third line of this example}
+\end{multline}
+\end{verbatim}
+
+\noindent {\bf{A single equation with multiple lines aligned at the = signs}}
+\begin{align}
+a &= c+d \\
+b &= e+f
+\end{align}
+\noindent is coded as:
+\begin{verbatim}
+\begin{align}
+a &= c+d \\
+b &= e+f
+\end{align}
+\end{verbatim}
+
+The {\tt{align}} environment can align on multiple  points as shown in the following example:
+\begin{align}
+x &= y & X & =Y & a &=bc\\
+x' &= y' & X' &=Y' &a' &=bz
+\end{align}
+\noindent is coded as:
+\begin{verbatim}
+\begin{align}
+x &= y & X & =Y & a &=bc\\
+x' &= y' & X' &=Y' &a' &=bz
+\end{align}
+\end{verbatim}
+
+\section{Subnumbering}
+The amsmath package provides a {\tt{subequations}} environment to facilitate subnumbering. An example:
+
+\begin{subequations}\label{eq:2}
+\begin{align}
+f&=g \label{eq:2A}\\
+f' &=g' \label{eq:2B}\\
+\mathcal{L}f &= \mathcal{L}g \label{eq:2c}
+\end{align}
+\end{subequations}
+
+\noindent is coded as:
+\begin{verbatim}
+\begin{subequations}\label{eq:2}
+\begin{align}
+f&=g \label{eq:2A}\\
+f' &=g' \label{eq:2B}\\
+\mathcal{L}f &= \mathcal{L}g \label{eq:2c}
+\end{align}
+\end{subequations}
+
+\end{verbatim}
+
+\section{Cases Structures}
+Many times cases can be miscoded using the wrong environment, i.e., {\tt{array}}. Using the {\tt{cases}} environment will save keystrokes (from not having to type the $\backslash${\tt{left}}$\backslash${\tt{lbrace}}) and automatically provide the correct column alignment.
+\begin{equation*}
+{z_m(t)} = \begin{cases}
+1,&{\text{if}}\ {\beta }_m(t) \\ 
+{0,}&{\text{otherwise.}} 
+\end{cases}
+\end{equation*}
+\noindent is coded as follows:
+\begin{verbatim}
+\begin{equation*}
+{z_m(t)} = 
+\begin{cases}
+1,&{\text{if}}\ {\beta }_m(t),\\ 
+{0,}&{\text{otherwise.}} 
+\end{cases}
+\end{equation*}
+\end{verbatim}
+\noindent Note that the ``\&'' is used to mark the tabular alignment. This is important to get  proper column alignment. Do not use $\backslash${\tt{quad}} or other fixed spaces to try and align the columns. Also, note the use of the $\backslash${\tt{text}} macro for text elements such as ``if'' and ``otherwise
+
+\section{References}
+You can manually copy in the resultant .bbl file and set second argument of $\backslash${\tt{begin}} to the number of references
+ (used to reserve space for the reference number labels box).
+
+You can use a bibliography generated by BibTeX as a .bbl file.
+ BibTeX documentation can be easily obtained at:
+ http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+ The IEEEtran BibTeX style support page is:
+ http://www.michaelshell.org/tex/ieeetran/bibtex/
+ 
+ % argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+\end{document}
