@@ -54,9 +54,29 @@ function R = specReflectance(txD,txH,rxD,rxH,n1,n2,lenWall,perp)
     magR = abs(r);
     R = magR * magR;
 end
-lenWall = 30;
-txD = 5;
+% Plot a range of values for specReflectance for varying rxD,rxH
+txD = 2;
 txH = 10;
-rxInitD = 
-[txD,txH] = tx;
-[rxInitD,rxInitH] = rxInit;
+n1 = 1;
+n2 = 1.5; % e.g. plaster wall
+lenWall = 3*txD;
+perp=true;
+
+steps = 200;
+% rxD goes from txD to 10*txD
+rxD = linspace(0,10*txD,steps);
+% rxH goes from 0 to 0.99*txH
+rxH = linspace(0, 0.99*txH,steps);
+refl = zeros(steps,steps); % initialize
+for i=1:steps
+    for j=1:steps
+        refl(i,j) = specReflectance(txD,txH,rxD(i),rxH(j),n1,n2,lenWall,perp);    
+    end
+end
+surf(rxD,rxH,refl);
+title('Spectral Reflectance Coefficient for varying Rx position')
+subtitle(['Tx dist: ' int2str(txD), ', Tx height: ' int2str(txH)]);
+xlabel('Rx distance')
+ylabel('Rx height')
+%TODO: clean up subtitle and rethink scaling
+%TODO: sensibility checks for graph
