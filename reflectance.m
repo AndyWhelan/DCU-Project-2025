@@ -1,10 +1,10 @@
 %{
 Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
 
-                  tx = (txD,txH)                                              
+                  tx = (tx_d,tx_h)                                              
                                                                           
                          \                                                
-                          \         rxInit = (rxInitD,rxInitH)                  
+                          \         rx_init = (rx_init_d,rx_init_h)                  
                            \                                              
                             \                 /                           
                              \               /                            
@@ -13,69 +13,73 @@ Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
                                 \         /                               
                   +--------------\       /                                
                   |               \     /                                 
-                  | pi/2-angleInc  \   /                                  
+                  | pi/2-angle_inc  \   /                                  
                   |                 \ /                                   
-      (0,0) -------------------- (reflD,0) ------------------ (lenWall,0)
+      (0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
 %}
-function D = specReflPoint(txD,txH,rxD,rxH)
+function D = spec_refl_point(tx_d,tx_h,rx_d,rx_h)
     % No check yet that the line joining image to Rx intersects the wall
-    imgD = txD;
-    imgH = -txH;
+    img_d = tx_d;
+    img_h = -tx_h;
     % Equation of line joining image to Rx, setting y to 0
-    D = imgD - imgH * ((rxD-imgD)/(rxH-imgH));
+    D = img_d - img_h * ((rx_d-img_d)/(rx_h-img_h));
 end
-function A = specAngleInc(txD,txH,rxD,rxH)
-    reflD = specReflPoint(txD,txH,rxD,rxH);
-    A = pi/2 - atan(rxH/reflD);
+function A = spec_angle_inc(tx_d,tx_h,rx_d,rx_h)
+    refl_d = spec_refl_point(tx_d,tx_h,rx_d,rx_h);
+    A = pi/2 - atan(rx_h/refl_d);
 end
-function T = specAngleTran(txD,txH,rxD,rxH,n1,n2)
+function T = spec_angle_tran(tx_d,tx_h,rx_d,rx_h,n1,n2)
     % n1 and n2 are refractive indices
-    angleI = specAngleInc(txD,txH,rxD,rxH);
-    T = asin((n1*sin(angleI))/n2);
+    angle_i = spec_angle_inc(tx_d,tx_h,rx_d,rx_h);
+    T = asin((n1*sin(angle_i))/n2);
 end
-function r = specReflCoeff(txD,txH,rxD,rxH,n1,n2,lenWall,perp)
+function r = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
     % perp is a bool, deciding the EM-wave polarization relative to plane
     % of incidence.
-    reflD = specReflPoint(txD,txH,rxD,rxH);
-    if reflD > lenWall
+    refl_d = spec_refl_point(tx_d,tx_h,rx_d,rx_h);
+    if refl_d > len_wall
         r = 0; % since there won't be a real reflection point
     else
-        angleI = specAngleInc(txD,txH,rxD,rxH);
-        angleT = specAngleTran(txD,txH,rxD,rxH,n1,n2);
+        angle_i = spec_angle_inc(tx_d,tx_h,rx_d,rx_h);
+        angle_t = spec_angle_tran(tx_d,tx_h,rx_d,rx_h,n1,n2);
         if perp
-            r = -(sin(angleI - angleT))/(sin(angleI + angleT));
+            r = -(sin(angle_i - angle_t))/(sin(angle_i + angle_t));
         else
-            r = (tan(angleI - angleT))/(tan(angleI + angleT));
+            r = (tan(angle_i - angle_t))/(tan(angle_i + angle_t));
         end
     end
 end
-function R = specReflectance(txD,txH,rxD,rxH,n1,n2,lenWall,perp)
-    r = specReflCoeff(txD,txH,rxD,rxH,n1,n2,lenWall,perp);
-    magR = abs(r);
-    R = magR * magR;
+function R = spec_reflectance(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
+    r = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp);
+    mag_r = abs(r);
+    R = mag_r * mag_r;
 end
-% Plot a range of values for specReflectance for varying rxD,rxH
-txD = 2;
-txH = 10;
+
+% Plot a range of values for spec_reflectance for varying rx_d,rx_h
+tx_d = 2;
+tx_h = 10;
 n1 = 1;
 n2 = 1.5; % e.g. plaster wall
-lenWall = 3*txD;
-perp=true;
+len_wall = 3*tx_d;
+perp=true; % polarization
 
 steps = 200;
-% rxD goes from txD to 10*txD
-rxD = linspace(0,10*txD,steps);
-% rxH goes from 0 to 0.99*txH
-rxH = linspace(0, 0.99*txH,steps);
-refl = zeros(steps,steps); % initialize
+rx_init_d = 0;
+rx_final_d = 10*tx;
+rx_init_h = 0;
+rx_final_h = 0.99*tx
+
+rx_d = linspace(rx_init_d,rx_final_d,steps);
+rx_h = linspace(rx_init_h,rx_final_h,steps);
+refl = zeros(steps,steps); % initialize matrix of 0s
 for i=1:steps
     for j=1:steps
-        refl(i,j) = specReflectance(txD,txH,rxD(i),rxH(j),n1,n2,lenWall,perp);    
+        refl(i,j) = spec_reflectance(tx_d,tx_h,rx_d(i),rx_h(j),n1,n2,len_wall,perp);    
     end
 end
-surf(rxD,rxH,refl);
-title('Spectral Reflectance Coefficient for varying Rx position')
-subtitle(['Tx dist: ' int2str(txD), ', Tx height: ' int2str(txH)]);
+surf(rx_d,rx_h,refl);
+title('Spectral Reflectance Coefficient for Varying Rx Position')
+subtitle(['Tx dist: ' int2str(tx_d), ', Tx height: ' int2str(tx_h)]);
 xlabel('Rx distance')
 ylabel('Rx height')
 %TODO: clean up subtitle and rethink scaling
