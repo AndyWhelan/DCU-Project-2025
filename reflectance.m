@@ -55,7 +55,7 @@ function R = spec_reflectance(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
     R = mag_r * mag_r;
 end
 
-% Plot a range of values for spec_reflectance for varying rx_d,rx_h
+% 3d-plot a range of values for spec_reflectance for varying rx_d,rx_h
 tx_d = 2;
 tx_h = 10;
 n1 = 1;
@@ -64,7 +64,7 @@ len_wall = 3*tx_d; %TODO: suggest sensible range of values
 perp=true; % polarization. TODO: elaborate
 
 steps = 200;
-%TODO: clean up subtitle and rethink scaling
+%TODO: rethink scaling
 rx_init_d = 0;
 rx_final_d = 10*tx;
 rx_init_h = 0;
@@ -72,7 +72,8 @@ rx_final_h = 0.99*tx
 
 rx_d = linspace(rx_init_d,rx_final_d,steps);
 rx_h = linspace(rx_init_h,rx_final_h,steps);
-refl = zeros(steps,steps); % initialize matrix of 0s
+% populate refl matrix
+refl = zeros(steps,steps);
 for i=1:steps
     for j=1:steps
         refl(i,j) = spec_reflectance(tx_d,tx_h,rx_d(i),rx_h(j),n1,n2,len_wall,perp);    
@@ -80,6 +81,7 @@ for i=1:steps
 end
 surf(rx_d,rx_h,refl);
 title('Spectral Reflectance Coefficient for Varying Rx Position')
+%TODO: clean up subtitle
 subtitle(['Tx dist: ' int2str(tx_d), ', Tx height: ' int2str(tx_h)]);
 xlabel('Rx distance')
 ylabel('Rx height')
