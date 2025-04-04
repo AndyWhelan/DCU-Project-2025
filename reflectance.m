@@ -66,9 +66,9 @@ perp=true; % polarization. TODO: elaborate
 steps = 200;
 %TODO: rethink scaling
 rx_init_d = 0;
-rx_final_d = 10*tx;
+rx_final_d = 10*tx_d;
 rx_init_h = 0;
-rx_final_h = 0.99*tx
+rx_final_h = 0.99*tx_h;
 
 rx_d = linspace(rx_init_d,rx_final_d,steps);
 rx_h = linspace(rx_init_h,rx_final_h,steps);
@@ -82,7 +82,7 @@ end
 surf(rx_d,rx_h,refl);
 title('Spectral Reflectance Coefficient for Varying Rx Position')
 %TODO: clean up subtitle
-subtitle(['Tx dist: ' int2str(tx_d), ', Tx height: ' int2str(tx_h)]);
-xlabel('Rx distance')
-ylabel('Rx height')
+subtitle(['Tx wall-position: ' int2str(tx_d), ', Tx wall-distance: ' int2str(tx_h)]);
+xlabel('Rx wall-position')
+ylabel('Rx wall-distance')
 %TODO: sensibility checks for graph
