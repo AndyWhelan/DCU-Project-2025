@@ -50,8 +50,8 @@ function R = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
     end
 end
 function R = spec_reflectance(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
-    r = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp);
-    mag_r = abs(r);
+    R = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp);
+    mag_r = abs(R);
     R = mag_r * mag_r;
 end
 
