@@ -7,3 +7,12 @@ Function definition for spectral reflection `spec_refl`.
 
 ## [`parameters.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/parameters.m)
 Editable parameters for the plot.
+
+# TODO
+1. Elaborate on spectral reflection coeff
+2. Elaborate on polarisation
+3. Sensibility checks on refl_plot.m graph
+4. Rethink scaling
+5. Reference plaster wall refractive index
+6. Try using the spectral reflectance to calculate the received power for antennas with a radius of tolerance.
+
