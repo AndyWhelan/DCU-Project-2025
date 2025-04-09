@@ -1,8 +1,20 @@
 %{
-3d-plot a range of values for spec_reflectance for varying rx_d,rx_h
+1. Calculate the reflection power coefficients for a range of values
+2. 3d-plot it for varying rx_d,rx_h
 %}
 
 parameters
+% Calculation for plot:
+rx_d = linspace(rx_init_d,rx_final_d,rx_steps);
+rx_h = linspace(rx_init_h,rx_final_h,rx_steps);
+refl = zeros(rx_steps,rx_steps);
+for i=1:rx_steps
+    for j=1:rx_steps
+        refl(i,j) = spec_refl(tx_d,tx_h,rx_d(i),rx_h(j),n1,n2,len_wall,perp);    
+    end
+end
+
+% Plot setup
 surf(rx_d,rx_h,refl);
 title('Specular-Reflectance for Varying Rx Position')
 %TODO: clean up subtitle

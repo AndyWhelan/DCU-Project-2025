@@ -1,6 +1,5 @@
 %{ 
-1. Setup the parameters for the 3d-plot
-2. Calculate the reflection power coefficients for a range of values
+Setup the parameters for the 3d-plot
 %}
 
 % Geometry:
@@ -22,14 +21,3 @@ perp=true; % EM-wave polarization relative to plane of incidence P.
 % Numerical parameters:
 rx_steps = 200; % number of steps for Rx to move from start to finish
 %TODO: rethink scaling
-
-% Calculation:
-rx_d = linspace(rx_init_d,rx_final_d,rx_steps);
-rx_h = linspace(rx_init_h,rx_final_h,rx_steps);
-% populate refl matrix
-refl = zeros(rx_steps,rx_steps);
-for i=1:rx_steps
-    for j=1:rx_steps
-        refl(i,j) = spec_refl(tx_d,tx_h,rx_d(i),rx_h(j),n1,n2,len_wall,perp);    
-    end
-end
