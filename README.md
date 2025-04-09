@@ -1,13 +1,15 @@
+***NB: MATLAB files are separated out and linked. Should clone this repo to get `refl_plot.m` working.***
+
 # Files
 ## [`spec_refl.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/spec_refl.m)
-Function definition for spectral reflection `spec_refl`.
+Function definition for specular reflectance `spec_refl`.
 
 ## [`parameters.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/parameters.m)
 Setup the parameters for the 3d-plot
 
 ## [`refl_plot.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/refl_plot.m)
 1. Calculate the reflection power coefficients for a range of values
-2. 3d-plot it for varying rx_d,rx_h
+2. 3d-plot it for varying Rx positions
 
 # TODO
 1. Rethink scaling
