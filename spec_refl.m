@@ -24,7 +24,8 @@ function R = spec_refl(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
 end
 function R = spec_refl_coeff(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp)
     % perp is a bool, deciding the EM-wave polarization relative to plane
-    % of incidence. TODO: elaborate a little.
+    % of incidence P.
+% If true, it's perpendicular to P; if false, it's parallel.
     refl_d = spec_refl_point(tx_d,tx_h,rx_d,rx_h);
     if refl_d > len_wall
         R = 0; % since there won't be a real reflection point
