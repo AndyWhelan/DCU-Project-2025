@@ -2,23 +2,21 @@
 
 # Setup
 Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
-
-             (tx_d,tx_h)                                              
-                                                                    
-                   \                                                
-                    \          (rx_init_d,rx_init_h)                  
-                     \                                              
-                      \                 /                           
-                       \               /                            
-                        \             /                             
-                         \           /                              
-                          \         /                               
-            +--------------\       /                                
-            |               \     /                                 
-            | pi/2-angle_i   \   /                                  
-            |                 \ /                                   
-(0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
-
+                 (tx_d,tx_h)                                              
+                                                                        
+                       \                                                
+                        \          (rx_init_d,rx_init_h)                  
+                         \                                              
+                          \                 /                           
+                           \               /                            
+                            \             /                             
+                             \           /                              
+                              \         /                               
+                +--------------\       /                                
+                |               \     /                                 
+                | pi/2-angle_i   \   /                                  
+                |                 \ /                                   
+    (0,0) -------------------- (refl_d,0) --------------- (len_wall,0)
 # Folders/Files
 ## [`functions/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/functions/)
 Function definitions for calculating reflectance values.
