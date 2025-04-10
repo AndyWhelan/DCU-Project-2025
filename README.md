@@ -29,6 +29,7 @@ Setup the parameters for the 3d-plot
 2. 3d-plot it.
 
 ## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
+Mainly files from earlier in the project (presentation, lit. review, etc.) but also some notes.
 
 # TODO
 1. Rethink scaling
