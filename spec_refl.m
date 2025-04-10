@@ -1,21 +1,5 @@
 %{
-Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
-
-                   (tx_d,tx_h)                                              
-                                                                          
-                         \                                                
-                          \          (rx_init_d,rx_init_h)                  
-                           \                                              
-                            \                 /                           
-                             \               /                            
-                              \             /                             
-                               \           /                              
-                                \         /                               
-                  +--------------\       /                                
-                  |               \     /                                 
-                  | pi/2-angle_i   \   /                                  
-                  |                 \ /                                   
-      (0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
+Function definition for specular reflectance `spec_refl`.
 %}
 function R = spec_refl(tx_d,tx_h,rx_d,rx_h,n1,n2,len_wall,perp) % reflected power
     % perp decides the EM-wave polarization relative to plane of incidence P.

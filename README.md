@@ -1,5 +1,24 @@
 ***NB: MATLAB files are separated out and linked. Should clone this repo to get `refl_plot.m` working.***
 
+# Setup
+Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
+
+                   (tx_d,tx_h)                                              
+                                                                          
+                         \                                                
+                          \          (rx_init_d,rx_init_h)                  
+                           \                                              
+                            \                 /                           
+                             \               /                            
+                              \             /                             
+                               \           /                              
+                                \         /                               
+                  +--------------\       /                                
+                  |               \     /                                 
+                  | pi/2-angle_i   \   /                                  
+                  |                 \ /                                   
+      (0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
+
 # Files
 ## [`spec_refl.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/spec_refl.m)
 Function definition for specular reflectance `spec_refl`.
