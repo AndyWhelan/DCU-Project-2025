@@ -7,9 +7,9 @@ tx_d = 2;
 tx_h = 10;
 rx_init_d = 0;
 rx_init_h = 0;
-rx_final_d = 10*tx_d;
-rx_final_h = 10*tx_h;
-len_wall = 3*tx_d; %TODO: suggest sensible range of values
+rx_final_d = 10 * tx_d;
+rx_final_h = 10 * tx_h;
+len_wall = 3 * tx_d; %TODO: suggest sensible range of values
 
 % Other physical parameters:
 n1 = 1; % refractive index of air

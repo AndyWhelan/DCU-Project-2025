@@ -3,32 +3,32 @@
 # Setup
 Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
 
-                   (tx_d,tx_h)                                              
-                                                                          
-                         \                                                
-                          \          (rx_init_d,rx_init_h)                  
-                           \                                              
-                            \                 /                           
-                             \               /                            
-                              \             /                             
-                               \           /                              
-                                \         /                               
-                  +--------------\       /                                
-                  |               \     /                                 
-                  | pi/2-angle_i   \   /                                  
-                  |                 \ /                                   
-      (0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
+             (tx_d,tx_h)                                              
+                                                                    
+                   \                                                
+                    \          (rx_init_d,rx_init_h)                  
+                     \                                              
+                      \                 /                           
+                       \               /                            
+                        \             /                             
+                         \           /                              
+                          \         /                               
+            +--------------\       /                                
+            |               \     /                                 
+            | pi/2-angle_i   \   /                                  
+            |                 \ /                                   
+(0,0) -------------------- (refl_d,0) ------------------ (len_wall,0)
 
-# Files
-## [`spec_refl.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/spec_refl.m)
-Function definition for specular reflectance `spec_refl`.
+# Folders/Files
+## [`functions/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/functions/)
+Function definitions for calculating reflectance values.
 
 ## [`parameters.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/parameters.m)
 Setup the parameters for the 3d-plot
 
-## [`refl_plot.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/refl_plot.m)
-1. Calculate the reflection power coefficients for a range of values
-2. 3d-plot it for varying Rx positions
+## [`plot_specular_reflectance.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/plot_specular_reflectance.m)
+1. Calculate the reflection power coefficients for a range of receiver positions,
+2. 3d-plot it.
 
 # TODO
 1. Rethink scaling
