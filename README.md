@@ -28,6 +28,8 @@ Setup the parameters for the 3d-plot
 1. Calculate the reflection power coefficients for a range of receiver positions,
 2. 3d-plot it.
 
+## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
+
 # TODO
 1. Rethink scaling
 2. Sensibility checks on refl_plot.m graph
