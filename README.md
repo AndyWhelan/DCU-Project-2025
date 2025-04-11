@@ -20,7 +20,7 @@
 * Source centred at `( tx_d, tx_h )`,
 * Reflection point `( rx_d, rx_h )` varies between `( rx_init_d, rx_init_h )` and `( rx_final_d, rx_final_h )`,
 ## Assumptions
-* Rx at reflection point currently treated as point source,
+* Rx at reflection point currently treated as a point. **Adjust to either be of fixed length or with a radius of tolerance?**
 * No assumption yet on Tx radiation pattern (just calculation of reflectance for a given ray).
 
 # Folders/Files
@@ -38,7 +38,7 @@ Setup the parameters for the 3d-plot
 ### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review)
 ### [`papers/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/papers)
 ### [`presentation/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/presentation)
-### [`various_notes`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
+### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
 
 # Meetings
 
@@ -58,6 +58,7 @@ Setup the parameters for the 3d-plot
 * **Next Meeting**: should probably have more frequent. Any availability from Friday week?
 
 # TODO
-1. Rethink scaling
-2. Sensibility checks on refl_plot.m graph
-3. Try using the spectral reflectance to calculate the received power for antennas with a radius of tolerance.
+1. Adjust coordinate system to match that in paper of Degli-Esposti.
+2. Rethink scaling
+3. Sensibility checks on refl_plot.m graph
+4. Try using the spectral reflectance to calculate the received power for antennas with a radius of tolerance.
