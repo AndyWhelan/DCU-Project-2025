@@ -35,27 +35,11 @@ Setup the parameters for the 3d-plot
 This folder contains MATLAB files with function definitions for calculating reflectance.
 
 ## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
-### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review)
+### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review/)
+### [`meetings/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/meetings/)
 ### [`papers/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/papers)
 ### [`presentation/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/presentation)
 ### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
-
-# Meetings
-
-## April 11 2025
-
-### Questions
-
-* **Tx/Rx Geometry**: current approach is to calculate reflectance between point sources for one wall of fixed length, with varying receiver positions. **What's the appropriate way to complete this portion? i.e. should we go with:**
-    * **spherical Tx radiation or non-uniform?**
-    * **curved Rx or sphere?**
-* **Vector/Wavenumber Questions**: you had mentioned a complex vector involving `-k*R` for complex arg and `1 / ( sqrt( k*R ))` as the complex magnitude.
-    * **Is `R` the position vector or reflectance?**
-    * **Is there a source for this equation?**
-    * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (`sqrt` of) `R` is wrong. Why would a high reflectance result in small contribution? Also, if it's the position vector, why `sqrt`**
-    * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`. Also, what about the negative sign?**
-    * **I assume we'll be doing a sort of integral/sum over these contributions?**
-* **Next Meeting**: should probably have more frequent. Any availability from Friday week?
 
 # TODO
 1. Adjust coordinate system to match that in paper of Degli-Esposti.
