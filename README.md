@@ -52,7 +52,7 @@ This folder contains MATLAB files with function definitions for calculating refl
 * **Vector/Wavenumber Questions**: you had mentioned a complex vector involving `-k*R` for complex arg and `1 / ( sqrt( k*R ))` as the complex magnitude.
     * **Is `R` the position vector or reflectance?**
     * **Is there a source for this equation?**
-    * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (sqrt of) `R` is wrong. Why would a high reflectance result in small contribution?**
+    * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (`sqrt` of) `R` is wrong. Why would a high reflectance result in small contribution? Also, if it's the position vector, why `sqrt`**
     * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`. Also, what about the negative sign?**
     * **I assume we'll be doing a sort of integral/sum over these contributions?**
 * **Next Meeting**: should probably have more frequent. Any availability from Friday week?
