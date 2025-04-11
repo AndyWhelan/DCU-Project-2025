@@ -29,7 +29,9 @@ Setup the parameters for the 3d-plot
 2. 3d-plot it.
 
 ## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
-Mainly files from earlier in the project (presentation, lit. review, etc.) but also some notes.
+### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review)
+### [`papers/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/papers)
+### [`presentation/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/presentation)
 
 # Meetings
 
@@ -44,7 +46,7 @@ Mainly files from earlier in the project (presentation, lit. review, etc.) but a
     * **Is R the position vector or reflectance?**
     * **Is there a source for this equation?**
     * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (sqrt of) `R` is wrong. Why would a high reflectance result in small contribution?**
-    * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`**
+    * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`. Also, what about the negative sign?**
     * **I assume we'll be doing a sort of integral/sum over these contributions?**
 
 # TODO
