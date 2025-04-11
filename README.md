@@ -41,6 +41,7 @@ Mainly files from earlier in the project (presentation, lit. review, etc.) but a
     * **spherical Tx radiation or non-uniform?**
     * **curved Rx or sphere?**
 * **Vector/Wavenumber Questions**: you had mentioned a complex vector involving `-k*R` for complex arg and `1 / ( sqrt( k*R ))` as the complex magnitude.
+    * **Is R the position vector or reflectance?**
     * **Is there a source for this equation?**
     * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (sqrt of) `R` is wrong. Why would a high reflectance result in small contribution?**
     * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`**
