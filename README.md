@@ -1,12 +1,8 @@
 ***NB: MATLAB files are separated out and linked. Should clone this repo to get `refl_plot.m` working.***
 
-# Setup
-Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
-                 (tx_d,tx_h)                                              
-                                                                        
-                       \                                                
-                        \          (rx_init_d,rx_init_h)                  
-                         \                                              
+                  ( tx_d, tx_h )                                              
+                        \                                                
+                         \             ( rx_d, rx_h )                  
                           \                 /                           
                            \               /                            
                             \             /                             
@@ -14,9 +10,19 @@ Geometry setup: 2d wall of fixed length; fixed Tx; mobile Rx:
                               \         /                               
                 +--------------\       /                                
                 |               \     /                                 
-                | pi/2-angle_i   \   /                                  
+                | pi/2 - angle_i \   /                                  
                 |                 \ /                                   
-    (0,0) -------------------- (refl_d,0) --------------- (len_wall,0)
+    ( 0, 0 ) --------------- ( refl_d, 0 ) ---------- ( len_wall, 0 )
+
+# Setup
+* Wall with fixed length `len_wall`,
+* Origin set at one edge of wall,
+* Source centred at `( tx_d, tx_h )`,
+* Reflection point `( rx_d, rx_h )` varies between `( rx_init_d, rx_init_h )` and `( rx_final_d, rx_final_h )`,
+## Assumptions
+* Rx at reflection point currently treated as point source,
+* No assumption yet on Tx radiation pattern (just calculation of reflectance for a given ray).
+
 # Folders/Files
 ## [`functions/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/functions/)
 Function definitions for calculating reflectance values.
@@ -32,6 +38,7 @@ Setup the parameters for the 3d-plot
 ### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review)
 ### [`papers/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/papers)
 ### [`presentation/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/presentation)
+### [`various_notes`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
 
 # Meetings
 
@@ -48,6 +55,7 @@ Setup the parameters for the 3d-plot
     * **Is the magnitude correct? It seems like having the magnitude be inversely proportional to (sqrt of) `R` is wrong. Why would a high reflectance result in small contribution?**
     * **Is the complex arg correct? I can see a reference to a position vector `r` but not reflectance `R`. Also, what about the negative sign?**
     * **I assume we'll be doing a sort of integral/sum over these contributions?**
+* **Next Meeting**: should probably have more frequent. Any availability from Friday week?
 
 # TODO
 1. Rethink scaling
