@@ -31,6 +31,17 @@ Setup the parameters for the 3d-plot
 ## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
 Mainly files from earlier in the project (presentation, lit. review, etc.) but also some notes.
 
+# Meetings
+
+## April 11 2025
+
+### Questions
+
+1. **Tx/Rx Geometry**: current approach is to calculate reflectance between point sources for one wall of fixed length, with varying receiver positions. **What's the appropriate way to complete this portion? i.e. should we go with:
+	i. 	spherical Tx radiation or non-uniform?
+	ii. 	curved Rx or sphere?**
+2. **Vector/Wavenumber Questions**: you had mentioned a complex vector involving `-k*R` for complex arg and `1 / ( sqrt( k*R ))` as the complex magnitude. I assume we'll be doing a sort of integral/sum over these contributions?
+
 # TODO
 1. Rethink scaling
 2. Sensibility checks on refl_plot.m graph
