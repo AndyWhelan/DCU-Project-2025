@@ -37,9 +37,9 @@ Mainly files from earlier in the project (presentation, lit. review, etc.) but a
 
 ### Questions
 
-* **Tx/Rx Geometry**: current approach is to calculate reflectance between point sources for one wall of fixed length, with varying receiver positions. **What's the appropriate way to complete this portion? i.e. should we go with:
-    * spherical Tx radiation or non-uniform?
-    * curved Rx or sphere?**
+* **Tx/Rx Geometry**: current approach is to calculate reflectance between point sources for one wall of fixed length, with varying receiver positions. **What's the appropriate way to complete this portion? i.e. should we go with:**
+    * **spherical Tx radiation or non-uniform?**
+    * **curved Rx or sphere?**
 * **Vector/Wavenumber Questions**: you had mentioned a complex vector involving `-k*R` for complex arg and `1 / ( sqrt( k*R ))` as the complex magnitude. I assume we'll be doing a sort of integral/sum over these contributions?
 
 # TODO
