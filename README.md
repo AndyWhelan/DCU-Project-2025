@@ -1,4 +1,5 @@
 ***NB: MATLAB files are separated out and linked. Should clone this repo to get `refl_plot.m` working.***
+# Setup
 
                   ( tx_d, tx_h )                                              
                         \                                                
@@ -14,7 +15,6 @@
                 |                 \ /                                   
     ( 0, 0 ) --------------- ( refl_d, 0 ) ---------- ( len_wall, 0 )
 
-# Setup
 * Wall with fixed length `len_wall`,
 * Origin set at one edge of wall,
 * Source centred at `( tx_d, tx_h )`,
