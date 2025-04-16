@@ -30,6 +30,9 @@ Setup the parameters for plots and simulations.
 ## [`plot_cumulative_power_po.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/plot_cumulative_power_po.m)
 Plot the cumulative power or electric field as integrated along the wall.
 
+## [`PO_flat_strip.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/PO_flat_strip.m)
+Conor's code for 2d setup with some indentation, commenting, and minor relabeling.
+
 ## [`old/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/old/)
 Previous files that may be useful later.
 
@@ -44,5 +47,11 @@ MATLAB files with function definitions for calculations.
 ### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
 
 # TODO
-1. Calculate the specular component of power
-2. Generalise the surface (how will this impact calcs?)
+* Seems the graphs don't match when I change the frequency to 3MHz or 30MHz - expected?
+clc meaning matlab* Was there a reason behind choosing the discs per wavelength to be 20?
+* Was there a reason why strip is chosen to be `40 \* wavelength`?
+* The `self` term for diagonal in MoM - demystify? e.g. the 1.781 number...
+* Plan of attack... what should I prioritize:
+    * Adding the diffuse component,
+    * Changing the wall shape (what would this affect in the calcs, e.g. for GO would I need to take into account slope of the wall at PoC, and would I need to take into account multiple bounces?)
+    * Anything else important to vary?
