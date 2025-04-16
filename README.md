@@ -47,9 +47,9 @@ MATLAB files with function definitions for calculations.
 ### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
 
 # TODO
-* Seems the graphs don't match when I change the frequency to 3MHz or 30MHz - expected?
-* Was there a reason behind choosing the discs per wavelength to be 20?
-* Was there a reason why strip is chosen to be `40 \* wavelength`?
+* Why don't the graphs match when I change the frequency to 3MHz or 30MHz?
+* Why is `disc_per_wavelength = 20`?
+* Why is strip length `40 * wavelength`?
 * The `self` term for diagonal in MoM - demystify? e.g. the 1.781 number...
 * Plan of attack... what should I prioritize:
     * Adding the diffuse component,
