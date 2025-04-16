@@ -48,7 +48,7 @@ MATLAB files with function definitions for calculations.
 
 # TODO
 * Seems the graphs don't match when I change the frequency to 3MHz or 30MHz - expected?
-clc meaning matlab* Was there a reason behind choosing the discs per wavelength to be 20?
+* Was there a reason behind choosing the discs per wavelength to be 20?
 * Was there a reason why strip is chosen to be `40 \* wavelength`?
 * The `self` term for diagonal in MoM - demystify? e.g. the 1.781 number...
 * Plan of attack... what should I prioritize:
