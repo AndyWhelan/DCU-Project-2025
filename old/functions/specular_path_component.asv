@@ -7,17 +7,19 @@ function pc = specular_path_component( tx_d, tx_h, rx_d, rx_h, ...
     r2 = norm( rx - wall )
     fc = fresnel_coefficients( tx_d, tx_h, wall_pos, n1, n2, perp )
     hankel_arg = k * ( r1 + r2 )
+    second_hankel_arg = k*r1
 
     fresnel = abs( fc ) * abs( fc )
-    if approx
-        E_i = approx_hankel_2( hankel_arg )
-    else
-        E_i = hankel_2( hankel_arg ) 
-    end
+    E_i = greens_function( hankel_arg )
+    F_i = greens_function( second_hankel_arg )
+  
     phase_evolution_component = exp( -i * k * r2 )
     free_space_attenuation = sqrt( r1/( r1 + r2 ))
-
-    pc = fresnel * E_i * phase_evolution_component * free_space_attenuation 
+    pc = E_i %/F_i
+    %pc = fresnel * E_i 
+end
+function gf = greens_function( kr )
+    gf = (i/4) * hankel_2( kr )
 end
 function fc = fresnel_coefficients( tx_d, tx_h, wall_pos, ... 
                                      n1, n2, perp )

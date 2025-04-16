@@ -1,5 +1,5 @@
-function D = specular_reflected_wall_position( tx_d, tx_h, rx_d, rx_h ) % reflected point wall position
-    % No check yet that the line joining image to Rx intersects the wall
+function D = specular_reflected_wall_position( tx_d, tx_h, rx_d, rx_h )
+% reflected point wall position
     img_d = tx_d;
     img_h = -tx_h;
     % Equation of line joining image to Rx, setting y to 0

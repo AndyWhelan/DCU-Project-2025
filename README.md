@@ -15,24 +15,26 @@
                 |                 \ /                                   
     ( 0, 0 ) --------------- ( refl_d, 0 ) ---------- ( len_wall, 0 )
 
-* Wall with fixed length `len_wall`,
-* Origin set at one edge of wall,
+* Wall with ~~fixed length `len_wall`~~ infinite length,
 * Source centred at `( tx_d, tx_h )`,
 * Reflection point `( rx_d, rx_h )` varies between `( rx_init_d, rx_init_h )` and `( rx_final_d, rx_final_h )`,
+* Wall is P.E.C (perfect electrical conductor)
 ## Assumptions
-* Rx at reflection point currently treated as a point. **Adjust to either be of fixed length or with a radius of tolerance?**
-* No assumption yet on Tx radiation pattern (just calculation of reflectance for a given ray).
+* Rx at reflection point treated as a point.
+* Cylindrical wave emanating from Tx.
 
 # Files
 ## [`parameters.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/parameters.m)
-Setup the parameters for the 3d-plot
+Setup the parameters for plots and simulations.
 
-## [`plot_specular_reflectance.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/plot_specular_reflectance.m)
-1. Calculate the reflection power coefficients for a range of receiver positions,
-2. 3d-plot it.
+## [`plot_cumulative_power_po.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/plot_cumulative_power_po.m)
+Plot the cumulative power or electric field as integrated along the wall.
+
+## [`old/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/old/)
+Previous files that may be useful later.
 
 ## [`functions/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/functions/)
-This folder contains MATLAB files with function definitions for calculating reflectance.
+MATLAB files with function definitions for calculations.
 
 ## [`supplementary_files/`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/supplementary_files/)
 ### [`literature_review/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/literature_review/)
@@ -42,7 +44,5 @@ This folder contains MATLAB files with function definitions for calculating refl
 ### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
 
 # TODO
-1. Adjust coordinate system to match that in paper of Degli-Esposti.
-2. Rethink scaling
-3. Sensibility checks on plot_specular_reflectance.m graph
-4. Try using the spectral reflectance to calculate the received power for antennas with a radius of tolerance.
+1. Calculate the specular component of power
+2. Generalise the surface (how will this impact calcs?)

@@ -1,0 +1,3 @@
+From the following [table](https://en.wikipedia.org/wiki/Green%27s_function#Table_of_Green's_functions) of Green's functions, can see that the one mentioned for 3d-wave equation `e^{-jkR}/(4*pi*R)` corresponds to the Helmholtz operator `H = ∇^2 + k^2`. Furthermore, to find the 2d-analogue, we could use `H = ∇^2 - (ik)^2` and apply the generic `n`-dimensional one for `∇^2 - k^2`.
+
+Doing the above procedure, we end up with the Green's function `(i/4) * H^2_0 (k*r)`. The reason we use the Helmholtz operator is that the wave equations turn into this for time-harmonic fields (we assume electric field is time-harmonic).
