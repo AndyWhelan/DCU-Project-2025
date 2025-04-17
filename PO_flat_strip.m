@@ -76,26 +76,6 @@ for(ct1 = 1:N)
 end
 J = inv(Z)*E_inc_z ; 
 
-figure
-plot(strip_x,real(J_PO_z)) ; 
-hold on
-plot(strip_x,real(J),'r') ; 
-legend('PO','J') ; 
-grid on
-xlabel('x') ; 
-ylabel('real(J)') 
-title('PO versus J - real part')  ;
-
-figure
-plot(strip_x,abs(J_PO_z)) ; 
-hold on
-plot(strip_x,abs(J),'r') ; 
-legend('PO','J') ; 
-grid on
-xlabel('x') ; 
-ylabel('abs(J)') 
-title('PO versus J - abs part')  ;
-
 % Now compute the scattered field along a line in the x direction 
 y_line = 5*lambda ; 
 x_start = 0 ; 
@@ -128,6 +108,26 @@ for(ct1 = 1:no_of_scatter_points)
         end
     end
 end
+
+figure
+plot(strip_x,real(J_PO_z)) ; 
+hold on
+plot(strip_x,real(J),'r') ; 
+legend('PO','J') ; 
+grid on
+xlabel('x') ; 
+ylabel('real(J)') 
+title('PO versus J - real part')  ;
+
+figure
+plot(strip_x,abs(J_PO_z)) ; 
+hold on
+plot(strip_x,abs(J),'r') ; 
+legend('PO','J') ; 
+grid on
+xlabel('x') ; 
+ylabel('abs(J)') 
+title('PO versus J - abs part')  ;
 
 figure
 plot(x_point,real(the_PO_field))

@@ -45,13 +45,3 @@ MATLAB files with function definitions for calculations.
 ### [`papers/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/papers)
 ### [`presentation/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/presentation)
 ### [`various_notes/`](https://github.com/AndyWhelan/DCU-Project-2025/tree/main/supplementary_files/various_notes)
-
-# TODO
-* Why don't the graphs match when I change the frequency to 3MHz or 30MHz?
-* Why is `disc_per_wavelength = 20`?
-* Why is strip length `40 * wavelength`?
-* The `self` term for diagonal in MoM - demystify? e.g. the 1.781 number...
-* Plan of attack... what should I prioritize:
-    * Adding the diffuse component,
-    * Changing the wall shape (what would this affect in the calcs, e.g. for GO would I need to take into account slope of the wall at PoC, and would I need to take into account multiple bounces?)
-    * Anything else important to vary?
