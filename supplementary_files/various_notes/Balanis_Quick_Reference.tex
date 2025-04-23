@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts}
+\usepackage{array}
+\usepackage{cancel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{wasysym}
+\definecolor{linkborder}{RGB}{204,229,255}
+\usepackage{hyperref}\hypersetup{linkbordercolor=linkborder}
+
+\definecolor{vanish}{RGB}{224,224,224}
+\renewcommand{\arraystretch}{2}
+
+\title{Balanis Quick Reference}
+\author{Andrew Whelan}
+\date{}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section*{Notation}
+\small
+\begin{tabular}{ m{4em} m{24em} m{4em} }
+    \( \partial_t \) & \( \displaystyle \frac{\partial}{\partial t}\) & \\
+    \( E \) & Electric Field Intensity & [V/m] \\
+    \( H \) & Magnetic Field Intensity & [A/m] \\
+    \( D \) & Electric Flux Density & [C/m\textsuperscript{2}] \\
+    \( B \) & Magnetic Flux Density & [Wb/m\textsuperscript{2}] \\
+    \( \displaystyle J_{c/d/i} \) & Electric Current Density \textsubscript{(conduction/displacement/impressed)} & [A/m\textsuperscript{2}] \\
+    \( \displaystyle \mathfrak{M}_{d/i} \) & Magnetic Current Density \textsubscript{(displacement/impressed)} & [V/m\textsuperscript{2}] \\
+    \( \displaystyle \rho_{e} \) & Electric Charge Density & [C/m\textsuperscript{2}] \\
+    \( \displaystyle \rho_{m} \) & Magnetic Charge Density & [Wb/m\textsuperscript{2}] \\
+\end{tabular}
+\normalsize
+\newpage
+\section{Basics}
+\subsection{Maxwell's Equations}
+\subsubsection*{Differential Form}
+    \begin{subequations}\label{eq:Maxwell}
+        \begin{align}
+            \text{Maxwell-Faraday} & : & \nabla \times E &= - \partial_t B \begingroup \textcolor{vanish}{- \mathfrak{M}_i } \endgroup \label{eq:MaxwellFaraday} \\
+            \text{Amp\`ere-Maxwell} & : & \nabla \times H &= \ \ \partial_t D + J_{c} + J_{i} \label{eq:AmpereMaxwell} \\
+            \text{Gauss} & : & \nabla \cdot D &= \ \ \rho_e \label{eq:GaussElectric} \\
+            \text{Gauss (Magnetism)} & : & \nabla \cdot B &= \ \ 0 \begingroup \textcolor{vanish}{\quad = \rho_m} \endgroup \label{eq:GaussMagnetic}
+        \end{align}
+    \end{subequations}
+\subsubsection*{Integral Form}
+    \begin{subequations}\label{eq:MaxwellIntegral}
+        \begin{align}
+            \oint_C E \cdot dl &=  - \partial_t \iint_S B \cdot ds \begingroup \textcolor{vanish}{- \iint_S \mathfrak{M_i} \cdot ds} \endgroup \label{eq:MaxwellFaradayIntegral} \\
+            \oint_C H \cdot dl &=  \partial_t \iint_S D \cdot ds + \iint_S ( J_c + J_i ) \cdot ds \label{eq:AmpereMaxwellIntegral} \\
+            \oiint_S D \cdot ds &= \iiint_V \rho_e \cdot dv \label{eq:GaussElectricIntegral} \\
+            \oiint_S B \cdot ds &= \iiint_V \rho_m \cdot dv \label{eq:GaussMagneticIntegral}
+        \end{align}
+    \end{subequations}
+\subsection{Constitutive Relations} 
+    \begin{subequations}\label{eq:Constitutive}
+        \begin{align}
+            D &= \epsilon E \label{eq:ConstitutiveElectric} \\ 
+            B &= \mu H \label{eq:ConstitutiveMagnetic} \\
+            J_c &= \sigma E \label{eq:ConstitutiveCurrentDensity}
+        \end{align}
+    \end{subequations}
+\newpage
+\section{P.E.C Field Derivation}
+    \begin{enumerate}
+        \item   Starting from Maxwell's equations \eqref{eq:Maxwell} and constitutive equations \eqref{eq:Constitutive}, transform to frequency domain to simplify curl equations:
+                \begin{subequations}\label{eq:MaxwellFD}
+                    \begin{align}
+                        \nabla \times H &= J + j \omega D \label{eq:AmpereMaxwellFD} \\
+                        \nabla \times E &= - j \omega B \label{eq:MaxwellFaradayFD}
+                    \end{align}
+                \end{subequations}
+        \item   Introduce magnetic vector potential $A$ and electric potential $\phi$ defined by:
+                \begin{subequations}\label{eq:Potentials}
+                    \begin{align}
+                        B &= \nabla \times A \label{eq:MagneticPotential} \\
+                        E &= - \nabla \phi - j \omega A \label{eq:ElectricPotential}
+                    \end{align}
+                \end{subequations}
+                and fix Lorenz gauge:
+                \begin{equation} \label{eq:LorenzGaugeCondition}
+                    \nabla \cdot A = - \frac{j \omega}{c^2} \phi
+                \end{equation}
+        \item   Apply the above with some vector identities to reduce Ampere-Maxwell equation \eqref{eq:AmpereMaxwellFD} to Helmholtz equation:
+                \begin{enumerate}
+                    \item Substitute the constitutive conditions \eqref{eq:Constitutive} and potentials \eqref{eq:Potentials} respectively to \eqref{eq:AmpereMaxwellFD}:
+                        \begin{align*}
+                            & \frac{1}{\mu} \nabla \times B = J + j \omega \epsilon E \\
+                            \implies & \frac{1}{\mu} \nabla \times \nabla \times A = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
+                        \end{align*}
+                    \item Use the vector calculus identity $\nabla \times \nabla \times A = \nabla(\nabla \cdot A) - \nabla^2 A$, so
+                        \begin{align*}
+                            \frac{1}{\mu} \left( \nabla(\nabla \cdot A) - \nabla^2 A \right) &= J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
+                        \end{align*}
+                    \item Apply the Lorenz gauge condition \eqref{eq:LorenzGaugeCondition}:
+                        \begin{align*}
+                            & -\frac{1}{\mu} ( \frac{j \omega}{c^2} \nabla \phi + \nabla^2 A ) = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A \\
+                            \implies & - \frac{1}{\mu} \nabla^2 A = J - \omega^2 \epsilon A \\
+                            \implies & \nabla^2 A + k^2 A = -\mu J.
+                        \end{align*}
+                \end{enumerate}
+        \item   Solve for vector potential using Green functions to get
+                \begin{equation} \label{eq:GreenSol1}
+                    A = \mu \int J(r) G(r, r') dr'
+                \end{equation}
+        \item   Plug into electric field formula \eqref{eq:ElectricPotential} in terms of potentials:
+                \begin{align*}
+                    & A = \frac{j}{\omega} ( \nabla \phi + E )
+                \end{align*}
+                Use the far field assumption on the scalar potential $\nabla \phi \to 0$ - this can be worked out to die off quickly asymptotically. Finally we arrive at
+                \begin{align*}
+                    & E \approx - \omega \mu j \int J(r) G(r, r') dr' \\
+                    \implies & E \approx - \eta k j \int J(r) G(r, r') dr'
+                \end{align*}
+
+    \end{enumerate}
+
+\end{document}

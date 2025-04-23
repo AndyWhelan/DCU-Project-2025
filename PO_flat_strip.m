@@ -14,12 +14,11 @@ eta = sqrt(mu0/epsilon0) ;  % vacuum impedance
 
 % Basic parameters
 E0 = 1 ;                    % amplitude of incident wave equals 1
-f = 300*MHz ;               % EM-frequency, TODO: tried with different
-                                            % frequencies (30, 30000MHz.)
-                                            % Why not matching as well?
+f = 300*MHz ;               % EM-frequency
+
 % Related constants
 omega = 2.0*pi*f ; 
-lambda = f/c0  ; 
+lambda = c0/f  ;
 k0 = 2.0*pi/lambda ;        % vacuum wavenumber  
 
 % We assume a plane wave incident field
@@ -35,12 +34,16 @@ kr_vec_y = -k0*sin(alpha_r) ;
 theta = pi/2.0  - alpha_r ; 
 
 % Strip dimensions
-w = 40.0*lambda ; % TODO: confirm why 40 was chosen... Heuristic?
+w = 40.0*lambda ;
 strip_start = 0.0 ; 
 strip_end = w ;
 
+function nv = normal_vector( ct )
+    nv = [ 0; 1; 0 ] ;
+end
+
 % Compute and plot incident fields on surface 
-disc_per_wavelength = 20 ;  % TODO: confirm why 20 was chosen... Heuristic?
+disc_per_wavelength = 20 ;
 N = ceil((w/lambda)*disc_per_wavelength) ; 
 delta_x = w/N ; 
 % Strip runs from (0,0) to (w,0) ; 
@@ -49,25 +52,28 @@ for(ct = 1:N)
     strip_y(ct) = 0.0 ; 
     % Incident field at centre ct
     E_inc_z(ct,1) = E0*exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) ; 
+    H_inc{ct} = ((E0)/(omega*mu0)) * ...
+                exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) * ...
+                [ ki_vec_y ; -ki_vec_x ; 0 ] ;
+    J_PO{ct} = 2 * cross( normal_vector( ct ), H_inc{ct})
     % Physical optics current at centre ct
     J_PO_z(ct,1) = -2.0 * ((E0*ki_vec_y)/(omega*mu0)) ...
                    * exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct)));  
 end
 
 % Now make the MoM matrix 
-% TODO: elaborate a bit on this? Why the 1.781, and what basis functions?
 % The diagonal needs us to compute the field from a basis function 
 % at the centre of the same basis function. This involves integrating over
 % an integrable singularity. So a special case for the diagonal terms
 self = -1.0*delta_x*(1.0 - j*(2.0/pi)*log(1.781*k0*delta_x/(4.0*exp(1.0)))) ; 
-for(ct1 = 1:N) 
+for(ct1 = 1:N)
     for(ct2 = 1:N) 
-        Rx = strip_x(ct1)  - strip_x(ct2) ; 
-        Ry = strip_y(ct1)  - strip_y(ct2) ; 
+        Rx = strip_x(ct1) - strip_x(ct2) ; 
+        Ry = strip_y(ct1) - strip_y(ct2) ; 
         R = sqrt(Rx*Rx + Ry*Ry) ;
         the_hank = (besselj(0,k0*R) - j*bessely(0,k0*R)) ; 
         % Off diagonal terms
-        if( ct1 ~= ct2) 
+        if(ct1 ~= ct2) 
             Z(ct1,ct2) = (k0*eta/4.0)*the_hank*delta_x ;
         else
             Z(ct1,ct2) = -(k0*eta/4.0)*self ; % diagonal term

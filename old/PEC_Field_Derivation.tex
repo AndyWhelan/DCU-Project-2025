@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{verbatim}
+
+\begin{document}
+
+\title{Derivaion}
+
+\begin{enumerate}
+    \item   Start from Maxwell's equations
+            \begin{subequations}\label{eq:MaxwellTime}
+                \begin{align}
+                    \nabla \times H &= J + \frac{\partial D}{\partial t} \label{eq:AmpereMaxwell} \\
+                    \nabla \times E &= - \frac{\partial B}{\partial t} \label{eq:MaxwellFaraday} \\
+                    \nabla \cdot D &= \rho \label{eq:GaussElectric} \\
+                    \nabla \cdot B &= 0 \label{eq:GaussMagnetic}
+                \end{align}
+            \end{subequations}
+            and constitutive equations (without dielectric)
+            \begin{subequations}\label{eq:Constitutive}
+                \begin{align}
+                    D &= \epsilon E \label{eq:ConstitutiveElectric} \\
+                    B &= \mu H \label{eq:ConstitutiveMagnetic}
+                \end{align}
+            \end{subequations}
+    \item   Assume time harmonicity ( $\Xi(r,t) = \Xi(r)e^{j \omega t})$, where $\Xi \in { B,D,E,H }$, and simplify:
+            \begin{subequations}\label{eq:MaxwellTimeTH}
+                \begin{align}
+                    \nabla \times H &= J + j \omega D \label{eq:AmpereMaxwellTH} \\
+                    \nabla \times E &= - j \omega B \label{eq:MaxwellFaradayTH} \\
+                    \nabla \cdot D &= \rho \label{eq:GaussElectricTH} \\
+                    \nabla \cdot B &= 0 \label{eq:GaussMagneticTH}
+                \end{align}
+            \end{subequations}
+    \item   Introduce magnetic vector potential $A$ and electric potential $\phi$ defined by:
+            \begin{subequations}\label{eq:Potentials}
+                \begin{align}
+                    B &= \nabla \times A \label{eq:MagneticPotential} \\
+                    E &= - \nabla \phi - \frac{\partial A}{\partial t} \label{eq:ElectricPotential}
+                \end{align}
+            \end{subequations}
+            and fix Lorenz gauge:
+            \begin{equation*} \label{eq:LorenzGaugeConditionUnreduced}
+                \nabla \cdot A + \frac{1}{c^2} \frac{\partial \phi}{\partial t} = 0
+            \end{equation*}
+            Note that time-harmonicity also applies to $A$, and therefore will also apply to $\phi$, so the Lorenz gauge reduces to
+            \begin{equation} \label{eq:LorenzGaugeCondition}
+                \nabla \cdot A = - \frac{j \omega}{c^2} \phi
+            \end{equation}
+    \item   Apply the above with some vector identities to reduce Ampere-Maxwell equation \eqref{eq:AmpereMaxwellTH} to Helmholtz equation:
+            \begin{enumerate}
+                \item Substitute the constitutive conditions \eqref{eq:Constitutive} and potentials \eqref{eq:Potentials} respectively to \eqref{eq:AmpereMaxwellTH}:
+                    \begin{align*}
+                        & \frac{1}{\mu} \nabla \times B = J + j \omega \epsilon E \\
+                        \implies & \frac{1}{\mu} \nabla \times \nabla \times A = J - j \omega \epsilon \left( \nabla \phi + \frac{\partial A}{\partial t} \right) \\
+                        \implies & \frac{1}{\mu} \nabla \times \nabla \times A = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
+                    \end{align*}
+                \item Use the vector calculus identity $\nabla \times \nabla \times A = \nabla(\nabla \cdot A) - \nabla^2 A$, so
+                    \begin{align*}
+                        \frac{1}{\mu} \left( \nabla(\nabla \cdot A) - \nabla^2 A \right) &= J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
+                    \end{align*}
+                \item Apply the Lorenz gauge condition \eqref{eq:LorenzGaugeCondition}:
+                    \begin{align*}
+                        & -\frac{1}{\mu} ( \frac{j \omega}{c^2} \nabla \phi + \nabla^2 A ) = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A \\
+                        \implies & - \frac{1}{\mu} \nabla^2 A = J - \omega^2 \epsilon A \\
+                        \implies & \nabla^2 A + k^2 A = -\mu J.
+                    \end{align*}
+            \end{enumerate}
+    \item   Solve for vector potential using Green functions to get
+            \begin{equation} \label{eq:GreenSol1}
+                A = \mu \int J(r) G(r, r') dr'
+            \end{equation}
+    \item   Plug into electric field formula \eqref{eq:ElectricPotential} in terms of potentials:
+            \begin{align*}
+                & A = \frac{j}{\omega} ( \nabla \phi + E )
+            \end{align*}
+            Use the far field assumption on the scalar potential $\nabla \phi \to 0$ - this can be worked out to die off quickly asymptotically. Finally we arrive at
+            \begin{align*}
+                & E \approx - \omega \mu j \int J(r) G(r, r') dr' \\
+                \implies & E \approx - \eta k j \int J(r) G(r, r') dr'
+            \end{align*}
+
+\end{enumerate}
+
+\end{document}
