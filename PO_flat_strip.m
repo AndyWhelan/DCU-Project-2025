@@ -37,9 +37,25 @@ theta = pi/2.0  - alpha_r ;
 w = 40.0*lambda ;
 strip_start = 0.0 ; 
 strip_end = w ;
+lambda_w = w/10 ;
+A_w = 8 ;
 
-function nv = normal_vector( ct )
-    nv = [ 0; 1; 0 ] ;
+function nv = normal_vector( ct, lambda_wall, A_wall )
+    % Assume wall is of form A_wall * sin( 2pi*ct/lambda_wall )
+    % So derivative is A_wall * (2*pi/lambda_wall) * cos( 2*pi*ct/lambda_wall )
+    m_tangent =  A_wall * ( 2*pi/lambda_wall ) * cos( 2*pi*ct/lambda_wall ) ;
+    if m_tangent==0
+       nv = [ 0; 1; 0 ] ; 
+    else
+       m_normal = 1/m_tangent ;
+       if m_normal > 0
+          x_normal = 1 / sqrt( 1 + m_normal^2 );
+       else
+          x_normal = -1 / sqrt( 1 + abs( m_normal^2 ));
+       end
+       y_normal = abs( m_normal ) * abs( x_normal ); % normal always upward-pointing
+       nv = [ x_normal, y_normal, 0 ] ;
+    end
 end
 
 % Compute and plot incident fields on surface 
@@ -51,14 +67,16 @@ for(ct = 1:N)
     strip_x(ct) = strip_start + (ct-0.5)*delta_x ; 
     strip_y(ct) = 0.0 ; 
     % Incident field at centre ct
+    n_v{ct} = normal_vector( ct, lambda_w, A_w );
     E_inc_z(ct,1) = E0*exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) ; 
     H_inc{ct} = ((E0)/(omega*mu0)) * ...
                 exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) * ...
                 [ ki_vec_y ; -ki_vec_x ; 0 ] ;
-    J_PO{ct} = 2 * cross( normal_vector( ct ), H_inc{ct})
+    J_PO{ct} = 2 * cross( n_v{ct}, H_inc{ct})
     % Physical optics current at centre ct
-    J_PO_z(ct,1) = -2.0 * ((E0*ki_vec_y)/(omega*mu0)) ...
-                   * exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct)));  
+    J_PO_z(ct,1) = J_PO{ct}(3);
+    %J_PO_z(ct,1) = -2.0 * ((E0*ki_vec_y)/(omega*mu0)) ...
+    %               * exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct)));  
 end
 
 % Now make the MoM matrix 
