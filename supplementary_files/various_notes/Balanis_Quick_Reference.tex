@@ -23,23 +23,37 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
+\setcounter{page}{0}
 
 \tableofcontents
 
 \newpage
 
 \section*{Notation}
+\addcontentsline{toc}{section}{Notation}
 \small
-\begin{tabular}{ m{4em} m{24em} m{4em} }
+\begin{tabular}{ m{5em} m{24em} m{4em} }
     \( \partial_t \) & \( \displaystyle \frac{\partial}{\partial t}\) & \\
-    \( E \) & Electric Field Intensity & [V/m] \\
-    \( H \) & Magnetic Field Intensity & [A/m] \\
-    \( D \) & Electric Flux Density & [C/m\textsuperscript{2}] \\
-    \( B \) & Magnetic Flux Density & [Wb/m\textsuperscript{2}] \\
-    \( \displaystyle J_{c/d/i} \) & Electric Current Density \textsubscript{(conduction/displacement/impressed)} & [A/m\textsuperscript{2}] \\
-    \( \displaystyle \mathfrak{M}_{d/i} \) & Magnetic Current Density \textsubscript{(displacement/impressed)} & [V/m\textsuperscript{2}] \\
-    \( \displaystyle \rho_{e} \) & Electric Charge Density & [C/m\textsuperscript{2}] \\
-    \( \displaystyle \rho_{m} \) & Magnetic Charge Density & [Wb/m\textsuperscript{2}] \\
+    \( E \) & Electric Field Intensity & [V m\textsuperscript{-1}] \\
+    \( H \) & Magnetic Field Intensity & [A m\textsuperscript{-1}] \\
+    \( D \) & Electric Flux Density & [C m\textsuperscript{-2}] \\
+    \( B \) & Magnetic Flux Density & [Wb m\textsuperscript{-2}] \\
+    \( \displaystyle J_{c/d/i} \) & Electric Current Density \textsubscript{(conduction/displacement/impressed)} & [A m\textsuperscript{-2}] \\
+    \( \displaystyle \mathfrak{M}_{d/i} \) & Magnetic Current Density \textsubscript{(displacement/impressed)} & [V m\textsuperscript{-2}] \\
+    \( \displaystyle \rho_{e} \) & Electric Charge Density & [C m\textsuperscript{-2}] \\
+    \( \displaystyle \rho_{m} \) & Magnetic Charge Density & [Wb m\textsuperscript{-2}] \\
+    \( \displaystyle \epsilon \) & Permittivity & [F m\textsuperscript{-1}] \\
+    \( \displaystyle \mu \) & Permeability & [H m\textsuperscript{-1}] \\
+    \( \displaystyle \sigma \) & Conductivity & [S m\textsuperscript{-1}] \\
+    \( \displaystyle \eta := \sqrt{\frac{\mu}{\epsilon}} \) & Wave Impedance & [S\textsuperscript{-1}] \\
+    \( \displaystyle f \) & Frequency & [s\textsuperscript{-1}] \\
+    \( \displaystyle \lambda \) & Wavelength & [m] \\
+    \( \displaystyle \omega := 2 \pi f \) & Angular Frequency & [s\textsuperscript{-1}] \\
+    \( \displaystyle k := \frac{2 \pi}{\lambda} \) & Wavenumber & [m\textsuperscript{-1}]  \\
+    \( \displaystyle v_f \) & Velocity of front part of wave & [ms\textsuperscript{-1}]  \\
+    \( \displaystyle v_g \) & Group velocity of wave (envelope velocity) & [ms\textsuperscript{-1}]  \\
+    \( \displaystyle v_p \) & Phase velocity of wave (peak/trough velocity) & [ms\textsuperscript{-1}]  \\
 \end{tabular}
 \normalsize
 \newpage
@@ -60,7 +74,7 @@
             \oint_C E \cdot dl &=  - \partial_t \iint_S B \cdot ds \begingroup \textcolor{vanish}{- \iint_S \mathfrak{M_i} \cdot ds} \endgroup \label{eq:MaxwellFaradayIntegral} \\
             \oint_C H \cdot dl &=  \partial_t \iint_S D \cdot ds + \iint_S ( J_c + J_i ) \cdot ds \label{eq:AmpereMaxwellIntegral} \\
             \oiint_S D \cdot ds &= \iiint_V \rho_e \cdot dv \label{eq:GaussElectricIntegral} \\
-            \oiint_S B \cdot ds &= \iiint_V \rho_m \cdot dv \label{eq:GaussMagneticIntegral}
+            \oiint_S B \cdot ds &= 0 \begingroup \textcolor{vanish}{= \iiint_V \rho_m \cdot dv} \endgroup \label{eq:GaussMagneticIntegral}
         \end{align}
     \end{subequations}
 \subsection{Constitutive Relations} 
@@ -71,6 +85,42 @@
             J_c &= \sigma E \label{eq:ConstitutiveCurrentDensity}
         \end{align}
     \end{subequations}
+\subsection{Boundary Conditions}
+
+\scriptsize
+\begin{tabular}{ | m{6.5em} || m{7.9em} | m{7.5em} | m{7.7em} | m{7.9em} | }
+    \hline
+    & \textbf{General} & \textbf{Finite \( \sigma \), no source/charge} & \textbf{Medium 1 PEC} & \textbf{Medium 1 PMC} \\
+    \hline\hline
+    \( E_{\parallel} := n \times E \) & \( E_{\parallel 2} - E_{\parallel 1} = -M_s \) & \( E_{\parallel 2} - E_{\parallel 1} = 0 \) & \( E_{\parallel 2} = 0 \) & \( E_{\parallel 2} = -M_s \) \\
+    \( H_{\parallel} := n \times H \) & \( H_{\parallel 2} - H_{\parallel 1} = J_s \) & \( H_{\parallel 2} - H_{\parallel 1} = 0 \) & \( H_{\parallel 2} = J_s \) & \( H_{\parallel 2} = 0 \) \\
+    \( D_{\perp} := n \cdot D \) & \( D_{\perp 2} - D_{\perp 1} = \phi_{es} \) & \( D_{\perp 2} - D_{\perp 1} = 0 \) & \( D_{\perp 2} = \phi_{es} \) & \( D_{\perp 2} = 0 \) \\
+    \( B_{\perp} := n \cdot B \) & \( B_{\perp 2} - B_{\perp 1} = \phi_{ms} \) & \( B_{\perp 2} - B_{\perp 1} = 0 \) & \( B_{\perp 2} = 0 \) & \( B_{\perp 2} = \phi_{ms} \) \\
+    \hline
+\end{tabular}
+\newpage
+\normalsize
+\subsection{Material Considerations}
+All the constitutive parameters of \eqref{eq:Constitutive} are typically time/space-varying tensors. Furthermore, they are complex-valued in order to model dissipation for time-varying fields.
+
+Generally, we can classify materials into categories described below.
+
+\subsubsection{Magnets} The magnetization is the net effect of the microscopic magnetic dipoles created by orbiting electrons. A large value of $\mu$ indicates a stronger magnetization.
+\subsubsection{Dielectrics/Insulators}
+Here, the dominant charges are on the boundary of the material creating an overall electric dipole. A large value of $\epsilon$ indicates a stronger ability to store charge, but must be weighed vs. $\sigma$ and $\omega$ also. The condition for a good dielectric is
+    \begin{equation} \label{eq:dielectric}
+        \frac{\sigma}{\omega \epsilon} \ll 1
+    \end{equation}
+\subsubsection{Conductors}
+Here, there are free charges creating currents throughout the material, due to valence electrons that aren't tightly bound. The condition here is the opposite of the above:
+    \begin{equation} \label{eq:conductor}
+        \frac{\sigma}{\omega \epsilon} \gg 1
+    \end{equation}
+\subsubsection{Semiconductors}
+These are roughly in between an insulator and a conductor, with the condition
+    \begin{equation} \label{eq:semiconductor}
+        \frac{\sigma}{\omega \epsilon} = O(1)
+    \end{equation}
 \newpage
 \section{P.E.C Field Derivation}
     \begin{enumerate}
