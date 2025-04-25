@@ -29,31 +29,47 @@
 \tableofcontents
 
 \newpage
-
-\section*{Notation}
-\addcontentsline{toc}{section}{Notation}
 \small
-\begin{tabular}{ m{5em} m{24em} m{4em} }
+\section*{Notation}
+\subsection*{Mathematical}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( \partial_t \) & \( \displaystyle \frac{\partial}{\partial t}\) & \\
+    \( j \) & Imaginary unit ( \( j^2 = -1 \) ) & \\
+\end{tabular}
+\subsection*{Microscopic Fields}
+\addcontentsline{toc}{section}{Notation}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( E \) & Electric Field Intensity & [V m\textsuperscript{-1}] \\
     \( H \) & Magnetic Field Intensity & [A m\textsuperscript{-1}] \\
+\end{tabular}
+\subsection*{Macroscopic Fields}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( D \) & Electric Flux Density & [C m\textsuperscript{-2}] \\
     \( B \) & Magnetic Flux Density & [Wb m\textsuperscript{-2}] \\
+\end{tabular}
+\subsection*{Field Sources}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( \displaystyle J_{c/d/i} \) & Electric Current Density \textsubscript{(conduction/displacement/impressed)} & [A m\textsuperscript{-2}] \\
     \( \displaystyle \mathfrak{M}_{d/i} \) & Magnetic Current Density \textsubscript{(displacement/impressed)} & [V m\textsuperscript{-2}] \\
     \( \displaystyle \rho_{e} \) & Electric Charge Density & [C m\textsuperscript{-2}] \\
     \( \displaystyle \rho_{m} \) & Magnetic Charge Density & [Wb m\textsuperscript{-2}] \\
+\end{tabular}
+\subsection*{Constitutive Parameters}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( \displaystyle \epsilon \) & Permittivity & [F m\textsuperscript{-1}] \\
     \( \displaystyle \mu \) & Permeability & [H m\textsuperscript{-1}] \\
     \( \displaystyle \sigma \) & Conductivity & [S m\textsuperscript{-1}] \\
-    \( \displaystyle \eta := \sqrt{\frac{\mu}{\epsilon}} \) & Wave Impedance & [S\textsuperscript{-1}] \\
+\end{tabular}
+\subsection*{Waves}
+\begin{tabular}{ m{7em} m{24em} m{4em} }
     \( \displaystyle f \) & Frequency & [s\textsuperscript{-1}] \\
-    \( \displaystyle \lambda \) & Wavelength & [m] \\
+    \( \displaystyle k \)\textsuperscript{\eqref{eq:wavenumber}} & Wavenumber & [m\textsuperscript{-1}]  \\
+    \( \displaystyle \alpha \)\textsuperscript{\eqref{eq:attenuationConstant}} & Wave Attenuation & [m\textsuperscript{-1}]  \\
+    \( \displaystyle \lambda := \frac{2 \pi}{k} \) & Wavelength & [m] \\
     \( \displaystyle \omega := 2 \pi f \) & Angular Frequency & [s\textsuperscript{-1}] \\
-    \( \displaystyle k := \frac{2 \pi}{\lambda} \) & Wavenumber & [m\textsuperscript{-1}]  \\
-    \( \displaystyle v_f \) & Velocity of front part of wave & [ms\textsuperscript{-1}]  \\
-    \( \displaystyle v_g \) & Group velocity of wave (envelope velocity) & [ms\textsuperscript{-1}]  \\
-    \( \displaystyle v_p \) & Phase velocity of wave (peak/trough velocity) & [ms\textsuperscript{-1}]  \\
+    \( \displaystyle \eta := \sqrt{\frac{j \omega \mu}{\sigma + j \omega \epsilon}} \) & Wave Impedance & [S\textsuperscript{-1}] \\
+    \( \displaystyle v_g := \partial_k \omega \) & Group velocity of wave (envelope velocity) & [ms\textsuperscript{-1}]  \\
+    \( \displaystyle v_p := \frac{\omega}{k} \) & Phase velocity of wave (peak/trough velocity) & [ms\textsuperscript{-1}]  \\
 \end{tabular}
 \normalsize
 \newpage
@@ -92,7 +108,7 @@
     \hline
     & \textbf{General} & \textbf{Finite \( \sigma \), no source/charge} & \textbf{Medium 1 PEC} & \textbf{Medium 1 PMC} \\
     \hline\hline
-    \( E_{\parallel} := n \times E \) & \( E_{\parallel 2} - E_{\parallel 1} = -M_s \) & \( E_{\parallel 2} - E_{\parallel 1} = 0 \) & \( E_{\parallel 2} = 0 \) & \( E_{\parallel 2} = -M_s \) \\
+    \( E_{\parallel} := n \times E \) & \( E_{\parallel 2} - E_{\parallel 1} = -\mathfrak{M}_s \) & \( E_{\parallel 2} - E_{\parallel 1} = 0 \) & \( E_{\parallel 2} = 0 \) & \( E_{\parallel 2} = -\mathfrak{M}_s \) \\
     \( H_{\parallel} := n \times H \) & \( H_{\parallel 2} - H_{\parallel 1} = J_s \) & \( H_{\parallel 2} - H_{\parallel 1} = 0 \) & \( H_{\parallel 2} = J_s \) & \( H_{\parallel 2} = 0 \) \\
     \( D_{\perp} := n \cdot D \) & \( D_{\perp 2} - D_{\perp 1} = \phi_{es} \) & \( D_{\perp 2} - D_{\perp 1} = 0 \) & \( D_{\perp 2} = \phi_{es} \) & \( D_{\perp 2} = 0 \) \\
     \( B_{\perp} := n \cdot B \) & \( B_{\perp 2} - B_{\perp 1} = \phi_{ms} \) & \( B_{\perp 2} - B_{\perp 1} = 0 \) & \( B_{\perp 2} = 0 \) & \( B_{\perp 2} = \phi_{ms} \) \\
@@ -121,6 +137,57 @@ These are roughly in between an insulator and a conductor, with the condition
     \begin{equation} \label{eq:semiconductor}
         \frac{\sigma}{\omega \epsilon} = O(1)
     \end{equation}
+\newpage
+\subsection{Wave Equation}
+$E$ and $H$ obey equations:
+\begin{subequations} \label{eq:fieldEqs}
+    \begin{align}
+    (\mu \epsilon \partial^2_t + \mu \sigma \partial_t - \nabla^2 ) E & + \nabla \times \mathfrak{M}_i + \mu \partial_t J_i + \frac{1}{\epsilon} \nabla \rho_e &= 0 \label{eq:electricFieldEq} \\
+    (\mu \epsilon \partial^2_t + \mu \sigma \partial_t - \nabla^2 ) H & - \nabla \times J_i + \epsilon \partial_t \mathfrak{M}_i + \frac{1}{\mu} \nabla \rho_m + \sigma \mathfrak{M}_i &= 0 \label{eq:magneticFieldEq}
+    \end{align}
+\end{subequations}
+To obtain solutions we usually look at time-harmonic solutions, and can then use Fourier series to express other forms in terms of these. The time harmonic forms of \eqref{eq:fieldEqs} are obtained by replacements $\partial_t \to \omega j$, $\partial_t^2 \to - \omega^2$
+\begin{subequations} \label{eq:fieldEqsTH}
+    \begin{align}
+    (- \mu \epsilon \omega^2 + \mu \sigma \omega j - \nabla^2 ) E & + \nabla \times \mathfrak{M}_i + \mu \omega j J_i + \frac{1}{\epsilon} \nabla \rho_e &= 0 \label{eq:electricFieldEqTH} \\
+    ( - \mu \epsilon \omega^2 + \mu \sigma \omega j - \nabla^2 ) H & - \nabla \times J_i + \epsilon \omega j \mathfrak{M}_i + \frac{1}{\mu} \nabla \rho_m + \sigma \mathfrak{M}_i &= 0 \label{eq:magneticFieldEqTH}
+    \end{align}
+\end{subequations}
+\subsubsection{Source-Free Solutions}
+The source-free ($\rho_e = \rho_m = J_i = \mathfrak{M}_i = 0$) versions of \eqref{eq:fieldEqsTH} are
+\begin{subequations} \label{eq:fieldEqsSF}
+    \begin{align}
+    (- \mu \epsilon \omega^2 + \mu \sigma \omega j - \nabla^2 ) E & = 0 \label{eq:electricFieldEqSF} \\
+    ( - \mu \epsilon \omega^2 + \mu \sigma \omega j - \nabla^2 ) H & = 0 \label{eq:magneticFieldEqSF}
+    \end{align}
+\end{subequations}
+Solutions to \eqref{eq:fieldEqsSF} can be obtained by:
+\begin{enumerate}
+    \item Expressing the field in terms of coordinate functions, and
+    \item Using separation of variables.
+\end{enumerate}
+The solutions obtained in this way are expressible in terms of complex exponentials and Bessel functions.
+Note that the quantity $- \mu \epsilon \omega^2 + \mu \sigma \omega j $ can be expressed as the square of a single complex number $\gamma = \alpha + kj$. Solving for $\alpha$ and $k$, we get
+\begin{equation} \label{eq:attenuationConstant}
+    \alpha = \omega \sqrt{\mu \epsilon} \left( \frac{1}{2} \left( \sqrt{1 + \left( \frac{\sigma}{\omega \epsilon} \right)^2 } - 1 \right)  \right)^{\frac{1}{2}}
+\end{equation}
+and
+\begin{equation} \label{eq:wavenumber}
+    k = \omega \sqrt{\mu \epsilon} \left( \frac{1}{2} \left( \sqrt{1 + \left( \frac{\sigma}{\omega \epsilon} \right)^2 } + 1 \right)  \right)^{\frac{1}{2}}
+\end{equation}
+which, for lossless materials ($\sigma = 0$) reduce to
+\begin{equation} \label{eq:attenuationConstantLossless}
+    \alpha = 0
+\end{equation}
+and
+\begin{equation} \label{eq:wavenumberLossless}
+    k = \omega \sqrt{\mu \epsilon}
+\end{equation}
+\subsubsection{TEM (Transverse ElectroMagnetic) Modes)}
+TEM modes are solutions of \eqref{eq:fieldEqsTH} whose $E$ and $H$ fields form a fixed plane over time for a given spatial point.
+If equiphase planes are parallel, then it's a plane wave.
+
+$TE^y$ means that the electric field has no $y$ component.
 \newpage
 \section{P.E.C Field Derivation}
     \begin{enumerate}
