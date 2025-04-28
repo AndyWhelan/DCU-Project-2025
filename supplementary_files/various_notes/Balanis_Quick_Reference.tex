@@ -183,64 +183,70 @@ and
 \begin{equation} \label{eq:wavenumberLossless}
     k = \omega \sqrt{\mu \epsilon}
 \end{equation}
-\subsubsection{TEM (Transverse ElectroMagnetic) Modes)}
-TEM modes are solutions of \eqref{eq:fieldEqsTH} whose $E$ and $H$ fields form a fixed plane over time for a given spatial point.
-If equiphase planes are parallel, then it's a plane wave.
-
-$TE^y$ means that the electric field has no $y$ component.
+\subsubsection{Transverse Modes}
+Transverse modes are solutions of \eqref{eq:fieldEqsTH} whose $E$ and/or $H$ fields have no component for a given set of coordinates (it is said to be "transverse to" this set) over time for a given spatial point, e.g.
+\begin{itemize}
+\item $TE^y$ means that the electric field has no $y$ component,
+\item $TM^z$ means that the magnetic field has no $z$ component,
+\item $TEM$ means that the electric and magnetic field are both contained in a plane,
+\item If equiphase planes are parallel, then it's a plane wave.
+\end{itemize}
 \newpage
-\section{P.E.C Field Derivation}
-    \begin{enumerate}
-        \item   Starting from Maxwell's equations \eqref{eq:Maxwell} and constitutive equations \eqref{eq:Constitutive}, transform to frequency domain to simplify curl equations:
-                \begin{subequations}\label{eq:MaxwellFD}
-                    \begin{align}
-                        \nabla \times H &= J + j \omega D \label{eq:AmpereMaxwellFD} \\
-                        \nabla \times E &= - j \omega B \label{eq:MaxwellFaradayFD}
-                    \end{align}
-                \end{subequations}
-        \item   Introduce magnetic vector potential $A$ and electric potential $\phi$ defined by:
-                \begin{subequations}\label{eq:Potentials}
-                    \begin{align}
-                        B &= \nabla \times A \label{eq:MagneticPotential} \\
-                        E &= - \nabla \phi - j \omega A \label{eq:ElectricPotential}
-                    \end{align}
-                \end{subequations}
-                and fix Lorenz gauge:
-                \begin{equation} \label{eq:LorenzGaugeCondition}
-                    \nabla \cdot A = - \frac{j \omega}{c^2} \phi
-                \end{equation}
-        \item   Apply the above with some vector identities to reduce Ampere-Maxwell equation \eqref{eq:AmpereMaxwellFD} to Helmholtz equation:
-                \begin{enumerate}
-                    \item Substitute the constitutive conditions \eqref{eq:Constitutive} and potentials \eqref{eq:Potentials} respectively to \eqref{eq:AmpereMaxwellFD}:
-                        \begin{align*}
-                            & \frac{1}{\mu} \nabla \times B = J + j \omega \epsilon E \\
-                            \implies & \frac{1}{\mu} \nabla \times \nabla \times A = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
-                        \end{align*}
-                    \item Use the vector calculus identity $\nabla \times \nabla \times A = \nabla(\nabla \cdot A) - \nabla^2 A$, so
-                        \begin{align*}
-                            \frac{1}{\mu} \left( \nabla(\nabla \cdot A) - \nabla^2 A \right) &= J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A
-                        \end{align*}
-                    \item Apply the Lorenz gauge condition \eqref{eq:LorenzGaugeCondition}:
-                        \begin{align*}
-                            & -\frac{1}{\mu} ( \frac{j \omega}{c^2} \nabla \phi + \nabla^2 A ) = J - j \omega \epsilon \nabla \phi - \omega^2 \epsilon A \\
-                            \implies & - \frac{1}{\mu} \nabla^2 A = J - \omega^2 \epsilon A \\
-                            \implies & \nabla^2 A + k^2 A = -\mu J.
-                        \end{align*}
-                \end{enumerate}
-        \item   Solve for vector potential using Green functions to get
-                \begin{equation} \label{eq:GreenSol1}
-                    A = \mu \int J(r) G(r, r') dr'
-                \end{equation}
-        \item   Plug into electric field formula \eqref{eq:ElectricPotential} in terms of potentials:
-                \begin{align*}
-                    & A = \frac{j}{\omega} ( \nabla \phi + E )
-                \end{align*}
-                Use the far field assumption on the scalar potential $\nabla \phi \to 0$ - this can be worked out to die off quickly asymptotically. Finally we arrive at
-                \begin{align*}
-                    & E \approx - \omega \mu j \int J(r) G(r, r') dr' \\
-                    \implies & E \approx - \eta k j \int J(r) G(r, r') dr'
-                \end{align*}
-
-    \end{enumerate}
-
+\section{Reflection and Transmission}
+\subsection{Normal Incidence}
+Assuming the wave vector in the $z$ direction, the electric field is polarized in the $x$ direction, defining $E_0, \Gamma, T$ respectively by
+\begin{subequations} 
+    \begin{align*}
+        E^i &= E_0 e^{-(\alpha_1 + jk_1) z} \mathbf{e}_x \\
+        E^r &= \Gamma E_0 e^{(\alpha_1 + jk_1)z} \mathbf{e}_x \\
+        E^t &= T E_0 e^{-(\alpha_2 + jk_2) z} \mathbf{e}_x \\
+    \end{align*}
+\end{subequations}
+applying right-hand-rule and enforcing continuity of tangential components ($\Theta^i + \Theta^r = \Theta^t$ at $z=0$, where $\Theta \in {E,H}$) leads to 
+\begin{subequations} \label{eq:losslessNormalReflection}
+    \begin{align}
+        \Gamma &= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1} \label{eq:reflectionNormal} \\
+        T &= 1 + \Gamma
+    \end{align}
+\end{subequations}
+\subsection{Oblique Incidence}
+The formulae for oblique angles are simple to obtain in a similar fashion. For the electric field perpendicular to the plane of incidence we replace \eqref{eq:reflectionNormal} by
+\begin{equation} \label{eq:reflectionObliquePerp}
+    \Gamma_{\perp} = \frac{\eta_2 \cos \theta_i - \eta_1 \cos \theta_t }{\eta_2 \cos \theta_i + \eta_1 \cos \theta_t}
+\end{equation}
+and when it is polarized parallel, it instead becomes
+\begin{equation} \label{eq:reflectionObliquePar}
+    \Gamma_{\parallel} = \frac{\eta_2 \cos \theta_t - \eta_1 \cos \theta_i }{\eta_2 \cos \theta_t + \eta_1 \cos \theta_i}
+\end{equation}
+which can both be derived from the formulae for plane-wave impedances for transverse modes (the first is $TM^z$ corresponding to $\eta_p \to \frac{\eta_p}{\cos \theta_p}$, and the second is $TE^z$ corresponding to $\eta_p \to \eta_p \cos \theta_p $)
+\newpage
+\section{Vector Potentials}
+The magnetic vector potential $A$ is defined for source-free regions (guaranteed experimentally, since there are no magnetic monopoles: $\rho_m = 0$) by
+\begin{equation} \label{eq:magneticVectorPotential}
+    B_A = \nabla \times A 
+\end{equation}
+The electric scalar potential $\phi_e$ is then defined by
+\begin{equation} \label{eq:electricScalarPotential}
+    E_A = - \nabla \phi_e -j \omega A 
+\end{equation}
+Similarly, if there are no electric charges ($\rho_e = 0$), then we can define the electric vector potential $F$ by
+\begin{equation} \label{eq:electricVectorPotential}
+    D_F = - \nabla \times F 
+\end{equation}
+and the magnetic scalar potential $\phi_m$ by
+\begin{equation} \label{eq:magneticScalarPotential}
+    H_F = - \nabla \phi_m -j \omega F 
+\end{equation}
+We can specify $\phi_e, \phi_m$ arbitrarily (doing so is called "fixing a gauge").
+The Lorenz gauge is defined by
+\begin{equation} \label{eq:LorenzGauge}
+    \nabla \cdot \Theta + \mu \epsilon \partial_t \phi_{\theta} = 0 
+\end{equation}
+Applying this to both potentials leads to the Helmholtz equations:
+\begin{subequations} \label{eq:Helmholtz}
+    \begin{align}
+        \nabla^2 A + k^2 A &= -\mu J \label{eq:HelmMag} \\
+        \nabla^2 F + k^2 F &= -\epsilon \mathfrak{M} \label{eq:HelmElec}
+    \end{align}
+\end{subequations}
 \end{document}
