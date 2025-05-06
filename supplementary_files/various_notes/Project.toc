@@ -1,0 +1,35 @@
+\contentsline {section}{Notation}{1}{section*.2}%
+\contentsline {section}{\numberline {1}Effective Roughness Model}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Uniform Plane Wave Incident on PEC}{3}{subsection.1.1}%
+\contentsline {section}{Appendices}{4}{section*.10}%
+\contentsline {subsection}{\numberline {A}Mathematical Identities and Theorems}{4}{subsection.Alph0.1}%
+\contentsline {subsection}{\numberline {B}Maxwell's Equations}{5}{subsection.Alph0.2}%
+\contentsline {subsubsection}{\numberline {B.1}Differential Form}{5}{subsubsection.Alph0.2.1}%
+\contentsline {subsubsection}{\numberline {B.2}Constitutive Relations}{5}{subsubsection.Alph0.2.2}%
+\contentsline {subsubsection}{\numberline {B.3}Integral Form}{5}{subsubsection.Alph0.2.3}%
+\contentsline {subsubsection}{\numberline {B.4}Uncoupled Form}{5}{subsubsection.Alph0.2.4}%
+\contentsline {subsubsection}{\numberline {B.5}Time-Harmonic Form}{5}{subsubsection.Alph0.2.5}%
+\contentsline {subsubsection}{\numberline {B.6}Source-Free Time Harmonic Equations}{6}{subsubsection.Alph0.2.6}%
+\contentsline {subsubsection}{\numberline {B.7}Boundary Conditions}{6}{subsubsection.Alph0.2.7}%
+\contentsline {subsubsection}{\numberline {B.8}Material Considerations}{6}{subsubsection.Alph0.2.8}%
+\contentsline {paragraph}{Magnets}{6}{section*.11}%
+\contentsline {paragraph}{Dielectrics/Insulators}{7}{section*.12}%
+\contentsline {paragraph}{Conductors}{7}{section*.13}%
+\contentsline {paragraph}{Semiconductors}{7}{section*.14}%
+\contentsline {subsection}{\numberline {C}Electromagnetic Theorems}{8}{subsection.Alph0.3}%
+\contentsline {subsubsection}{\numberline {C.1}Conservation of Energy}{8}{subsubsection.Alph0.3.1}%
+\contentsline {subsubsection}{\numberline {C.2}Duality}{8}{subsubsection.Alph0.3.2}%
+\contentsline {subsubsection}{\numberline {C.3}Uniqueness}{8}{subsubsection.Alph0.3.3}%
+\contentsline {subsubsection}{\numberline {C.4}Lorentz Reciprocity}{8}{subsubsection.Alph0.3.4}%
+\contentsline {subsubsection}{\numberline {C.5}Image Theory}{8}{subsubsection.Alph0.3.5}%
+\contentsline {subsubsection}{\numberline {C.6}Equivalence Theorems}{8}{subsubsection.Alph0.3.6}%
+\contentsline {subsection}{\numberline {D}Solutions to Maxwell's equations}{10}{subsection.Alph0.4}%
+\contentsline {subsubsection}{\numberline {D.1}Field Configurations}{10}{subsubsection.Alph0.4.1}%
+\contentsline {subsubsection}{\numberline {D.2}Separation of Variables}{10}{subsubsection.Alph0.4.2}%
+\contentsline {subsubsection}{\numberline {D.3}Unbounded Uniform Plane Waves}{10}{subsubsection.Alph0.4.3}%
+\contentsline {subsubsection}{\numberline {D.4}Vector Potentials}{11}{subsubsection.Alph0.4.4}%
+\contentsline {subsubsection}{\numberline {D.5}Reflection and Transmission}{12}{subsubsection.Alph0.4.5}%
+\contentsline {subsubsection}{\numberline {D.6}Geometrical Optics}{13}{subsubsection.Alph0.4.6}%
+\contentsline {paragraph}{Eikonal Surfaces}{13}{section*.23}%
+\contentsline {paragraph}{Conservation of Energy Flux}{13}{section*.24}%
+\contentsline {section}{TODO}{13}{section*.25}%

@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath,amsfonts}
+\usepackage[toc]{appendix}
 \usepackage{array}
 \usepackage{bm}
 \usepackage{cancel}
@@ -10,6 +11,9 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage{xcolor}
@@ -27,20 +31,29 @@
     sharp corners}
 \numberwithin{equation}{section}
 
-\title{Balanis Quick Reference}
-\author{Andrew Whelan}
-\date{\today}
 \begin{document}
-    \maketitle
+    \begin{titlepage}
+        \centering
+        \vspace*{\fill}  % Pushes content to vertical center
+
+        {\Huge\bfseries Modelling of Diffuse Scattering Effects for Outdoor Ray Tracing \par}
+        \vspace{1cm}
+        
+        {\Large Andrew Whelan \par}
+        \vspace{0.5cm}
+        
+        {\large \date{\today} \par}
+
+        \vspace*{\fill}  % Pushes remaining space below
+    \end{titlepage}
+
     \thispagestyle{empty}
     \setcounter{page}{0}
-
     \tableofcontents
 
     \newpage
     \small
     \section*{Notation}
-        \addcontentsline{toc}{section}{Notation}
         \addcontentsline{toc}{section}{Notation}
         \subsection*{Mathematical}
             \begin{tabular}{ m{6em} m{30em} m{0em} }
@@ -121,9 +134,84 @@
                     (peak/trough velocity) & [ms\textsuperscript{-1}]  \\
             \end{tabular}
             \normalsize
-            \newpage
-    \section{Maxwell's Equations}
-        \subsection{Differential Form}
+    \newpage
+    \section{Plane Wave Incident on PEC}    
+        We start with a setup as per diagram below.
+        \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            % Line object with text at centre, rotatable, customizable
+            \tikzset{
+                labelledArrow/.style 2 args={
+                    
+                }
+            }
+            % Wall                              [PARAMETERS]
+            \tikzmath{
+                \xWallStart = 0;    \yWallStart = 1;
+                \wallLen = 3;       \wallAngle = 0; % degrees 
+                \wallText = "PEC";  \wallTextOffset = -0.3; \wallColor="blue";
+            }
+            %                                   [CALCS]
+            \coordinate (wallStart) at (\xWallStart, \yWallStart);
+            \tikzmath{
+                \xWallEnd = \xWallStart + \wallLen*cos(\wallAngle);
+                \yWallEnd = \yWallStart + \wallLen*sin(\wallAngle);
+                \wallTextX = \xWallStart + 0.5*\wallLen*cos(\wallAngle)
+                    - \wallTextOffset * sin(\wallAngle);
+                \wallTextY = \yWallStart + 0.5*\wallLen*sin(\wallAngle)
+                    + \wallTextOffset * cos(\wallAngle);
+            }
+            \coordinate (wallEnd) at (\xWallEnd, \yWallEnd);
+            \coordinate (wallTextPos) at (\wallTextX, \wallTextY);
+            %                                   [DRAWING]
+            \draw[thick, \wallColor, postaction={node[midway,above] \wallText} (wallStart) -- (wallEnd);
+            %\node[rotate=\wallAngle, \wallColor] at (wallTextPos) {\wallText};
+
+            % Incident wave                     [PARAMETERS]
+            %\tikzmath{
+            %    
+            %}
+            %\draw[->, thick, blue] (0.5,2) -- (1.5,1) ;
+            %\node[blue][rotate=315] at (0.9,1.4) {$E_{i}$};
+
+            %% Normal at point of incidence
+            %\draw[dashed] (1.5, 2.2) -- (1.5, 1);
+
+            % Theta arc
+            %\draw[red] (1,1) ++(0:0.6) arc (0:45:0.6);
+            %\node[red] at (1.5,1.1) {$\theta$};
+
+            %% Mark point of incidence
+            %\filldraw[black] (4,2.12) circle (0.03);
+
+            % Optional labels or coordinate aids (remove if undesired)
+            % \draw[help lines] (0,0) grid (5,5);
+        \end{tikzpicture}
+        \end{center}
+
+    \newpage
+    \renewcommand{\thesubsection}{\Alph{subsection}}
+    \numberwithin{equation}{subsection}
+    \appendix
+    \section*{Appendices}
+    \addcontentsline{toc}{section}{Appendices}
+    \subsection{Mathematical Identities and Theorems}
+        \begin{subequations} \label{eq:integralVectorTheorems}
+            \begin{align}
+                \oint_C A \cdot dl &= \iint_S (\nabla \times A) \cdot ds
+                    \label{eq:stokes} \\
+                \oiint_S A \cdot ds &= \iiint_V (\nabla \cdot A) dv \label{eq:divergence}
+            \end{align}
+        \end{subequations}
+        \begin{subequations} \label{eq:vectorDifferentialIdentities}
+            \begin{align}
+                \nabla \cdot (A \times B) &= B \cdot (\nabla \times A) - A \cdot (\nabla
+                    \times B) \label{eq:divOfCurlOfProduct}
+            \end{align}
+        \end{subequations}
+        \newpage
+    \subsection{Maxwell's Equations}
+        \subsubsection{Differential Form}
             \begin{subequations}\label{eq:Maxwell}
                 \begin{align}
                     \nabla \times E &= - \partial_t B \begingroup \textcolor{vanish}{
@@ -135,7 +223,7 @@
                         \quad = \rho_m} \endgroup \label{eq:GaussMagnetic}
                 \end{align}
             \end{subequations}
-        \subsection{Constitutive Relations} 
+        \subsubsection{Constitutive Relations} 
             The material properties of a medium can be modelled without specifying 
             microscopic structure:
             \begin{subequations}\label{eq:Constitutive}
@@ -145,7 +233,7 @@
                     J_c &= \sigma E \label{eq:ConstitutiveCurrentDensity}
                 \end{align}
             \end{subequations}
-        \subsection{Integral Form}
+        \subsubsection{Integral Form}
             The below can be derived from taking the surface integral of the curl
             equations, the volume integral of the divergence equations, and applying 
             \eqref{eq:integralVectorTheorems}:
@@ -162,7 +250,7 @@
                         \rho_m \cdot dv} \endgroup \label{eq:GaussMagneticIntegral}
                 \end{align}
             \end{subequations}
-        \subsection{Uncoupled Form}
+        \subsubsection{Uncoupled Form}
             \begin{subequations} \label{eq:fieldEqs}
                 \begin{align}
                     (\mu \epsilon \partial^2_t + \mu \sigma \partial_t - \nabla^2 ) E &
@@ -175,7 +263,7 @@
                         \mathfrak{M}_i} \endgroup = 0 \label{eq:magneticFieldEq}
                 \end{align}
             \end{subequations}
-        \subsection{Time-Harmonic Form}
+        \subsubsection{Time-Harmonic Form}
             To obtain solutions we usually look at time-harmonic solutions, and can then
             use Fourier series to express other forms in terms of these. The time
             harmonic forms of \eqref{eq:fieldEqs} are obtained by replacements
@@ -206,7 +294,7 @@
                     \right)^{\frac{1}{2}} \label{eq:wavenumber}
             \end{align}
             \end{subequations}
-        \subsection{Source-Free Time Harmonic Equations}
+        \subsubsection{Source-Free Time Harmonic Equations}
             The source-free ($\rho_e = \rho_m = J_i = \mathfrak{M}_i = 0$) versions of
             \eqref{eq:fieldEqsTH} are
             \begin{subequations} \label{eq:fieldEqsSF}
@@ -217,7 +305,7 @@
                         \label{eq:magneticFieldEqSF}
                 \end{align}
             \end{subequations}
-        \subsection{Boundary Conditions}
+        \subsubsection{Boundary Conditions}
             \scriptsize
             \begin{tabular}{ | m{6.5em} || m{7.9em} | m{7.5em} | m{7.7em} | m{7.9em} | }
                 \hline
@@ -240,18 +328,18 @@
                 \hline
             \end{tabular}
             \normalsize
-        \subsection{Material Considerations}
+        \subsubsection{Material Considerations}
             All the constitutive parameters of \eqref{eq:Constitutive} are typically
             time/space-varying tensors. Furthermore, they are complex-valued in order to
             model dissipation for time-varying fields.
 
             Generally, we can classify materials into categories described below.
-        \subsubsection{Magnets}
-        The magnetization is the net effect of the microscopic
-        magnetic dipoles created by orbiting electrons. A large value of $\mu$
-        indicates a stronger magnetization.
+        \paragraph{Magnets}
+            The magnetization is the net effect of the microscopic
+            magnetic dipoles created by orbiting electrons. A large value of $\mu$
+            indicates a stronger magnetization.
 
-        \subsubsection{Dielectrics/Insulators}
+        \paragraph{Dielectrics/Insulators}
             Here, the dominant charges are on the boundary of the material creating an
             overall electric dipole. A large value of $\epsilon$ indicates a stronger
             ability to store charge, but must be weighed vs. $\sigma$ and $\omega$ also.
@@ -260,7 +348,7 @@
                 \frac{\sigma}{\omega \epsilon} \ll 1
             \end{equation}
 
-        \subsubsection{Conductors}
+        \paragraph{Conductors}
             Here, there are free charges creating currents throughout the material, due to
             valence electrons that aren't tightly bound. The condition here is the
             opposite of the above:
@@ -268,15 +356,14 @@
                 \frac{\sigma}{\omega \epsilon} \gg 1
             \end{equation}
 
-        \subsubsection{Semiconductors}
+        \paragraph{Semiconductors}
             These are roughly in between an insulator and a conductor, with the condition
                 \begin{equation} \label{eq:semiconductor}
                     \frac{\sigma}{\omega \epsilon} = O(1)
                 \end{equation}
-            \newpage
-
-    \section{Theorems}
-        \subsection{Conservation of Energy}
+        \newpage
+    \subsection{Electromagnetic Theorems}
+        \subsubsection{Conservation of Energy}
             Scalar multiply \eqref{eq:MaxwellFaraday} by $H$, and
             \eqref{eq:AmpereMaxwell} by $E$, subtract the two equations and apply
             \eqref{eq:divOfCurlOfProduct} to derive
@@ -299,28 +386,28 @@
             power exiting ($E \times H$ term) plus the dissipated ($J_c$ term) power
             plus the rate of change of the electromagnatic field energy ($M_d$ and $J_d$
             terms).
-        \subsection{Duality}
+        \subsubsection{Duality}
             Essentially a theoretical symmetrical relationship allowing quicker
             transformation of one problem to another. For example, a problem with
             electric sources and no magnetic ones can easily be transformed into one
             with magnetic sources and no electric ones.
-        \subsection{Uniqueness}
+        \subsubsection{Uniqueness}
             Essentially, a lossy ($\sigma \neq 0$) region with sources $J_i,
             \mathfrak{M}_i$ has unique solutions whenever the tangential components of
             $E$ and/or $H$ are specified over the boundary.
-        \subsection{Lorentz Reciprocity}
+        \subsubsection{Lorentz Reciprocity}
             \begin{equation}
                 \label{eq:lorentzReciprocity}
                 \nabla \cdot( E_2 \times H_1 - E_1 \times H_2 ) = ( E_2 \cdot J1 - E_1
                 \cdot J2 ) - ( H_2 \cdot M_1 - H_1 \cdot M_2 )
             \end{equation}
-        \subsection{Image Theory}
+        \subsubsection{Image Theory}
             Assuming a wall of infinite extent, and a PEC ($\sigma=\infty$) below,
             reflection can be considered for infinitesimal vertical and horizontal
             dipoles respectively. Reflected components can be considered by constructing
             virtual sources below the wall. Boundary conditions will enforce
             polarization of the virtual sources.
-        \subsection{Equivalence Theorems}
+        \subsubsection{Equivalence Theorems}
             \subsubsection*{Volume Equivalence}
             \begin{subequations}
                 \begin{align} \label{eq:VolumeEquivalence}
@@ -390,8 +477,8 @@
             \end{align}
             \end{subequations}
             \newpage
-        \section{Solutions}
-        \subsection{Field Configurations}
+    \subsection{Solutions to Maxwell's equations}
+        \subsubsection{Field Configurations}
             A field configuration is a restriction of $E$ or $H$ to a given geometry. A
             \emph{mode} is a solution for a given field configuration. \emph{Transverse
             modes} are solutions of \eqref{eq:fieldEqsTH} whose $E$ and/or $H$ fields
@@ -404,7 +491,7 @@
                     contained in a plane,
                 \item If equiphase planes are parallel, then it's a plane wave.
             \end{itemize}
-        \subsection{Separation of Variables}
+        \subsubsection{Separation of Variables}
             Under certain ideal scenarios, solutions to \eqref{eq:fieldEqsSF} can be
             obtained by:
             \begin{enumerate}
@@ -414,7 +501,7 @@
             \end{enumerate}
             The solutions obtained in this way are expressible in terms of complex
             exponentials and Bessel functions.
-        \subsection{Unbounded Uniform Plane Waves}
+        \subsubsection{Unbounded Uniform Plane Waves}
             \subsubsection*{TE\textsuperscript{$y$}}
             For purposes of simplifying coordinate transformations, we can simplify the
             formula given in Balanis for the $E$ field. Essentially, it requires
@@ -471,7 +558,7 @@
                 \end{align}
             \end{subequations}
             \normalsize
-        \subsection{Vector Potentials}
+        \subsubsection{Vector Potentials}
             The magnetic vector potential $A$ is defined for source-free regions
             (guaranteed experimentally, since there are no magnetic monopoles: $\rho_m =
             0$) by
@@ -503,7 +590,7 @@
                     \nabla^2 F + k^2 F &= -\epsilon \mathfrak{M} \label{eq:HelmElec}
                 \end{align}
             \end{subequations}
-        \subsection{Reflection and Transmission}
+        \subsubsection{Reflection and Transmission}
 
         \subsubsection*{Uniform Plane Waves}
         \paragraph*{Normal Incidence:}
@@ -543,22 +630,7 @@
         transverse modes (the first is $TM^z$ corresponding to $\eta_p \to
         \frac{\eta_p}{\cos \theta_p}$, and the second is $TE^z$ corresponding to $\eta_p
         \to \eta_p \cos \theta_p $)
-        \newpage
-    \section*{Appendix A: Mathematical Identities and Theorems}
-        \addcontentsline{toc}{section}{Appendix A: Mathematical Identities and Theorems}
-        \begin{subequations} \label{eq:integralVectorTheorems}
-            \begin{align}
-                \oint_C A \cdot dl &= \iint_S (\nabla \times A) \cdot ds
-                    \label{eq:stokes} \\
-                \oiint_S A \cdot ds &= \iiint_V (\nabla \cdot A) dv \label{eq:divergence}
-            \end{align}
-        \end{subequations}
-        \begin{subequations} \label{eq:vectorDifferentialIdentities}
-            \begin{align}
-                \nabla \cdot (A \times B) &= B \cdot (\nabla \times A) - A \cdot (\nabla
-                    \times B) \label{eq:divOfCurlOfProduct}
-            \end{align}
-        \end{subequations}
+        \newpage       \newpage
     \section*{TODO}
         \addcontentsline{toc}{section}{TODO}
         \begin{description}
