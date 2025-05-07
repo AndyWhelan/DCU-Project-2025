@@ -140,23 +140,33 @@
     \section{Effective Roughness Model}
         This model is a modification of Geometrical Optics in which, in addition to the
         specular component, each point impinging on the middle of a surface element $dW$
-        gives a diffuse contribution $dE_d$ to the scattered field $E_s$ whose amplitude $\left|
-        dE_d \right|$ is given by
+        gives a diffuse contribution $dE_d$ to the scattered field $E_s$ whose amplitude
+        $\left| dE_d \right|$ is given by
         \begin{equation} \label{eq:scatteringAmpER}
-           \left| dE_d \right| \propto \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}}
-           \frac{1}{r_i r_s}
+           \left| dE_d \right| \propto \sqrt{\frac{dW \cos \theta_i \cos \theta_d}{\pi}}
+           \frac{1}{r_i r_d}
         \end{equation}
         with the constant of proportionality depending on the incident amplitude and a
         scattering parameter $S$. Specifically, we have
         \begin{subequations}
             \begin{align}
                 \left| dE_d \right| &= S \Upsilon \sqrt{dW}, \quad \text{where} \\
-                \Upsilon &= \sqrt{\frac{60 G_t P_t \cos \theta_i \cos \theta_s}{\pi}}
-                \frac{1}{r_i r_s}
+                \Upsilon &= \sqrt{\frac{60 G_t P_t \cos \theta_i \cos \theta_d}{\pi}}
+                \frac{1}{r_i r_d}
             \end{align}
         \end{subequations}
         \subsection{Uniform Plane Wave Incident on PEC}    
-            We start with a setup as per Figure~\ref{fig:planeWavePEC}.
+            We start with a setup as per Figure~\ref{fig:planeWavePEC}. Then
+            \begin{subequations}
+                \begin{align}
+                    k_i &= \sin (\theta_i) \text{e}_x - \cos (\theta_i) \text{e}_y \\
+                    k_r &= \sin (\theta_i) \text{e}_x + \cos (\theta_i) \text{e}_y \\
+                    k_d &= \sin (\theta_d) \text{e}_x + \cos (\theta_d) \text{e}_y
+                \end{align}
+            \end{subequations}
+            Then, since $G_t = 1$ (0 gain), $P_t = 1$ (uniformity of wave), $dW = h dx$,
+            and
+            $\left| \Gamma \right| = 1$
             \vspace*{\fill}
             \begin{figure}[H] 
             \begin{center}
@@ -182,7 +192,8 @@
                     node[#9, rotate=\arrowAngle+\labelAngleShift]
                         {\arrowLabel};
             }
-            % Call the macro with: xStart, yStart, length, angle, label, label offset, color
+            % Call the macro with: xStart, yStart, length, angle, label, label offset,
+%             color
             % Wall
             \tikzmath{
                     \xObstacleStart = 0;            
@@ -195,28 +206,31 @@
             \def\obstacleLabel{PEC}
             \def\obstacleColor{gray}
             \def\obstacleArrowStyle{ultra thick}
-            \drawLabelledArrow{\xObstacleStart}{\yObstacleStart}{\obstacleLen}{\obstacleAngle}
-                {\obstacleLabel}{\obstacleColor}{0}{\obstacleArrowStyle}{pos=0.9,below}
+            \drawLabelledArrow{\xObstacleStart}{\yObstacleStart}{\obstacleLen}
+                {\obstacleAngle}{\obstacleLabel}{\obstacleColor}{0}{\obstacleArrowStyle}
+                {pos=0.9,below}
             % Incident Ray
             \tikzmath{
                     \xIncidentStart = \xObstacleStart + \xObstacleCentre);
                     \yIncidentStart = \yObstacleStart + \yObstacleCentre);
                     \incidentAngle = \obstacleAngle + 135;
-                    \incidentLen = \obstacleLen/(abs(2*cos(\incidentAngle)));%\obstacleLen * ; 
+                    \incidentLen =
+                        \obstacleLen/(abs(2*cos(\incidentAngle)));%\obstacleLen * ; 
             }
-            \def\incidentLabel{\begingroup \scriptsize $E_i = e^{-jk_i \cdot r} \text{e}_z$ \endgroup}%= E_0 e^{-jk_i \cdot r} \text{e}_z$}
+            \def\incidentLabel{\begingroup \scriptsize $E_i = e^{-jk_i \cdot r}
+                \text{e}_z$ \endgroup}%= E_0 e^{-jk_i \cdot r} \text{e}_z$}
             \def\incidentColor{black}
             \def\incidentArrowStyle{<-}
-            \drawLabelledArrow{\xIncidentStart}{\yIncidentStart}{\incidentLen}{\incidentAngle}
-                {\incidentLabel}{\incidentColor}{180}{\incidentArrowStyle}{pos=0.7,below}
-
+            \drawLabelledArrow{\xIncidentStart}{\yIncidentStart}{\incidentLen}
+                {\incidentAngle}{\incidentLabel}{\incidentColor}{180}
+                {\incidentArrowStyle}{pos=0.7,below}
             % Normal Ray
             \tikzmath{
                     \normalLen = \obstacleLen*(0.4); 
                     \xNormalStart = (\normalLen/2)*sin(\obstacleAngle) + \xObstacleStart +
                         \xObstacleCentre;
-                    \yNormalStart = 0.9 -(\normalLen/2)*cos(\obstacleAngle) + \yObstacleStart +
-                        \yObstacleCentre;
+                    \yNormalStart = 0.9 -(\normalLen/2)*cos(\obstacleAngle) +
+                        \yObstacleStart + \yObstacleCentre;
                     \normalAngle = \obstacleAngle + 90;
             }
             \def\normalLabel{}
@@ -245,7 +259,7 @@
                 \heightStart = \xObstacleStart - 0.3;
             }
             \drawLabelledArrow{\heightStart}{\yObstacleStart}{\txHeight}{90}
-                {$h$}{\normalColor}{270}{<->, dotted}{pos=0.5,left}
+                {$y_{\text{start}}$}{\normalColor}{270}{<->, dotted}{pos=0.5,left}
             \tikzmath{
                 \waveVectorAngle = 180- \incidentAngle;
             }
@@ -261,17 +275,20 @@
                 {\waveVectorAngle}{$k_{r}$}{red}{0}{-{latex}, ultra thick}{pos=0.5,below}
             \tikzmath{
                 \xNonCoherentRay = \xIncidentStart - 0.6;
-                \nonCoherentRayLen = \incidentLen - 0.8;%( \incidentLen - 0.5 ) / cos( 180 - \incidentAngle );
+                \nonCoherentRayLen = \incidentLen - 0.8;%( \incidentLen - 0.5 ) / cos(
+%                                                           180 - \incidentAngle );
                 \nonCoherentRayAngle = \incidentAngle;
             }
             \drawLabelledArrow{\xNonCoherentRay}{\yIncidentStart}{\nonCoherentRayLen}
                 {\nonCoherentRayAngle}{}{black}{0}{thick}{pos=0.7,above}
             \drawLabelledArrow{\xNonCoherentRay}{\yIncidentStart}{1}
-                {\nonCoherentRayAngle}{$k_i$}{blue}{180}{{latex}-,ultra thick}{pos=0.7,below}
+                {\nonCoherentRayAngle}{$k_i$}{blue}{180}{{latex}-,ultra thick}
+                {pos=0.7,below}
             \drawLabelledArrow{\xNonCoherentRay}{\yIncidentStart}{3.3}
-                {37.5}{\begingroup \scriptsize $dE_d = S\Upsilon e^{-jk_s \cdot r} \sqrt{dW} \text{e}_z$ \endgroup}{black}{0}{thick}{pos=0.7,above}
+                {37.5}{\begingroup \scriptsize $dE_d = S\Upsilon e^{-jk_d \cdot r}
+                \sqrt{dW} \text{e}_z$ \endgroup}{black}{0}{thick}{pos=0.7,above}
             \drawLabelledArrow{\xNonCoherentRay}{\yIncidentStart}{1}
-                {37.5}{$k_{s}$}{purple}{0}{-{latex},ultra thick}{pos=0.2,above}
+                {37.5}{$k_{d}$}{purple}{0}{-{latex},ultra thick}{pos=0.2,above}
             \tikzmath{
                 \xSurfaceElement = \xNonCoherentRay - 0.1;
                 \surfaceElementLen = 0.2;
@@ -279,11 +296,22 @@
             \drawLabelledArrow{\xSurfaceElement}{\yIncidentStart}{\surfaceElementLen}
                 {0}{$dW$}{black}{0}{ultra thick}{pos=0.5,below}
             \end{tikzpicture}
-            \caption{A uniform plane wave strikes a PEC. The overall scattered wave is $E_s = E_r + E_d$. $E_r$ is just the usual specular component of geometrical optics, multiplied by $R$, a roughness parameter. $E_d$ is the diffuse component, which will be a sum/integral of contributions along the wall, one of which is shown here, for a drawn surface element $dW$}
+            \caption{A uniform plane wave strikes a PEC. The overall scattered wave is
+            $E_s = E_r + \int_W d E_d$. $E_r$ is just the usual specular component of
+            geometrical optics, multiplied by $R$, a roughness parameter. $E_d$ is the
+            diffuse component - a sum of non-coherent contributions along the wall, one
+            of which is shown here, for a drawn surface element $dW$.}
             \label{fig:planeWavePEC}
             \end{center}
             \end{figure}
 
+            \begin{subequations}
+                \begin{align}
+                    E_i &= e^{-j(x \sin \theta_i - y \cos \theta_i)} \text{e}_z \\
+                    E_r &= \sqrt{1 - S^{2}} e^{-j(x \sin \theta_i + y \cos \theta_i)} \text{e}_z \\
+                    E_d &= S e^{-j(x \sin \theta_i + y \cos \theta_i)} \text{e}_z
+                \end{align}
+            \end{subequations}
     \newpage
     \renewcommand{\thesubsection}{\Alph{subsection}}
     \numberwithin{equation}{subsection}
