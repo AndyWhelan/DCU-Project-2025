@@ -341,23 +341,26 @@
             \end{tikzpicture}
             \caption{Geometry setup implies that $r_i = \frac{w}{\sin \theta_i}$, and
                 $r_d = \sqrt{y^{2} + (x - w)^{2}}$, so that $\frac{1}{r_i r_d} =
-                \frac{\sin \theta_i}{ w \sqrt{y^{2} + ( x - w)^{2}}}$, and \cos \theta_d
-                = \frac{y}{\sqrt{y^{2} + ( x - w)^{2}}} }
+                \frac{\sin \theta_i}{ w \sqrt{y^{2} + ( x - w)^{2}}}$, and $\cos \theta_d
+                = \frac{y}{\sqrt{y^{2} + ( x - w)^{2}}}$ }
             \label{fig:trigPEC}
             \end{center}
             \end{figure}
             Then, since $G_t = 1$ (0 gain), $P_t = 1$ (uniformity of wave), $dW = h dx$,
             $\left| \Gamma \right| = 1$, and referring to the geometry of Figure
             \ref{fig:trigPEC}, we get
+            \small
             \begin{subequations}
                 \begin{align}
                     E_i &= e^{-j(x \sin \theta_i - y \cos \theta_i)} \text{e}_z \\
                     E_r &= \sqrt{1 - S^{2}} \ e^{-j(x \sin \theta_i + y \cos \theta_i)}
                         \text{e}_z \\
-                    E_d &= S \ \sin \theta_i \sqrt{\frac{60h \cos \theta_i}{\pi}} \int_W \frac{1}{w} \sqrt{\frac{ \cos \theta_d \ dw }{y^{2} + (x - w)^{2} }}
-                    e^{-j(x \sin \theta_d + y \cos \theta_d)} \text{e}_z
+                    E_d &= S \ \sin \theta_i \sqrt{\frac{60hy \cos \theta_i}{\pi}} \int_W
+                    \frac{1}{w} \sqrt{\frac{ dw }{\left( y^{2} + (x - w)^{2} \right)^{\frac{3}{2}} }}
+                    e^{-j\left(\frac{x^{2} + y^{2} -xw}{\sqrt{y^{2} +(x-w)^{2}}}\right)} \text{e}_z
                 \end{align}
             \end{subequations}
+            \normalsize
     \newpage
     \renewcommand{\thesubsection}{\Alph{subsection}}
     \numberwithin{equation}{subsection}

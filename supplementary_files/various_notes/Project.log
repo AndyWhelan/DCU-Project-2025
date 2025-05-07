@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.4.23)  7 MAY 2025 14:45
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.4.23)  7 MAY 2025 15:11
  restricted system commands enabled.
 **./Project.tex
 (./Project.tex
@@ -966,33 +966,33 @@ Overfull \hbox (14.7468pt too wide) in paragraph at lines 121--139
  []
 
 [2] [3] [4] [5] [6]
-Underfull \hbox (badness 6173) in paragraph at lines 480--480
+Underfull \hbox (badness 6173) in paragraph at lines 484--484
 []|\OT1/lmr/bx/n/7 Fi-nite $\OML/cmm/m/it/7 ^^[$\OT1/lmr/bx/n/7 , no
  []
 
 
-Overfull \hbox (18.75842pt too wide) in paragraph at lines 478--499
+Overfull \hbox (18.75842pt too wide) in paragraph at lines 482--503
 [] 
  []
 
 [7] [8] [9] [10] [11] [12]
-Overfull \hbox (2.07909pt too wide) in paragraph at lines 772--777
+Overfull \hbox (2.07909pt too wide) in paragraph at lines 776--781
 \OT1/lmr/m/n/10 ap-ply-ing right-hand-rule and en-forc-ing con-ti-nu-ity of tan
 -gen-tial com-po-nents ($\OT1/cmr/m/n/10 ^^B[] +
  []
 
 [13]
-Overfull \hbox (19.97293pt too wide) in paragraph at lines 819--821
+Overfull \hbox (19.97293pt too wide) in paragraph at lines 823--825
 []\OT1/lmr/m/n/10 Chap-ter 11.2, [590e], [571b] 
  []
 
 
-Overfull \hbox (20.26237pt too wide) in paragraph at lines 822--823
+Overfull \hbox (20.26237pt too wide) in paragraph at lines 826--827
 []\OT1/lmr/m/n/10 Chap-
  []
 
 
-Overfull \hbox (14.18307pt too wide) in paragraph at lines 824--826
+Overfull \hbox (14.18307pt too wide) in paragraph at lines 828--830
 []\OT1/lmr/m/n/10 Chap-ters 11.4, 11.7 [614e, 664e], [595b,
  []
 
@@ -1011,7 +1011,7 @@ Here is how much of LuaTeX's memory you used:
  989 words of node memory still in use:
    31 hlist, 2 vlist, 14 rule, 2 glue, 1 kern, 4 sub_mlist, 59 glue_spec, 2 writ
 e, 24 pdf_literal, 24 pdf_colorstack nodes
-   avail lists: 1:1,2:25,3:892,4:142,5:439,6:97,7:4376,8:78,9:1146,10:4,11:265
+   avail lists: 1:1,2:25,3:893,4:142,5:439,6:97,7:4376,8:78,9:1146,10:4,11:265
  52104 multiletter control sequences out of 65536+600000
  84 fonts using 3484495 bytes
  101i,16n,101p,526b,986s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1031,20 +1031,21 @@ sfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/euler/eufm7.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx10.p
-fb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/
-share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public
-/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/
-fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/wasy-type1/wasy10.pfb>
-Output written on Project.pdf (16 pages, 469399 bytes).
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/euler/eufm7.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/te
+xmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/wasy-type1/wasy10.pfb>
+Output written on Project.pdf (16 pages, 482402 bytes).
 
-PDF statistics: 543 PDF objects out of 1000 (max. 8388607)
- 466 compressed objects within 5 object streams
+PDF statistics: 547 PDF objects out of 1000 (max. 8388607)
+ 469 compressed objects within 5 object streams
  164 named destinations out of 1000 (max. 131072)
  488 words of extra memory for PDF output out of 10000 (max. 100000000)
 
