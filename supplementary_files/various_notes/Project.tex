@@ -156,7 +156,7 @@
             \end{align}
         \end{subequations}
         \subsection{Uniform Plane Wave Incident on PEC}    
-            We start with a setup as per Figure~\ref{fig:planeWavePEC}. Then
+            We start with a setup as per Figure~\ref{fig:planeWavePEC}. 
             \begin{subequations}
                 \begin{align}
                     k_i &= \sin (\theta_i) \text{e}_x - \cos (\theta_i) \text{e}_y \\
@@ -164,13 +164,10 @@
                     k_d &= \sin (\theta_d) \text{e}_x + \cos (\theta_d) \text{e}_y
                 \end{align}
             \end{subequations}
-            Then, since $G_t = 1$ (0 gain), $P_t = 1$ (uniformity of wave), $dW = h dx$,
-            and
-            $\left| \Gamma \right| = 1$
             \vspace*{\fill}
             \begin{figure}[H] 
             \begin{center}
-            \begin{tikzpicture}[scale=1.5]
+            \begin{tikzpicture}[scale=2.5]
             \newcommand{\drawLabelledArrow}[9]{%
                 \tikzmath{
                     \xArrowStart = #1; 
@@ -241,7 +238,7 @@
             
             \pgfmathsetmacro\xFudge{\xObstacleCentre - sin(\obstacleAngle)}
             \pgfmathsetmacro\yFudge{\yObstacleCentre + cos(\obstacleAngle)}
-            \draw (\xFudge, \yFudge) arc (\obstacleAngle+90:\obstacleAngle+135:1);
+            \draw[dotted] (\xFudge, \yFudge) arc (\obstacleAngle+90:\obstacleAngle+135:1);
             \tikzmath{
                 \xIncidentE = \xIncidentStart + \incidentLen * cos(\incidentAngle);
                 \yIncidentE = \yIncidentStart + \incidentLen * sin(\incidentAngle);
@@ -254,12 +251,12 @@
             \drawLabelledArrow{\xObstacleStart}{\yObstacleStart}{1.0}{90}
                 {$\text{e}_y$}{\normalColor}{270}{-{latex}, ultra thick}{pos=0.8,right}
             \node at (1.8,0.6) {$\theta_i$};
-            \tikzmath{
-                \txHeight = \incidentLen * sin(\incidentAngle);
-                \heightStart = \xObstacleStart - 0.3;
-            }
-            \drawLabelledArrow{\heightStart}{\yObstacleStart}{\txHeight}{90}
-                {$y_{\text{start}}$}{\normalColor}{270}{<->, dotted}{pos=0.5,left}
+            %\tikzmath{
+            %    \txHeight = \incidentLen * sin(\incidentAngle);
+            %    \heightStart = \xObstacleStart + 4.3;
+            %}
+            %\drawLabelledArrow{\heightStart}{\yObstacleStart}{\txHeight}{90}
+            %    {$y$}{\normalColor}{270}{<->, dotted}{pos=0.5,right}
             \tikzmath{
                 \waveVectorAngle = 180- \incidentAngle;
             }
@@ -295,6 +292,8 @@
             }
             \drawLabelledArrow{\xSurfaceElement}{\yIncidentStart}{\surfaceElementLen}
                 {0}{$dW$}{black}{0}{ultra thick}{pos=0.5,below}
+            \drawLabelledArrow{\xNonCoherentRay}{-0.4}{-1.38}
+                {0}{$w$}{black}{0}{<->, dotted}{pos=0.5,below}
             \end{tikzpicture}
             \caption{A uniform plane wave strikes a PEC. The overall scattered wave is
             $E_s = E_r + \int_W d E_d$. $E_r$ is just the usual specular component of
@@ -304,12 +303,58 @@
             \label{fig:planeWavePEC}
             \end{center}
             \end{figure}
-
+            \begin{figure}[H]
+            \begin{center}
+            \begin{tikzpicture}[scale=1.5]
+                \def\labelOffset{0.1}
+                \draw[thick](0,0) -- (2,0);
+                \draw[<->,dotted](0,-\labelOffset) -- (2-0.02,-\labelOffset) node[pos=0.5,
+                    below]{$w$};
+                \draw[thick](0,0) -- (0,1);
+                \tikzmath{
+                    \firstDiagonalAngle = atan(1/2);
+                    \xDiagonalFirst = \labelOffset * sin( \firstDiagonalAngle );
+                    \xDiagonalSecond = 2 + \xDiagonalFirst;
+                    \yDiagonalFirst = 1 + \labelOffset * cos( \firstDiagonalAngle );
+                    \yDiagonalSecond = -1 + \yDiagonalFirst;
+                }
+                \draw[thick, color=blue](0,1) -- (2,0) node[pos=0.5, above,
+                    rotate=-\firstDiagonalAngle]{$r_i$};
+                %\draw node[pos=0.5, above, rotate=-\firstDiagonalAngle]{$r_i$};
+                \def\xArc{1}
+                \draw (\xArc,0) arc (180:180-\firstDiagonalAngle:2-\xArc);
+                \draw node[] at (\xArc+0.35,0.12)
+                    {\begingroup \scriptsize $\frac{\pi}{2} - \theta_i$ \endgroup};
+                \tikzmath{
+                    \secondDiagonalAngle = atan(2/(6-2));
+                }
+                \draw[thick, color=purple] (2,0) -- (6,2) node[pos=0.5, above,
+                    rotate=\secondDiagonalAngle] {$r_d$};
+                \draw[thick] (2,0) -- (6,0);
+                \draw[thick] (6,2) -- (6,0) node[pos=0.5, right] {$y$};
+                \draw[<->,dotted](2+0.02,-\labelOffset) -- (6,-\labelOffset) node[pos=0.5,
+                    below]{$x-w$};
+                \def\xArc{3.2}
+                \draw (\xArc,0) arc (180:180+\secondDiagonalAngle:2-\xArc);
+                \draw node[] at (\xArc-0.45,0.12)
+                    {\begingroup \scriptsize $\frac{\pi}{2} - \theta_d$ \endgroup};
+            \end{tikzpicture}
+            \caption{Geometry setup implies that $r_i = \frac{w}{\sin \theta_i}$, and
+                $r_d = \sqrt{y^{2} + (x - w)^{2}}$, so that $\frac{1}{r_i r_d} =
+                \frac{\sin \theta_i}{ w \sqrt{y^{2} + ( x - w)^{2}}}$}
+            \label{fig:trigPEC}
+            \end{center}
+            \end{figure}
+            Then, since $G_t = 1$ (0 gain), $P_t = 1$ (uniformity of wave), $dW = h dx$,
+            $\left| \Gamma \right| = 1$, and referring to the geometry of Figure
+            \ref{fig:trigPEC}, we get
             \begin{subequations}
                 \begin{align}
                     E_i &= e^{-j(x \sin \theta_i - y \cos \theta_i)} \text{e}_z \\
-                    E_r &= \sqrt{1 - S^{2}} e^{-j(x \sin \theta_i + y \cos \theta_i)} \text{e}_z \\
-                    E_d &= S e^{-j(x \sin \theta_i + y \cos \theta_i)} \text{e}_z
+                    E_r &= \sqrt{1 - S^{2}} \ e^{-j(x \sin \theta_i + y \cos \theta_i)}
+                        \text{e}_z \\
+                    E_d &= S \ \sin \theta_i \sqrt{\frac{60h \cos \theta_i}{\pi}} \int_W \frac{1}{w} \sqrt{\frac{ \cos \theta_d \ dw }{y^{2} + (x - w)^{2} }}
+                    e^{-j(x \sin \theta_d + y \cos \theta_d)} \text{e}_z
                 \end{align}
             \end{subequations}
     \newpage

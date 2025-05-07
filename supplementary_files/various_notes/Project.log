@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.4.23)  7 MAY 2025 01:26
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.4.23)  7 MAY 2025 14:45
  restricted system commands enabled.
 **./Project.tex
 (./Project.tex
@@ -966,33 +966,33 @@ Overfull \hbox (14.7468pt too wide) in paragraph at lines 121--139
  []
 
 [2] [3] [4] [5] [6]
-Underfull \hbox (badness 6173) in paragraph at lines 435--435
+Underfull \hbox (badness 6173) in paragraph at lines 480--480
 []|\OT1/lmr/bx/n/7 Fi-nite $\OML/cmm/m/it/7 ^^[$\OT1/lmr/bx/n/7 , no
  []
 
 
-Overfull \hbox (18.75842pt too wide) in paragraph at lines 433--454
+Overfull \hbox (18.75842pt too wide) in paragraph at lines 478--499
 [] 
  []
 
 [7] [8] [9] [10] [11] [12]
-Overfull \hbox (2.07909pt too wide) in paragraph at lines 727--732
+Overfull \hbox (2.07909pt too wide) in paragraph at lines 772--777
 \OT1/lmr/m/n/10 ap-ply-ing right-hand-rule and en-forc-ing con-ti-nu-ity of tan
 -gen-tial com-po-nents ($\OT1/cmr/m/n/10 ^^B[] +
  []
 
 [13]
-Overfull \hbox (19.97293pt too wide) in paragraph at lines 774--776
+Overfull \hbox (19.97293pt too wide) in paragraph at lines 819--821
 []\OT1/lmr/m/n/10 Chap-ter 11.2, [590e], [571b] 
  []
 
 
-Overfull \hbox (20.26237pt too wide) in paragraph at lines 777--778
+Overfull \hbox (20.26237pt too wide) in paragraph at lines 822--823
 []\OT1/lmr/m/n/10 Chap-
  []
 
 
-Overfull \hbox (14.18307pt too wide) in paragraph at lines 779--781
+Overfull \hbox (14.18307pt too wide) in paragraph at lines 824--826
 []\OT1/lmr/m/n/10 Chap-ters 11.4, 11.7 [614e, 664e], [595b,
  []
 
@@ -1002,19 +1002,19 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `Project.out' has not changed.
-(rerunfilecheck)             Checksum: E631BDF710DC4331E3313EFA50F9B865;5011.
+(rerunfilecheck)             Checksum: D319846967387223318779FBC0535D49;5011.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31016 strings out of 476553
+ 31070 strings out of 476553
  125027,1977958 words of node,token memory allocated
  989 words of node memory still in use:
    31 hlist, 2 vlist, 14 rule, 2 glue, 1 kern, 4 sub_mlist, 59 glue_spec, 2 writ
 e, 24 pdf_literal, 24 pdf_colorstack nodes
-   avail lists: 1:1,2:25,3:747,4:132,5:439,6:97,7:4376,8:78,9:1146,10:4,11:265
- 52051 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:25,3:892,4:142,5:439,6:97,7:4376,8:78,9:1146,10:4,11:265
+ 52104 multiletter control sequences out of 65536+600000
  84 fonts using 3484495 bytes
- 101i,16n,101p,526b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,101p,526b,986s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvip
 s/lm/lm-rm.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
@@ -1041,10 +1041,10 @@ share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public
 /lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/
 fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/wasy-type1/wasy10.pfb>
-Output written on Project.pdf (16 pages, 467218 bytes).
+Output written on Project.pdf (16 pages, 469399 bytes).
 
-PDF statistics: 540 PDF objects out of 1000 (max. 8388607)
- 463 compressed objects within 5 object streams
- 163 named destinations out of 1000 (max. 131072)
+PDF statistics: 543 PDF objects out of 1000 (max. 8388607)
+ 466 compressed objects within 5 object streams
+ 164 named destinations out of 1000 (max. 131072)
  488 words of extra memory for PDF output out of 10000 (max. 100000000)
 
