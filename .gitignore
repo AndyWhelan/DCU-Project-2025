@@ -1,5 +1,7 @@
+*.aux
 *.log
 *.out
-*.aux
 *.swp
-*DS_Store
+*.toc
+.DS_Store
+matlab_functions/old
