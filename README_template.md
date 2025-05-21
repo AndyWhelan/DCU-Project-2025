@@ -1,6 +1,6 @@
 The main repo for 2025 MECE Project.
 <!-- {{{ Project -->
-## [`Project`](./Project.pdf)
+## [Project](./Project.pdf)
 Current LaTeX writeup. Note it hasn't been adjusted for final formatting.
 <!-- }}} -->
 <!-- {{{ MATLAB Code -->
