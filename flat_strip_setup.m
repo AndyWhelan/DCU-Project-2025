@@ -3,7 +3,7 @@ clear all
 close all
 
 %   Code to compute scattering from a strip of width w 
-%   2D problem
+%   2D problem..
 
 addpath( genpath( './matlab_functions'));
 

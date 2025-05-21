@@ -3,14 +3,15 @@ The main repo for 2025 MECE Project.
 # [Literature Review](./literature_review/main.pdf)
 <!-- }}} -->
 <!-- {{{ MATLAB Code -->
-# [MATLAB Code](./flat_strip_setup.m) (inline version below)
+# [MATLAB Code](./flat_strip_setup.m)
+The code linked above uses functions from [./matlab_functions](./matlab_functions).The full, inlined version is pasted below:
 ```matlab
 clc
 clear all
 close all
 
 %   Code to compute scattering from a strip of width w 
-%   2D problem
+%   2D problem..
 
 addpath( genpath( './matlab_functions'));
 

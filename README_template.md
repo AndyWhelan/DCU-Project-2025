@@ -3,7 +3,8 @@ The main repo for 2025 MECE Project.
 # [Literature Review](./literature_review/main.pdf)
 <!-- }}} -->
 <!-- {{{ MATLAB Code -->
-# [MATLAB Code](./flat_strip_setup.m) (inline version below)
+# [MATLAB Code](./flat_strip_setup.m)
+The code linked above uses functions from [./matlab_functions](./matlab_functions).The full, inlined version is pasted below:
 <!--INLINE:flat_strip_setup.m-->
 <!-- }}} -->
 # Files
