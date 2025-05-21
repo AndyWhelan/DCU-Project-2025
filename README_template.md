@@ -4,16 +4,16 @@ The main repo for 2025 MECE Project.
 Current LaTeX writeup. Note it hasn't been adjusted for final formatting.
 <!-- }}} -->
 <!-- {{{ Design Plan -->
-[Design Plan](https://docs.google.com/document/d/13tcJ5zGpxG1qnMD3emKxFI0-ayuOIjt_9a4OcLTsqQk/)
+# [Design Plan](https://docs.google.com/document/d/13tcJ5zGpxG1qnMD3emKxFI0-ayuOIjt_9a4OcLTsqQk/)
 <!-- }}} -->
 <!-- {{{ Presentation -->
-[Presentation](./presentation/PresentationDCU.pptx)
+# [Presentation](./presentation/PresentationDCU.pptx)
 <!-- }}} -->
 <!-- {{{ Literature Review -->
 # [Literature Review](./literature_review/main.pdf)
 <!-- }}} -->
 <!-- {{{ Meetings -->
-[Meetings](./meetings/)
+# [Meetings](./meetings/)
 <!-- }}} -->
 <!-- {{{ MATLAB Code -->
 # [MATLAB Code](./flat_strip_setup.m)
