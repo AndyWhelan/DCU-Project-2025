@@ -24,7 +24,6 @@ lambda = c0/f  ;
 k0 = 2.0*pi/lambda ;        % vacuum wavenumber  
 
 % We assume a plane wave incident field
-% Propagation vector for incoming wave
 alpha_i = 3.0*pi/4.0 ;  
 ki_vec_x = -k0*cos(alpha_i) ;    % propagation direction is rotated 180 (-1 factor)
 ki_vec_y = -k0*sin(alpha_i) ;
@@ -50,8 +49,8 @@ delta_x = w/N ;
 for(ct = 1:N) 
     strip_x(ct) = strip_start + (ct-0.5)*delta_x ; 
     strip_y(ct) = 0.0 ; 
-    % Incident field at centre ct
     n_v{ct} = normal_vector( ct, lambda_w, A_w );
+    % Incident field at centre ct
     E_inc_z(ct,1) = E0*exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) ; 
     H_inc{ct} = ((E0)/(omega*mu0)) * ...
                 exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct))) * ...
@@ -59,8 +58,6 @@ for(ct = 1:N)
     J_PO{ct} = 2 * cross( n_v{ct}, H_inc{ct})
     % Physical optics current at centre ct
     J_PO_z(ct,1) = J_PO{ct}(3);
-    %J_PO_z(ct,1) = -2.0 * ((E0*ki_vec_y)/(omega*mu0)) ...
-    %               * exp(-j*(ki_vec_x*strip_x(ct) + ki_vec_y*strip_y(ct)));  
 end
 
 % Now make the MoM matrix 

@@ -1,4 +1,7 @@
 The main repo for 2025 MECE Project.
+<!-- {{{ Literature Review -->
+# [Literature Review](./literature_review/main.pdf)
+<!-- }}} -->
 
 # Files
 ## [`PO_flat_strip.m`](https://github.com/AndyWhelan/DCU-Project-2025/blob/main/PO_flat_strip.m)
