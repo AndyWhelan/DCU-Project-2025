@@ -52,5 +52,5 @@ for func in "${used_funcs[@]}"; do
       echo "WARNING: Function file '$func_file' not found." >&2
    fi
 done
-
-echo "Done. Inlined version saved to '$OUTPUT_FILE'"
+cat $OUTPUT_FILE
+rm $OUTPUT_FILE
