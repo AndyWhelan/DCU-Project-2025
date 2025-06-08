@@ -1,4 +1,5 @@
-% Packages {{{
+% LaTeX Boilerplate
+% LaTeX Boilerplate:    Packages {{{
 \documentclass[lettersize,journal]{IEEEtran}
 \usepackage{algorithmic}
 \usepackage{algorithm}
@@ -20,7 +21,7 @@
 \usepackage{verbatim}
 \usepackage{xcolor}
 %}}}
-% Setup {{{
+% LaTeX Boilerplate:    Setup {{{
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 \title{MEng in Electronic \& Computer Engineering}
 \author{Andrew Whelan, \emph{Dublin City University},
@@ -34,64 +35,94 @@
 \maketitle
 %}}}
 %}}}
-% Abstract {{{
+% ---Abstract---
+% {{{
 \begin{abstract}
-   A heuristic model of diffuse scattering is elaborated and applied to a setup
-   consisting of a plane wave incident on a sinusoidally shaped wall.
-   Results are compared to full-wave method-of-moments (MoM) model, and also to
+   An existing class of heuristic models of diffuse scattering are elaborated and
+   applied to a setup consisting of a plane wave incident on a sinusoidally shaped
+   wall. Results are compared to full-wave method-of-moments (MoM) model, and also to
    Geometrical Optics (GO) and Physical Optics (PO) approximations.
 \end{abstract}
 %}}}
-% IEEE Keywords {{{
+% ---IEEE Keywords---
+% {{{
 \begin{IEEEkeywords}
    Diffuse Scattering, Diffuse Reflection, Channel Model, Ray Tracing, Ray Shooting.
 \end{IEEEkeywords}
 %}}}
-% Introduction {{{
+% ---Introduction (TODO)---
+% {{{
 \section{Introduction}
-   \IEEEPARstart{T}{his} is the intro.
+   \IEEEPARstart{T}{BD.} 
 %}}}
-% Models {{{
-\section{Models}
-% Effective Roughness Model {{{
-\subsection{Effective Roughness Model}
-% Pre Fig.1 {{{
-        This model is a modification of Geometrical Optics in which, in addition to the
-        specular component, each point impinging on the middle of a surface element $dW$
-        gives a diffuse contribution $dE_d$ to the scattered field $E_s$ whose amplitude
-        $\left| dE_d \right|$ is given by
-        \begin{equation} \label{eq:scatteringAmpER}
-           \left| dE_d \right| \propto \sqrt{\frac{dW \cos \theta_i \cos \theta_d}{\pi}}
-           \frac{1}{r_i r_d}
-        \end{equation}
-        with the constant of proportionality depending on the incident amplitude and a
-        scattering parameter $S$. Specifically, we have
-        \begin{subequations}
-            \begin{align}
-                \left| dE_d \right| &= S \Upsilon \sqrt{dW}, \quad \text{where} \\
-                \Upsilon &= \sqrt{\frac{60 G_t P_t \cos \theta_i \cos \theta_d}{\pi}}
-                \frac{1}{r_i r_d}
-            \end{align}
-        \end{subequations}
-        \subsubsection{Uniform Plane Wave Incident on PEC}    
-            We start with a setup as per Figure~\ref{fig:planeWavePEC}. 
-            \begin{subequations}
-                \begin{align}
-                    k_i &= \sin (\theta_i) \text{e}_x - \cos (\theta_i) \text{e}_y \\
-                    k_r &= \sin (\theta_i) \text{e}_x + \cos (\theta_i) \text{e}_y \\
-                    k_d &= \sin (\theta_d) \text{e}_x + \cos (\theta_d) \text{e}_y
-                \end{align}
-            \end{subequations}
+% ---Models---
+% Models:               ER1 {{{
+\section{Model} In this model \cite{DegliEsposti1999Diffuse}, the scattered electric 
+field $E_s$ is assumed to propagate from each surface element $dW$ along a wall 
+according to a mix of components:
+\begin{equation}
+   E_s = E_L + E_R + E_T, 
+\end{equation} where
+\begin{itemize}
+   \item $E_L$ is a perfectly diffuse (Lambertian) component satisfying
+      \begin{subequations}
+         \begin{align}
+            \lvert E_L \rvert_{dS} &= S \lvert E_i \rvert_{dS} \label{SDefinition} \\
+            \lvert E_L \rvert &\propto \sqrt{\cos( \theta_s ) }, 
+            \label{LambertianAssumption}
+         \end{align}
+      \end{subequations} where $\theta_s$ is the scattering angle with respect to
+      the wall normal,
+   \item $E_R$ is the (reduced) specular component of Geometrical Optics satisfying
+      \begin{equation} \label{specularComponent}
+         \lvert E_R \rvert_{dS} = R \lvert \Gamma \rvert \lvert E_i \rvert_{dS},
+      \end{equation} where $\Gamma$ is obtainable via classical Fresnel formulae and
+      $R$ is introduced to reduce the specular component in favour of the diffuse 
+      component,
+   \item $E_T$ is the transmitted component through the wall, satisfying
+      \begin{equation}
+         \lvert E_T \rvert_{dS} \propto \lvert E_i \rvert_{dS},
+         \label{transmittedGeometryIndependent}
+      \end{equation} i.e. this component is geometry independent and only depends on
+      constitutive parameters.
+\end{itemize}
+
+Thus, in addition to the (reduced) specular component of Geometrical Optics,
+$E_{\text{GO,r}}$ each point in the middle of a surface element $dW$ gives a diffuse
+contribution $dE_d$ to the scattered field $E_s$ whose amplitude $\lvert
+dE_d \rvert$ is given by
+\begin{equation} \label{scatteringAmpER}
+   \lvert dE_d \rvert \propto \sqrt{\frac{dW \cos \theta_i \cos
+   \theta_d}{\pi}} \frac{1}{r_i r_d}
+\end{equation}
+with the constant of proportionality depending on the incident amplitude and a
+scattering parameter $S$. Specifically, we have
+\begin{subequations}
+   \begin{align}
+      \lvert dE_d \rvert &= S \Upsilon \sqrt{dW}, \quad \text{where} \\
+      \Upsilon &= \sqrt{\frac{60 G_t P_t \cos \theta_i \cos \theta_d}{\pi}}
+      \frac{1}{r_i r_d}
+   \end{align}
+\end{subequations}
+\subsubsection{Uniform Plane Wave Incident on PEC}    
+We start with a setup as per Figure~\ref{fig:planeWavePEC}. 
+\begin{subequations}
+   \begin{align}
+      k_i &= \sin (\theta_i) \text{e}_x - \cos (\theta_i) \text{e}_y \\
+      k_r &= \sin (\theta_i) \text{e}_x + \cos (\theta_i) \text{e}_y \\
+      k_d &= \sin (\theta_d) \text{e}_x + \cos (\theta_d) \text{e}_y
+   \end{align}
+\end{subequations}
 %}}}
-            % Fig.1 {{{
-            \begin{figure}[H] 
+% Models:               Fig.1 {{{
+            \begin{figure}[H]
             \begin{center}
             \begin{tikzpicture}[scale=1.5]
             \newcommand{\drawLabelledArrow}[9]{%
                 \tikzmath{
-                    \xArrowStart = #1; 
+                    \xArrowStart = #1;
                     \yArrowStart = #2;
-                    \arrowLen = #3; 
+                    \arrowLen = #3;
                     \arrowAngle = #4;
                     \labelAngleShift = #7;
                     \xArrowEnd = \xArrowStart + \arrowLen * cos(\arrowAngle);
@@ -103,35 +134,35 @@
                 \def\arrowStyle{#8}
                 \def\labelStyle{#9}
                 % Draw
-                \draw[#8, \arrowColor] 
+                \draw[#8, \arrowColor]
                     (\xArrowStart, \yArrowStart) -- (\xArrowEnd, \yArrowEnd)
                     node[#9, rotate=\arrowAngle+\labelAngleShift]
                         {\arrowLabel};
             }
-            % Call the macro with: xStart, yStart, length, angle, label, label offset,
-%             color
+            % Call the macro with: xStart, yStart, length, angle, label, label
+            % offset, color
             % Wall
             \tikzmath{
-                    \xObstacleStart = 0;            
-                    \yObstacleStart = 0;            
-                    \obstacleLen = 4;               
-                    \obstacleAngle = 0;            
+                    \xObstacleStart = 0;
+                    \yObstacleStart = 0;
+                    \obstacleLen = 4;
+                    \obstacleAngle = 0;
                     \xObstacleCentre = 0.5*\obstacleLen*cos(\obstacleAngle);
                     \yObstacleCentre = 0.5*\obstacleLen*sin(\obstacleAngle);
             }
             \def\obstacleLabel{PEC}
             \def\obstacleColor{gray}
             \def\obstacleArrowStyle{ultra thick}
-            \drawLabelledArrow{\xObstacleStart}{\yObstacleStart}{\obstacleLen}
-                {\obstacleAngle}{\obstacleLabel}{\obstacleColor}{0}{\obstacleArrowStyle}
-                {pos=0.9,below}
+               \drawLabelledArrow{\xObstacleStart}{\yObstacleStart}{\obstacleLen}
+                  {\obstacleAngle}{\obstacleLabel}{\obstacleColor}{0}
+                  {\obstacleArrowStyle}{pos=0.9,below}
             % Incident Ray
             \tikzmath{
                     \xIncidentStart = \xObstacleStart + \xObstacleCentre);
                     \yIncidentStart = \yObstacleStart + \yObstacleCentre);
                     \incidentAngle = \obstacleAngle + 135;
                     \incidentLen =
-                        \obstacleLen/(abs(2*cos(\incidentAngle)));%\obstacleLen * ; 
+                        \obstacleLen/(abs(2*cos(\incidentAngle)));%\obstacleLen * ;
             }
             \def\incidentLabel{\begingroup \scriptsize $E_i = e^{-jk_i \cdot r}
                 \text{e}_z$ \endgroup}%= E_0 e^{-jk_i \cdot r} \text{e}_z$}
@@ -142,7 +173,7 @@
                 {\incidentArrowStyle}{pos=0.7,below}
             % Normal Ray
             \tikzmath{
-                    \normalLen = \obstacleLen*(0.4); 
+                    \normalLen = \obstacleLen*(0.4);
                     \xNormalStart = (\normalLen/2)*sin(\obstacleAngle) + \xObstacleStart +
                         \xObstacleCentre;
                     \yNormalStart = 0.9 -(\normalLen/2)*cos(\obstacleAngle) +
@@ -154,7 +185,7 @@
             \def\normalArrowStyle{thick}
             \drawLabelledArrow{\xNormalStart}{\yNormalStart}{\normalLen}{\normalAngle}
                 {\normalLabel}{\normalColor}{180}{dotted}{midway,below}
-            
+
             \pgfmathsetmacro\xFudge{\xObstacleCentre - sin(\obstacleAngle)}
             \pgfmathsetmacro\yFudge{\yObstacleCentre + cos(\obstacleAngle)}
             \draw[dotted] (\xFudge, \yFudge) arc (\obstacleAngle+90:\obstacleAngle+135:1);
@@ -223,9 +254,9 @@
             \end{center}
             \end{figure}
             %}}}
-            % Pre Fig.2 {{{
+% Models:               Pre Fig.2 {{{
             Then, since $G_t = 1$ (0 gain), $P_t = 1$ (uniformity of wave), $dW = h dx$,
-            $\left| \Gamma \right| = 1$, and referring to the geometry of Figure
+            $\lvert \Gamma \rvert = 1$, and referring to the geometry of Figure
             \ref{fig:trigPEC}, we get
             \small
             \begin{subequations}
@@ -288,40 +319,7 @@
 \newpage
 %}}}
 % Bibliography {{{
-\begin{thebibliography}{1}
-   \bibliographystyle{IEEEtran}
-
-   \bibitem{ref:degliSecond}
-   V. Degli-Esposti ``A diffuse scattering model for urban propagation prediction'', IEEE Transactions on Antennas and Propagation, vol. 49, no. 7, pp. 1111-1113, July 2001.
-
-   \bibitem{ref:degliThird}
-   V. Degli-Esposti, F. Fuschini, E. M. Vitucci and G. Falciasecca, ``Measurement and Modelling of Scattering From Buildings'', IEEE Transactions on Antennas and Propagation, vol. 55, no. 1, pp. 143-153, Jan. 2007.
-
-   \bibitem{ref:directiveRepl}
-   F. Mani and C. Oestges, ``Ray-tracing evaluation of diffuse scattering in an outdoor scenario'', Proceedings of the 5th European Conference on Antennas and Propagation (EUCAP), Rome, Italy, 2011.
-
-   \bibitem{ref:BK1}
-   Hossein Ragheb, Edwin R. Hancock, ``The modified Beckmann–Kirchhoff scattering theory for rough surface analysis'', Pattern Recognition, Volume 40, Issue 7, 2007, Pages 2004-2020, ISSN 0031-3203.
-
-   \bibitem{ref:BK2}
-   F. Sheikh, D. Lessy and T. Kaiser, ``A Novel Ray-Tracing Algorithm for Non-Specular Diffuse Scattered Rays at Terahertz Frequencies'', 2018 First International Workshop on Mobile Terahertz Systems (IWMTS), Duisburg, Germany, 2018, pp. 1-6.
-
-   \bibitem{ref:BK3}
-   F. Sheikh and T. Kaiser, ``A Modified Beckmann-Kirchhoff Scattering Model for Slightly Rough Surfaces at Terahertz Frequencies'', 2019 IEEE International Symposium on Antennas and Propagation and USNC-URSI Radio Science Meeting, Atlanta, GA, USA, 2019, pp. 2079-2080.
-
-   \bibitem{ref:reciprocalHeur}
-   E. M. Vitucci, N. Cenni, F. Fuschini and V. Degli-Esposti, ``A Reciprocal Heuristic Model for Diffuse Scattering From Walls and Surfaces'', IEEE Transactions on Antennas and Propagation, vol. 71, no. 7, pp. 6072-6083, July 2023.
-
-   \bibitem{ref:fieldPrediction}
-   V. Degli-Esposti, D. Guiducci, A. de'Marsi, P. Azzi and F. Fuschini, ``An advanced field prediction model including diffuse scattering'', IEEE Transactions on Antennas and Propagation, vol. 52, no. 7, pp. 1717-1728, July 2004.
-
-   \bibitem{ref:RTComparison}
-   M. Zhu, L. Cazzella, F. Linsalata, M. Magarini, M. Matteucci and U. Spagnolini, ``Toward Real-Time Digital Twins of EM Environments: Computational Benchmark for Ray Launching Software'', in IEEE Open Journal of the Communications Society, vol. 5, pp. 6291-6302, 2024.
-
-   \bibitem{ref:dynamicRTPaper}
-   Bilibashi, Denis \& Vitucci, Enrico \& Degli-Esposti, Vittorio, ``On Dynamic Ray Tracing and Anticipative Channel Prediction for Dynamic Environments''. IEEE Transactions on Antennas and Propagation. PP. 1-1. 10.1109/TAP.2023.3262155, 2023.
-
-\end{thebibliography}
-
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
 \end{document}
 %}}}

@@ -1,3 +1,6 @@
+paper.*
+!paper.pdf
+!paper.tex
 *.aux
 *.log
 *.out

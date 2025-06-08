@@ -15,7 +15,7 @@ while IFS= read -r line; do
       FILE="${match[1]}"
       if [[ -f "$FILE" ]]; then
          echo '```matlab'
-         ./inline_matlab.sh "$FILE"
+         ~/DCU-Project-2025/utility/inline_matlab.sh "$FILE"
          echo '```'
       else
          echo "⚠️ File not found: $FILE" >&2
