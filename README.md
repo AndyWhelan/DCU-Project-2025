@@ -1,4 +1,88 @@
-The main repo for 2025 MECE Project.
+# Discussion for Meeting on 11-06-2025
+
+1. I looked back at the papers and believe I have a grasp of what they're doing (see
+   [next section](#effective-roughness-er-model) and discuss)
+2. Given you agree with this, 
+
+- I looked back at the papers
+
+# Effective Roughness (ER) Model
+## Assumptions
+In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_scattering_in_urban_microcellular_propagation.pdf) ,[2](./papers/1.A_diffuse_scattering_model.pdf), [3](./papers/2.Measurement_and_Modelling_of_Scattering.pdf)]</sup>, the following assumptions are made (I use $dW$ instead of $dS$ for clarity, since we have the scattering parameter $S$)
+
+1.  > ...consider a ray tube of solid angle $d \Omega$ impinging on the surface
+    element ($dW$). Part of the power is reflected in the specular ray tube... part
+    is transmitted and part is reflected toward the desination point $D$
+
+    $$
+    E = E_i + E_r + E_s + E_t,
+    $$
+    where
+    - $E$ is the total electric field,
+    - $E_i$ is the ***i***ncident field, 
+    - $E_r$ is the specularly ***r***eflected component of the scattered field,
+    - $E_s$ is the diffusely ***s***cattered component of the scattered field, and
+    - $E_t$ is the ***t***ransmitted component of the scattered field. 
+    
+2.  Lambertian local diffuse scattering: 
+    $$
+    ert E_s ert_{dW} \propto \sqrt{    $$
+    where $	heta_s$ is the scattering angle relative to the wall normal.
+3.
+    > $S$ ... defined as the ratio between local scattered field and incident field
+    ... can be determined from scattered field measurements
+
+    $$
+    S:= rac{ert E_s ert }{ert E_i ert}ert_{dW} \ \ 	ext{is assumed to be constant for a given wall.}
+    $$
+
+4.  The far-field is sufficiently close so that diffusely scattered waves interfere
+    incoherently:
+    $$
+    ert E_s ert = \int_W ert E_s ert_{dW} \ dW.
+    $$
+
+## Model Measures - Derivations
+### Local Scattering Power Balance
+
+Using the solid angle formula $d \Omega = rac{dW assumption 2, we equate the total power density (scaled by $ta$, intrinsic 
+impedance) of the scattered field, with respect to $E_i$ ($ert E_s ert_{dW}^2 \ r_i^2 \ d \Omega$) and $E_s$ ($ \iint_{\Omega} ert E_s ert_{dW}^2 \ r_s^2 d \Omega $), obtaining  
+
+$$
+ert E_s ert_{dW} = S \sqrt{rac{dW ert E_i ert_{dW}.
+$$
+
+Since $	heta_s$ will determine $	heta_i$ given fixed antenna positions, we can use
+the above to compute the
+- **Total Power** for a given setup (by utilising assumption 4),
+- **Power-Angle Profile**, and
+- **Scattering-angle Spread**
+
+Expressing $r_s$, $	heta_i$ and $	heta_s$ in terms of setup parameters ( $(x_{Tx},y_{Tx}), (x_{Rx},y_{Rx})$ ) and distance along the wall $x$:
+- $r_s = \sqrt{y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2}$,
+- $- $
+we can also derive:
+
+$$
+ert E_s ert_{dW} = S \sqrt{ rac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2ight)^{rac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2ight)^{rac{3}{4}}} } \ ert E_i ert_{dW}.
+$$
+
+This can be used to directly compute the
+- **Power-Distance Profile**, and
+- **Path-length Spread**,
+
+### Path Delay Conversion
+Additionally, by converting each path distance to a delay, we can compute
+- **Power-Delay Profile**, and 
+- **Delay Spread**
+
+The procedure for the conversion is as follows:
+- Use coordinate system in [[1](./papers/11.Evaluation_of_the_role_of_diffuse_scattering_in_urban_microcellular_propagation.pdf)] translating the origin to the specular point of reflection $x 	o x' = x - \left( x_i + y_i rac{x_s - x_i}{y_s + y_i} ight)$
+- $ct = \sqrt{(x'_i)^2 + (y_i)^2} + \sqrt{(x'_s)^2 + (y_s)^2}$, noting that $y' = y$,
+- Square the above twice to remove all radicals,
+- Reduce quartic to quadratic due to symmetry, and solve for $x'$,
+- Retransform $x' 	o x$.
+
 <!-- {{{ MATLAB Code -->
 # [MATLAB Code](./flat_strip_setup.m)
 The code linked above uses functions from [./matlab_functions](./matlab_functions). The full, inlined version is pasted below:
