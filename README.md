@@ -14,8 +14,8 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
     element ($dW$). Part of the power is reflected in the specular ray tube... part
     is transmitted and part is reflected toward the desination point $D$
 
-    $    E = E_i + E_r + E_s + E_t,$
-    where
+    $E = E_i + E_r + E_s + E_t$
+    ,where
     - $E$ is the total electric field,
     - $E_i$ is the ***i***ncident field, 
     - $E_r$ is the specularly ***r***eflected component of the scattered field,
@@ -23,25 +23,25 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
     - $E_t$ is the ***t***ransmitted component of the scattered field. 
     
 2.  Lambertian local diffuse scattering: 
-    $ \vert E_s \vert_{dW} \propto \sqrt{\cos \theta_s},$
+    $ | E_s |_{dW} \propto \sqrt{\cos \theta_s},$
     where $\theta_s$ is the scattering angle relative to the wall normal.
 3.
     > $S$ ... defined as the ratio between local scattered field and incident field
     ... can be determined from scattered field measurements
 
-    $S:= \frac{\vert E_s \vert }{\vert E_i \vert}\vert_{dW} \ \ \text{is assumed to be constant for a given wall.}$
+    $S:= \frac{| E_s | }{| E_i |}|_{dW} \ \ \text{is assumed to be constant for a given wall.}$
 
 4.  The far-field is sufficiently close so that diffusely scattered waves interfere
-    incoherently: $\vert E_s \vert = \int_W \vert E_s \vert_{dW} \ dW.$
+    incoherently: $| E_s | = \int_W | E_s |_{dW} \ dW.$
 
 ## Model Measures - Derivations
 ### Local Scattering Power Balance
 
 Using the solid angle formula $d \Omega = \frac{dW \cos \theta_i}{r_i^2}$, along with
 assumption 2, we equate the total power density (scaled by $\eta$, intrinsic 
-impedance) of the scattered field, with respect to $E_i$ ($\vert E_s \vert_{dW}^2 \ r_i^2 \ d \Omega$) and $E_s$ ($ \iint_{\Omega} \vert E_s \vert_{dW}^2 \ r_s^2 d \Omega $), obtaining  
+impedance) of the scattered field, with respect to $E_i$ ($| E_s |_{dW}^2 \ r_i^2 \ d \Omega$) and $E_s$ ($ \iint_{\Omega} | E_s |_{dW}^2 \ r_s^2 d \Omega $), obtaining  
 
-$\vert E_s \vert_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} \vert E_i \vert_{dW}. $
+$| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}. $
 
 Since $\theta_s$ will determine $\theta_i$ given fixed antenna positions, we can use
 the above to compute the
@@ -56,7 +56,7 @@ Expressing $r_s$, $\theta_i$ and $\theta_s$ in terms of setup parameters ( $(x_{
 
 we can also derive:
 
-$\vert E_s \vert_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ \vert E_i \vert_{dW}. $
+$| E_s |_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ | E_i |_{dW}. $
 
 This can be used to directly compute the
 - **Power-Distance Profile**, and
