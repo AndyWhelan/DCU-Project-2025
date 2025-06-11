@@ -1,4 +1,3 @@
-<!-- TODO:  3d -> 2d power balance-->
 # Effective Roughness (ER) Model
 ## Assumptions
 In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_scattering_in_urban_microcellular_propagation.pdf) ,[2](./papers/1.A_diffuse_scattering_model.pdf), [3](./papers/2.Measurement_and_Modelling_of_Scattering.pdf)]</sup>, the following assumptions are made (I use $dW$ instead of $dS$ for clarity, since we have the scattering parameter $S$)
@@ -26,7 +25,30 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
 4.  The far-field is sufficiently close so that diffusely scattered waves interfere
     incoherently: $| E_s | = \int_W | E_s |_{dW} \ dW.$
 
-## Model Measures - Derivations
+## Model Measures - Derivations in 2d (TODO)
+### Local Scattering Power Balance
+
+Here, the surface element reduces to a a line element:
+
+$`dW \to dx`$
+
+and the solid angle reduces to a plane angle:
+
+$`d \Omega \to d\omega = \frac{\cos \theta_i dx}{r_i}`$:
+
+So the local scattering power-balance becomes
+
+$`S^2|E_i|^2 r_i d \omega = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} | E_s |^2 \ r_s d \omega \ `$
+
+$`= K^2 r_s \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \omega  \ d \omega `$
+
+This gives us
+
+$` K = \sqrt{S^2 |E_i|^2 r_i \frac{\cos \theta_i dx}{2r_s r_i} }  `$
+
+$` \implies |E_s| = S \sqrt{ \frac{\cos \theta_i \cos \theta_s dx}{2r_s} } |E_i| `$
+
+## Model Measures - Derivations in 3d
 ### Local Scattering Power Balance
 
 Using the solid angle formula $d \Omega = \frac{dW \cos \theta_i}{r_i^2}$, along with
@@ -34,7 +56,7 @@ assumption 2, we equate the total power density (scaled by $\eta$, intrinsic
 impedance) of the scattered field, with respect to $E_i$
 ( $| E_s |^2_{dW} \ r^2_i \ d \Omega$ ) and $E_s$ ($\iint_{\Omega} | E_s |^2_{dW} \ r^2_s d \Omega$), obtaining  
 
-$| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}.$
+$`| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}`$
 
 Since $\theta_s$ will determine $\theta_i$ given fixed antenna positions, we can use
 the above to compute the
@@ -49,7 +71,7 @@ Expressing $r_s$, $\theta_i$ and $\theta_s$ in terms of setup parameters ( $(x_{
 
 we can also derive:
 
-$| E_s |_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ | E_i |_{dW}.$
+$`| E_s |_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ | E_i |_{dW}.`$
 
 This can be used to directly compute the
 - **Power-Distance Profile**, and
