@@ -34,7 +34,7 @@ assumption 2, we equate the total power density (scaled by $\eta$, intrinsic
 impedance) of the scattered field, with respect to $E_i$
 ( $| E_s |^2_{dW} \ r^2_i \ d \Omega$ ) and $E_s$ ($\iint_{\Omega} | E_s |^2_{dW} \ r^2_s d \Omega$), obtaining  
 
-$| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}. $
+$| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}.$
 
 Since $\theta_s$ will determine $\theta_i$ given fixed antenna positions, we can use
 the above to compute the
@@ -49,7 +49,7 @@ Expressing $r_s$, $\theta_i$ and $\theta_s$ in terms of setup parameters ( $(x_{
 
 we can also derive:
 
-$| E_s |_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ | E_i |_{dW}. $
+$| E_s |_{dW} = S \sqrt{ \frac{dW \ y_{Rx} \ y_{Tx}}{\pi \ \left(y^2_{Tx}+x^2\right)^{\frac{1}{2}} \ \left(y^2_{Rx} + (x_{Rx} - x_{Tx} - x)^2\right)^{\frac{3}{4}}} } \ | E_i |_{dW}.$
 
 This can be used to directly compute the
 - **Power-Distance Profile**, and
