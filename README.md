@@ -1,11 +1,4 @@
-# Discussion for Meeting on 11-06-2025
-
-1. I looked back at the papers and believe I have a grasp of what they're doing (see
-   [next section](#effective-roughness-er-model) and discuss)
-2. Given you agree with this, 
-
-- I looked back at the papers
-
+<!-- TODO:  3d -> 2d power balance-->
 # Effective Roughness (ER) Model
 ## Assumptions
 In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_scattering_in_urban_microcellular_propagation.pdf) ,[2](./papers/1.A_diffuse_scattering_model.pdf), [3](./papers/2.Measurement_and_Modelling_of_Scattering.pdf)]</sup>, the following assumptions are made (I use $dW$ instead of $dS$ for clarity, since we have the scattering parameter $S$)
@@ -38,7 +31,8 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
 
 Using the solid angle formula $d \Omega = \frac{dW \cos \theta_i}{r_i^2}$, along with
 assumption 2, we equate the total power density (scaled by $\eta$, intrinsic 
-impedance) of the scattered field, with respect to $E_i$ ($| E_s |_{dW}^2 \ r_i^2 \ d \Omega$) and $E_s$ ($ \iint_{\Omega} | E_s |_{dW}^2 \ r_s^2 d \Omega $), obtaining  
+impedance) of the scattered field, with respect to $E_i$
+( $| E_s |^2_{dW} \ r^2_i \ d \Omega$ ) and $E_s$ ($\iint_{\Omega} | E_s |^2_{dW} \ r^2_s d \Omega$), obtaining  
 
 $| E_s |_{dW} = S \sqrt{\frac{dW \cos \theta_i \cos \theta_s}{\pi}} \frac{1}{r_s} | E_i |_{dW}. $
 
