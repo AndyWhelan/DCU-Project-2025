@@ -22,8 +22,7 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
     - $E_s$ is the diffusely ***s***cattered component of the scattered field, and
     - $E_t$ is the ***t***ransmitted component of the scattered field. 
     
-2.  Lambertian local diffuse scattering: 
-    $ | E_s |_{dW} \propto \sqrt{\cos \theta_s},$
+2.  Lambertian local diffuse scattering: $| E_s |_{dW} \propto \sqrt{\cos \theta_s},$
     where $\theta_s$ is the scattering angle relative to the wall normal.
 3.
     > $S$ ... defined as the ratio between local scattered field and incident field
