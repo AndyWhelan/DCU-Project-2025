@@ -1,5 +1,6 @@
 # Effective Roughness (ER) Model
 ## Assumptions
+In what follows, $E$ refers to the phasor (spatial, or time-averaged) component of the electric field.
 In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_scattering_in_urban_microcellular_propagation.pdf) ,[2](./papers/1.A_diffuse_scattering_model.pdf), [3](./papers/2.Measurement_and_Modelling_of_Scattering.pdf)]</sup>, the following assumptions are made (I use $dW$ instead of $dS$ for clarity, since we have the scattering parameter $S$)
 
 1.  > ...consider a ray tube of solid angle $d \Omega$ impinging on the surface
@@ -14,21 +15,20 @@ In the original ER model<sup>[[1](./papers/11.Evaluation_of_the_role_of_diffuse_
     - $E_s$ is the diffusely ***s***cattered component of the scattered field, and
     - $E_t$ is the ***t***ransmitted component of the scattered field. 
     
-2.  Lambertian local diffuse scattering: $| E_s |_{dW} \propto \sqrt{\cos \theta_s},$
-    where $\theta_s$ is the scattering angle relative to the wall normal.
-3.
-    > $S$ ... defined as the ratio between local scattered field and incident field
-    ... can be determined from scattered field measurements
+2.  Lambertian local diffuse scattering: $| E_s |_{dW} = K \sqrt{\cos \theta_s},$
+    where $\theta_s$ is the scattering angle relative to the wall normal, and $K$ is
+    the maximum field magnitude (when the component is normal to the wall)
 
-    $S:= \frac{| E_s | }{| E_i |}|_{dW} \ \ \text{is assumed to be constant for a given wall.}$
+3.  $S^2 := \frac{ P_s }{ P_i } |_{dW}$ is assumed to be constant for a given wall.
 
-4.  The far-field is sufficiently close so that diffusely scattered waves interfere
-    incoherently: $| E_s | = \int_W | E_s |_{dW} \ dW.$
+4.  In the receiver region, the contributions from scattered elements are 
+    incoherent due to random unknown phases, so that we have
+    $| E_{s} |^2 = \int_W | E_s |^2_{dW} \ dW.$
 
 ## Model Measures - Derivations in 2d (TODO)
 ### Local Scattering Power Balance
 
-Here, the surface element reduces to a a line element:
+In 2d, the surface element simplifies to a a line element:
 
 $`dW \to dx`$
 
