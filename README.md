@@ -38,7 +38,7 @@ $`d \Omega \to d\omega = \frac{\cos \theta_i dx}{r_i}`$:
 
 So the local scattering power-balance becomes
 
-$`S^2|E_i|^2 r_i d \omega = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} | E_s |^2 \ r_s d \omega \ `$
+$`S^2|E_i|^2 r_i d \omega = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} | E_s |^2_{dx} \ r_s d \omega \ `$
 
 $`= K^2 r_s \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \omega  \ d \omega `$
 
@@ -46,7 +46,7 @@ This gives us
 
 $` K = \sqrt{S^2 |E_i|^2 r_i \frac{\cos \theta_i dx}{2r_s r_i} }  `$
 
-$` \implies |E_s| = S \sqrt{ \frac{\cos \theta_i \cos \theta_s dx}{2r_s} } |E_i| `$
+$` \implies |E_s|_{dx} = S \sqrt{ \frac{\cos \theta_i \cos \theta_s dx}{2r_s} } |E_i| `$
 
 ## Model Measures - Derivations in 3d
 ### Local Scattering Power Balance
