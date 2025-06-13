@@ -38,9 +38,9 @@ $`d \Omega \to d\omega = \frac{\cos \theta_i dx}{r_i}`$:
 
 So the local scattering power-balance becomes
 
-$`S^2|E_i|^2 r_i d \omega = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} | E_s |^2_{dx} \ r_s d \omega \ `$
+$`S^2|E_i|^2 r_i d \omega = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} | E_s |^2_{dx} \ r_s d \theta_s \ `$
 
-$`= K^2 r_s \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \omega  \ d \omega `$
+$`= K^2 r_s \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \theta_s  \ d \theta_s `$
 
 This gives us
 
