@@ -1,0 +1,166 @@
+% LaTeX Boilerplate
+% LaTeX Boilerplate:    Packages {{{
+\documentclass{article}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amsmath,amsfonts}
+\usepackage{array}
+\usepackage{arydshln} % for horizontal dashed lines in table
+\usepackage{balance}
+\usepackage{cite}
+\usepackage{gensymb} % for degrees symbol
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+%}}}
+\begin{document}
+% ---Models---
+% Models:               ER1 {{{
+\section{ER Model} 
+\subsection*{Assumptions}
+\begin{itemize}
+      \item \textbf{$E$-field decomposition}:
+      \begin{equation}
+         E = E_i + E_r + E_s + E_t, \ \text{where}
+         \label{eq:eDecomp}
+      \end{equation}
+      \begin{itemize}
+         \item $E$ is the total phasor (spatial, or time-averaged) component of the
+            electric field,
+         \item $E_i$ is the incident field, 
+         \item $E_r$ is the specularly reflected field, 
+         \item $E_s$ is the diffusely scattered field, and 
+         \item $E_t$ is the transmitted field.
+      \end{itemize}
+
+   \item \textbf{$E_s$-incoherence in Rx-region}: The various contributions to $E_s$
+      arriving at the Rx have random, uncorrelated phases. Consequently, the total
+      squared-magnitude $|E_s|^2$ of the scattered field satisfies:
+      \begin{equation}
+         |E_{s}|^2 = \int_W d(|E_s|^2), \ \text{where}
+         \label{eq:incoherence}
+      \end{equation}
+      \begin{itemize}
+         \item $d(|E_s|^2)$ is the squared-field contribution from 
+         \item $dW$, the infinitesimal scattering element on 
+         \item $W$, the wall surface.
+
+      \end{itemize}
+   \item \textbf{Constant Local Power Balance (diffuse scattering coefficient $S$)}: A
+      constant fraction $S^2$ of the power incident on a patch $dW$ is converted into
+      diffusely scattered power:
+      \begin{equation}
+         S^2 := \frac{dP_s}{dP_i}, \ \text{where}
+         \label{eq:sDef}
+      \end{equation}
+   \begin{itemize}
+      \item $dP_i$ is the power incident on $dW$, and 
+      \item $dP_s$ is the total power diffusely scattered from $dW$ into the
+         surrounding hemisphere.
+   \end{itemize}
+
+      \item \textbf{Lambertian Scattering Pattern}:
+      \begin{equation}
+         \frac{d(dP_s)}{d\Omega_s} = K \cos \theta_s, \ \text{where}
+         \label{eq:lambertianLawGeneric}
+      \end{equation}
+      \begin{itemize}
+         \item $d \Omega_s$ is the infinitesimal solid angle of the scattered
+            ray-tube, and
+         \item $K$ is a normalization constant, found by integrating over the entire
+            forward scattering space (a hemisphere in 3D, a semicircle in 2D) and
+            setting the result equal to the total scattered power, $dP_s$.
+      \end{itemize}
+\end{itemize}
+\subsection*{2D-Setup}
+\subsubsection*{$d P_{Rx}$ - power through Rx aperture}
+From the scattering element's ($dW$) POV, we have:
+\begin{equation}
+   dP_{Rx} \approx \left( \frac{d (dP_s) }{d \theta_s} \right) d \theta_{Rx} \label{eq:powerThroughRxApScat}
+\end{equation}
+Integrating \eqref{eq:lambertianLawGeneric} over $-\frac{\pi}{2} < \theta_{s}
+\leq \frac{\pi}{2}$, then plugging into \eqref{eq:powerThroughRxApScat} we get 
+\begin{equation}
+   dP_{Rx} = \frac{dP_{s}}{2} \cos \theta_s d \theta_{Rx} = \frac{dP_s}{2r_s}
+   \cos \theta_s d l_{Rx}
+   \label{eq:powerPerAngleScat}
+\end{equation}
+From the Rx's POV, we have
+\begin{equation}
+   dP_{Rx} = \frac{d(|E_s|^2)}{2 \eta_0} dl_{Rx}
+   \label{eq:powerPerAngleRx}
+\end{equation}
+Combining \eqref{eq:sDef}, \eqref{eq:powerPerAngleScat} and \eqref{eq:powerPerAngleRx} we get 
+\begin{equation}
+   d(|E_s|^2) = \frac{\eta_0 S^2 \cos \theta_s}{r_s} dP_i
+   \label{eq:diffContrFrompowerPerAngle}
+\end{equation}
+\subsubsection*{$dP_i$ - power incident on $dW$}
+From the incoming waves POV, we have 
+\begin{equation}
+   dP_i = \frac{|E_i|^2}{2 \eta_0} \cos \theta_i dx.
+   \label{eq:incomingWavePower}
+\end{equation}
+Combining \eqref{eq:incomingWavePower} with \eqref{eq:diffContrFrompowerPerAngle}, we get
+\begin{equation}
+   d(|E_s|^2) = \frac{S^2 \cos \theta_i \cos \theta_s}{2r_s} |E_i|^2 dx
+   \label{eq:fieldPre}
+\end{equation}
+\subsubsection*{$|E_i|$ as a function of $P_i$ and $r_i$}
+A far-field cylindrical incoming wave allows us to assume 
+\begin{equation}
+   |E_i|^2 = \frac{A}{r_i}
+   \label{eq:farField2d}
+\end{equation}
+\begin{align*}
+   \implies P_i &= \int_0^{2 \pi} \frac{|E_i|^2}{2 \eta_0} r_i d \theta \\
+   &= \frac{A}{2 \eta_0} \int_0^{2 \pi} d \theta \\ 
+   &= \frac{A \pi}{\eta_0} \\
+   \implies A &= \frac{\eta_0 P_i}{\pi}
+\end{align*}
+\begin{equation}
+   \implies |E_i|^2 = \frac{\eta_o P_i}{\pi} \frac{1}{r_i}
+   \label{eq:2dIntensityExpr}
+\end{equation}
+Then, combining \eqref{eq:2dIntensityExpr} with \eqref{eq:fieldPre}, we get
+\begin{equation}
+   d(|E_s|^2) = \frac{S^2 \eta_0 P_i \cos \theta_i \cos \theta_s }{2 \pi r_s r_i} \ dx
+   \label{eq:fieldMagEq1}
+\end{equation}
+
+\subsubsection*{Coordinate Transformations}
+Our setup consists of a transmitter at $(x_T, y_T)$ and a receiver at 
+$(x_R, y_R)$. We can express $\theta_i, \theta_s, r_i, r_s$ as follows:
+
+\begin{align*}
+   r_s &= \sqrt{y_R^2 + (x_R - x)^2} \\
+   \cos \theta_s &= \frac{y_R}{r_s} \\
+   r_i &= \sqrt{y_T^2 + (x - x_T)^2} \\
+   \cos \theta_i &= \frac{y_T}{r_i}
+\end{align*}
+Plugging these into \eqref{eq:fieldMagEq1} we get
+\begin{equation}
+   d(|E_s|^2) = \frac{S^2 \eta_0 P_i \ y_T y_R }{2 \pi (y_R^2 + (x_R - x)^2) ( y_T^2 + (x -
+   x_T)^2)} \ dx
+   \label{eq:localScaPow2dSetupParam}
+\end{equation}
+%}}}
+\newpage
+%}}}
+   
+\end{document}
+% Bibliography {{{
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}
+%}}}
