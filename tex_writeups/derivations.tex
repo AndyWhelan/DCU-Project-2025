@@ -154,6 +154,15 @@ Plugging these into \eqref{eq:fieldMagEq1} we get
    x_T)^2)} \ dx
    \label{eq:localScaPow2dSetupParam}
 \end{equation}
+We can also express $x$ in terms of $t$ by inverting the equation
+\[ (ct) = \sqrt{y_T^2 + (x - x_T)^2} + \sqrt{y_R^2 + (x_R - x)^2}. \] 
+In order to invert this, we need to square twice to get rid of any square roots.
+However, in order for the $x^4$ and $x^3$ terms to cancel, we need to make a further
+coordinate transformation so the origin is at the specular point of reflection: 
+\begin{equation}
+   x \to x' = x -x_T - y_T \left( \frac{x_R - x_T}{y_R + y_T} \right)
+   \label{eq:coordTrans}
+\end{equation}
 %}}}
 \newpage
 %}}}
