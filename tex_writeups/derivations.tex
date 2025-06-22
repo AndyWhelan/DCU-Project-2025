@@ -64,6 +64,7 @@
 \end{titlepage}
 % }}}
 
+% TODO {{{
 \section*{TODO}
 The below derivations are not quite as nice as I'd like, however, I'm probably
 spending a little too much time on prettifying the assumptions so... here's a list of
@@ -76,15 +77,80 @@ results (focusing on that this week):
    \item Come up with a sensible taxonomy of assumptions, and format appropriately
    \item Refine the derivations so that we only number significant results,
 \end{enumerate}
+% }}}
+% TODO: revise equation numbering later on, to reflect "common" assumptions across
+% scattering models
+
+\newpage
+\setcounter{section}{14} % "N"
+\setcounter{subsection}{-1}
+\setcounter{equation}{0}
+\section*{(N) Notation}
+The following generic notation is used throughout:
+\begin{align}
+   & \mathcal{E} = \text{Re}\{ \mathbf{E} e^{j \omega t } \} \ \text{is the electric field (}
+      \mathbf{E} \text{ is the phasor).}
+      \label{eq:eFieldDef} \\
+   & \mathcal{H} = \text{Re}\{ \mathbf{H} e^{j \omega t } \} \ \text{is the magnetic field (}
+      \mathbf{H} \text{ is the phasor).}
+      \label{eq:hFieldDef} \\
+   & \mathbf{E} = \vec{E} e^{\phi_E}
+      \label{eq:ePhasorDef} \\
+   & \mathbf{H} = \vec{H} e^{\phi_H}
+      \label{eq:hPhasorDef} \\
+   & \vec{E} \cdot \vec{H} = | \vec{E} | | \vec{H} | \cos
+      \theta_{\mathcal{S}}
+      \label{eq:spatialAngleDef} \\
+   & \mathcal{S} \overset{\text{def}}{=} \mathcal{E} \times \mathcal{H} \ \text{is the
+      Poynting vector.}
+      \label{eq:poyntingDef} \\
+   & \phi_{\mathcal{S}} = \phi_E - \phi_H \\
+   & Z \overset{\text{def}}{=} \frac{|\mathbf{E}|}{|\mathbf{H}|} \ \text{is the EM-wave impedance}
+      \label{eq:impedanceDef} \\
+   & | \langle \mathcal{ S } \rangle | \overset{\text{def}}{=} \left| \frac{\omega}{2
+      \pi} \int_{0}^{\frac{2 \pi}{\omega}} S(t) dt \right| = \ldots =
+      \frac{1}{2Z} |\mathbf{E}|^2 \sin (\theta_{\mathcal{S}}) \cos (
+      \phi_{\mathcal{S}} )
+      \label{eq:poyntingAvgDef}
+\end{align}
+
+\setcounter{section}{6} % "F"
+\setcounter{subsection}{-1}
+\setcounter{equation}{0}
+\section*{(F) Field Assumptions}
+The Rx and Tx are not in the near-field (a reasonable assumption in an outdoor
+scenario), so we have
+   % 2. E_s-incoherence in Rx-region {{{
+   %\subsection*{$E_s$-incoherence in Rx-region}
+\begin{equation}
+   \theta_{\mathcal{S}} = \frac{\pi}{2}
+   \label{eq:spatialAngleAssumption}
+\end{equation}
+\begin{equation}
+   \phi_{\mathcal{S}} = 0
+   \label{eq:phaseAngleAssumption}
+\end{equation}
+The wave is travelling in free space until it hits an obstruction, so
+\begin{equation}
+   Z = \eta_0
+   \label{eq:freeSpaceAssumption}
+\end{equation}
+      The contributions to $E_s$ arriving at the Rx have random, uncorrelated phases
+      \begin{equation}
+         \implies |E_{s}|^2 = \int_X d(|E_s|^2), \ \text{where}
+         \label{eq:incoherence}
+      \end{equation}
+      \begin{itemize}
+         \item $d(|E_s|^2)$ is the squared-field contribution from $dX$ over
+         \item $X$, the wall surface.
+      \end{itemize}
+   % }}}
 \newpage
 \setcounter{section}{1}   % Because first section is unnumbered
 \setcounter{subsection}{-1}
 \setcounter{equation}{-1}  % ```
 \section*{(A) \ Core Assumptions}
 \counterwithin{equation}{subsection}
-% TODO: revise equation numbering later on, to reflect "common" assumptions across
-% scattering models
-
 % A.0.1 Field Decomposition {{{
 \subsection{Generic Setup}
 \subsubsection{Field Decomposition}
@@ -111,11 +177,16 @@ diffusely-scattered component fields:
 \counterwithin{equation}{section}
 \setcounter{equation}{0}
 \subsection{Local Power Balance}
+$S_i$ is the phasor Poynting vector for the incoming wave. So, we have % TODO: move to notation section
+
+
 Letting $P_z$ denote the total power associated with a given field component, $dP_z$
 denote the total power associated with the portion incident on $dX$, and 
 \begin{align}
    dP_i &= dP_t + dP_r + dP_s \nonumber \\
-   \implies \frac{|E_i|^2 d \Omega_i r_i^2}{2 \eta_0} &= \nonumber
+   S_i \nonumber \\
+   \implies \frac{|E_i|^2}{2 \eta_0}dX_i &= P_t + \frac{R^2 |\Gamma|^2
+   |E_i|^2 d \Omega_i r_i^2}{} \nonumber
 \end{align}
 A constant fraction ($S^2$) of the total power incident on $dX$ ($dP_i$) is converted
 into diffusely scattered power ($dP_s$): 
@@ -138,7 +209,6 @@ The radiant intensity $I$ is given by a constant times a scattering pattern $K \
 \mathfrak{S}$. This relates to the above as follows:
 \begin{align}
    dP_s &= \int_{\Omega_X} K\mathfrak{S}( \Omega ) d \Omega_s \\
-   \label{eq:lambertianLawGeneric} 
    &= \int_{\Omega_X}\left( \frac{\mathfrak{S}(\Omega) dP_s }{ \int_{\Omega_X}
       \mathfrak{S}(\Omega_s') d \Omega_s' } \right) d \Omega_s, \ \ \text{where}
       \nonumber 
@@ -153,22 +223,6 @@ The radiant intensity $I$ is given by a constant times a scattering pattern $K \
 \end{itemize}
       % }}}
 
-\setcounter{section}{6}   % To get 'F' for 'Far-field` in eqref
-\setcounter{equation}{0}  % To start the numbering again.
-\newpage
-\section*{(F) \ Far-field Assumptions}
-   % 2. E_s-incoherence in Rx-region {{{
-   \subsection*{$E_s$-incoherence in Rx-region}
-      The contributions to $E_s$ arriving at the Rx have random, uncorrelated phases
-      \begin{equation}
-         \implies |E_{s}|^2 = \int_X d(|E_s|^2), \ \text{where}
-         \label{eq:incoherence}
-      \end{equation}
-      \begin{itemize}
-         \item $d(|E_s|^2)$ is the squared-field contribution from $dX$ over
-         \item $X$, the wall surface.
-      \end{itemize}
-   % }}}
 
 \renewcommand{\thesection}{\arabic{section}}
 %\counterwithout{equation}{section}
@@ -188,9 +242,10 @@ Let
    &= \frac{2 \eta_0 }{dl_{Rx}} \int_{\theta_{s} - \frac{d
       \theta_{Rx}}{2}}^{\theta_{s} + \frac{d \theta_{Rx}}{2}} I( \theta_s ) d \theta
       \nonumber \\
-   &\overset{\mathclap{d \theta_{Rx} \to 0}}{\approx} \ \ \ \ \frac{2 \eta_0 I(\theta_s) d
-      \theta_{Rx}}{dl_{Rx}} = \frac{2 \eta_0 d \theta_{Rx}}{dl_{Rx}} I(\theta_s) \nonumber \\
-   &\overset{\mathclap{\eqref{eq:lambertianLawGeneric}}}{=} \ \ \ \frac{2 \eta_0
+   &\overset{\mathclap{d \theta_{Rx} \to 0}}{\approx} \ \ \ \ \frac{2 \eta_0
+      I(\theta_s) d \theta_{Rx}}{dl_{Rx}} = \frac{2 \eta_0 d \theta_{Rx}}{dl_{Rx}}
+      I(\theta_s) \nonumber \\
+   &\overset{\mathclap{}}{=} \ \ \ \frac{2 \eta_0
       d \theta_{Rx}}{dl_{Rx}} \left( \frac{\cos \theta_s dP_s}{ \int_{\Omega_s} \cos
       \theta_s' d \Omega_s' } \right) \nonumber \\ 
    &= \frac{2 \eta_0 \cos \theta_s d \theta_{Rx} d P_s}{dl_{Rx}
