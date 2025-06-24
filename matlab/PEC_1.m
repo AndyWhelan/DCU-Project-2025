@@ -1,6 +1,12 @@
+% Assume a cylindrical wave incident field
+% The models used to compare are:
+% 1. Effective Roughness (ER) Lambertian model 
+%    (overall ER contribution is an integral along the points of the wall), and
+% 2. Geometrical Optics  (GO).
+%
 % Compare the squared magnitude of the electric field phasor for the setup:
 %                                             
-%  (r_x0, r_y) ────────────────────────────── (r_x, r_y) ──────────────── (r_xe, r_y)
+%     (r_x0, r_y) ─────────────────────────── (r_x, r_y) ──────────────── (r_xe, r_y)
 %                                                 /        
 %                (t_x, t_y)                    /           
 %                     \                     /              
@@ -9,14 +15,8 @@
 %                        \  ╎      /                       
 %                         \ ╎   /                          
 %                          \╎/                             
-% (0,0) ━━━━━━━━━━━━━━━ (w_x, 0) ━━━━━━━━━━━━━━━━━━━━ (w, 0)
+% (w_x0,0) ━━━━━━━━━━━━ (w_x, 0) ━━━━━━━━━━━━━━━━━━━━ (w_xe, 0)
 % 
-% We assume a cylindrical wave incident field
-% The models used to compare are:
-% 1. Effective Roughness (ER) Lambertian model 
-%    (overall ER contribution is an integral along the points of the wall), and
-% 2. Geometrical Optics  (GO).
-%
 % The following are the expectations:
 % a. Small scattering parameters (S ~ 0, R ~ 1) result in close agreement
 % b. As S↑, R↓, we see a smoothed out step function.
@@ -29,17 +29,38 @@ for k = 1:numel(fnames)
    assignin('base', fnames{k}, p.(fnames{k}))            ;
 end
 clear p fnames k                                         ;
+I_GO = zeros( 1, N_rx )                                  ;
+I_ER_Lamb = zeros( 1, N_rx )                             ;
 for(N_r = 1:N_rx)
-   r_x = strip_start_x + (N_r-0.5)*spacing_x             ; % Rx position calc
    E_r_sq = specular_intensity( eta_1, eta_2, mu_r1, ...
                                 mu_r2, t_x, t_y, ...
-                                r_x, r_y, ...
-                                strip_start_x, w, ...
+                                r_x( N_r ), r_y, ...
+                                r_x0, r_xe, ...
+                                w_x0, w_xe, ...
                                 spec_refl( N_r ), P0 )   ; % specular intensity calc
-   E_s_sq = er_lambertian_intensity( S, eta_1, P0, ...
-                                     delta_x, t_x, ...
-                                     t_y, r_x, r_y, ...
-                                     N_strip )           ; % er lamb intensity calc
+   E_s_sq = er_lamb_scattering_intensity( S, eta_1, P0, ...
+                                          delta_xw, t_x, ...
+                                          t_y, r_x( N_r ), r_y, ...
+                                          N_strip )           ; % er lamb intensity calc
+   I_GO( N_r ) = E_r_sq                                  ;
+   I_ER_Lamb( N_r ) = E_s_sq + ...
+                      E_r_sq                             ;
+                      %E_r_sq * (R( N_r ))^2              ;
+end
+figure                                                   ;
+plot( r_x, 10*log10(I_GO), ...
+      'b--', ...
+      'LineWidth', 1.5, ...
+      'DisplayName', 'GO (specular)' )                   ;
+hold on                                                  ;
+plot( r_x, 10*log10(I_ER_Lamb), ...
+      'r:', ...
+      'LineWidth', 1.5, ...
+      'DisplayName', 'ER (Lambertian)' )                 ;
+hold off                                                 ;
+title( 'Comparison of GO and ER Scattering Models', ...
+       'FontSize', 14, ...
+       'FontWeight', 'bold' )                            ;
 %                                                                                     TODO: (P1):
 %                                                                                     1. Plot some initial graphs,
 %                                                                                     2. Tighten up the formulae,
@@ -73,51 +94,58 @@ function P = setup_parameters()
    P.omega = 2.0*pi*P.f                                   ; % ANGULAR FREQUENCY       TODO: (P3) generalise formula via a function
    P.lambda = P.c_1 / P.f                                 ; % WAVELENGTH              TODO: (P3) ```
 
-   % STRIP DIMENSIONS:
-   P.w = 40.0*P.lambda                                    ; % STRIP LENGTH
-   P.strip_start_x = 0                                    ; % sum starts at origin    TODO: (P1) rename properly to tie in with diagram above
-   P.strip_end_x = 1.5*P.w                                ; % more than strip len     TODO: (P1) ```
+   % SETUP GEOMETRY:
+   P.w_x0 = 0                                             ; % STRIP START
+   P.w_len= 40.0*P.lambda                                 ; % STRIP LENGTH
+   P.r_x0 = 0                                             ; % RECEIVER LINE START
+   P.r_len= P.w_len * 4                                   ; % RECEIVER LINE LENGTH
+   P.w_xe = P.w_x0 + P.w_len                              ; % STRIP END
+   P.r_xe = P.r_x0 + P.r_len                              ; % RECEIVER END
 
                                                                                      
    % WALL SHAPE:                                                                      TODO: (P3) Currently unused. To use later when model generalised a bit
-   P.lambda_strip = P.w * 100                             ; % WALL PROFILE WAVELENGTH
+   P.lambda_strip = ( P.w_len * 100 )                     ; % WALL PROFILE WAVELENGTH
    P.A_strip = 0                                          ; % PROFILE AMPLITUDE
 
    % NUMERICAL PARAMETERS:
-   P.disc_per_wavelength = 20                             ; % samples per wavelength
-   P.N_strip = ceil((P.w/P.lambda)*P.disc_per_wavelength) ; % # sim-points on strip
-   P.delta_x = P.w/P.N_strip                              ;
-   P.N_rx  = 1000                                         ; % NUMBER OF RECEIVERS
-   P.spacing_x = (P.strip_end_x - P.strip_start_x)/P.N_rx ; %
+   P.disc_per_wavelength = 8                              ; % samples per wavelength
+   P.N_strip = ceil( (P.w_len/P.lambda)* ...
+                     P.disc_per_wavelength)               ; % # sim-points on strip
+   P.delta_xw = P.w_len/P.N_strip                         ; % 
+   P.N_rx  = 80                                           ; % NUMBER OF RECEIVERS
+   P.spacing_rx = (P.r_xe - P.r_x0)/P.N_rx                ; % RECEIVER SPACING
 
    % ANTENNA POSITIONS
    P.r_y = 5* P.lambda                                    ; % RX HEIGHT :             TODO: (P3) justify later. Maybe use the far-field definition
-   P.t_x = 0                                              ; % TX POS    :  0
    P.t_y = 0.7 * P.r_y                                    ; % TX HEIGHT :             TODO: (P3) ```
+   P.r_x = zeros(1, P.N_rx)                               ; % RX POS    : Prealloc
+   P.t_x = 0                                              ; % TX POS    : 0
 
    % ER-MODEL:                                                                        TODO: (P2) vary the ER-model param
    P.P_p = 0                                              ; % TRANSMITTED POWER       TODO: (P3) tie the transmitted power in with the constitutive parameters
-   P.S = 0.1                                              ; % SCATTERED POWER (sqrt)
+   P.S = 0.8                                              ; % SCATTERED POWER (sqrt)
+   P.spec_refl = zeros(1, P.N_rx)                         ; % SPEC REFLECTANCE
    P.Gamma = zeros(1, P.N_rx)                             ; % FRESNEL COEFFICIENTS
    P.R = zeros(1, P.N_rx)                                 ; % SPECULAR POWER (sqrt)
-   for(P.N_r = 1:P.N_rx)
-      P.spec_refl = specular_reflectance(  eta_1, ...
-                                           eta_2, ...
-                                           mu_r1, ...
-                                           mu_r2, ...
-                                           t_x, t_y, ...
-                                           r_x, r_y )     ;
-      P.Gamma( P.N_r ) = sqrt( P.spec_refl )              ;
-      P.R( P.n_r ) = sqrt( 1 - (P.S)^2 - (P.P_p / P.P_0) ) / ...
-                        P.Gamma( P.N_r )
+   for( n_r = 1:P.N_rx )
+      P.r_x( n_r ) = P.r_x0 + (n_r-0.5)*P.spacing_rx  ;
+      P.spec_refl( n_r ) = specular_reflectance( P.eta_1, ...
+                                                   P.eta_2, ...
+                                                   P.mu_r1, ...
+                                                   P.mu_r2, ...
+                                                   P.t_x, P.t_y, ...
+                                                   P.r_x( n_r ), P.r_y )  ;
+      P.Gamma( n_r ) = sqrt( P.spec_refl( n_r ) )         ;
+      P.R( n_r ) = sqrt( 1 - (P.S)^2 - (P.P_p / P.P0) ) / ...
+                        P.Gamma( n_r ) ;
    end
 end
 
-function I = er_lambertian_intensity( S, ...
-                                      eta_1, P0, ...
-                                      delta_x, ...
-                                      t_x, t_y, r_x, r_y, ...
-                                      N_strip )
+function I = er_lamb_scattering_intensity( S, ...
+                                           eta_1, P0, ...
+                                           delta_x, ...
+                                           t_x, t_y, r_x, r_y, ...
+                                           N_strip )
 I = 0 ;
 for( w_x = 1:N_strip )
    x_i_diff = (w_x - 0.5) * delta_x ;
@@ -129,19 +157,22 @@ for( w_x = 1:N_strip )
    theta_i = acos( r_y / dist_s ) ;
    theta_s = acos( t_y / dist_i ) ;
    % Formula 1.3 in derivations:
-   dI = ( ((S^2) * eta_1 * P0 * ( cos( theta_i )) * (cos(theta_s)) * delta_x ) / ...
-          (2*pi*dist_i*dist_s) )
+   dI = ((S^2) * eta_1 * P0 * ( cos( theta_i )) * (cos(theta_s)) * delta_x ) / ...
+          (2*pi*dist_i*dist_s) ;
    I = I + dI 
 end
 end
 %
 function I = specular_intensity( eta_1, eta_2, mu_r1, mu_r2, t_x, t_y, r_x, r_y, ...
-                                 x_start, len_strip, reflectance, P0 )
+                                 r_x0, r_xe, w_x0, w_xe, reflectance, P0 )
    I = 0 ;
-   theta_i = atan( (r_y + t_y)/(r_x - t_x) ) ;
-   spec_shear = r_y * tan( theta_i ) ;
-   if( spec_shear <= r_x && r_x <= spec_shear + len_strip )
-      dist = sqrt( (r_x - t_x)^2 + (r_y + t_y)^2 ) ; % total specular distance
+   theta_i = pi/2 - atan( (r_y + t_y)/(r_x - t_x) ) ;
+   x_rec_line = t_x + (r_y+t_y)*tan(theta_i) ;
+   x_spec = t_y * tan( theta_i ) + t_x ;
+   hits_wall = w_x0 <= x_spec && x_spec <= w_xe ;
+   hits_recv = r_x0 <= x_rec_line && x_rec_line <= r_xe ;
+   if( hits_wall && hits_recv )
+      dist = sqrt( (x_rec_line - t_x)^2 + (r_y + t_y)^2 ) ; % total specular distance
       I = 2 * eta_1 * P0 * ( 1 / dist ) * reflectance ;
    end
 end
@@ -192,14 +223,16 @@ function vp = wave_phase_velocity(epsilon, mu, sigma, f)
       mu      (1,1) {mustBeNumeric, mustBeReal, mustBePositive}
       sigma   (1,1) {mustBeNumeric, mustBeReal, mustBeNonnegative}
       % Optional args + validation:
-      f       (1,1) {mustBeNumeric, mustBeReal, mustBePositive} = []
+      f       (1,1) {mustBeNumeric, mustBeReal} = NaN
    end
-   if sigma > 0 && isempty(f)
-      % --- Case 0: Incorrect usage ---
-      error('For a lossy medium (sigma > 0), frequency argument ''f'' must be ...
-            provided.') ;
-   end
-   if sigma == 0
+   if sigma > 0 && isnan(f)
+      % --- Case 0: Default f / invalid options ---
+      if( sigma >= 5.8e7 ) % This is PEC, ok
+         vp = 0 ;
+      else
+         error('For a lossy medium (sigma > 0), frequency argument ''f'' must be provided.') ;
+      end
+   elseif sigma == 0
       % --- Case 1: Lossless Medium (Perfect Dielectric) ---
       vp = 1 / sqrt(epsilon * mu) ;
    else
@@ -219,17 +252,16 @@ function eta = wave_impedance(epsilon, mu, sigma, f)
       mu      (1,1) {mustBeNumeric, mustBeReal, mustBePositive}
       sigma   (1,1) {mustBeNumeric, mustBeReal, mustBeNonnegative}
       % Optional args + validation:
-      f       (1,1) {mustBeNumeric, mustBeReal, mustBePositive} = []
+      f       (1,1) {mustBeNumeric, mustBeReal} = NaN
    end
-   if sigma > 0 && isempty(f)
-      if( sigma == 5.8e7 ) % This is PEC, ok
+   if( sigma > 0 && isnan(f) )
+      % --- Case 0: Default f / invalid options ---
+      if( sigma >= 5.8e7 ) % This is PEC, ok
          eta = 0 ;
       else
-         error('For a lossy medium (sigma > 0), frequency argument ''f'' must be ...
-               provided.') ;
+         error('For a lossy medium (sigma > 0), frequency argument ''f'' must be provided.') ;
       end
-   end
-   if sigma == 0
+   elseif( sigma == 0 )
       % --- Case 1: Lossless Medium (Perfect Dielectric) ---
       eta = sqrt(mu / epsilon);
    else
