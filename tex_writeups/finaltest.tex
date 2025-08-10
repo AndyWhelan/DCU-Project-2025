@@ -1,0 +1,31 @@
+\listfiles
+\documentclass{article}
+
+% --- PACKAGES ---
+\usepackage{amsmath} % For \vec
+\usepackage{hyperref}
+\usepackage[symbols, nomain]{glossaries-extra}
+\usepackage{cleveref}
+
+% --- GLOSSARY DEFINITIONS ---
+\newglossarycategory{geometryAndCoordinates}{name={Geometry and Coordinates}}
+\newglossaryentry{coords}{
+   name={(\vec{r}, t)},
+   description={Coordinates in $\mathbb{R}^{3+1}$},
+   category={geometryAndCoordinates},
+   type=symbols
+}
+
+% --- FINALIZE GLOSSARY SETUP ---
+\makenoidxglossaries
+
+% --- DOCUMENT START ---
+\begin{document}
+
+A test using \gls{coords}.
+
+\appendix
+\section*{List of Symbols}
+\printnoidxglossary[type=symbols, style=long, sort=name, category]
+
+\end{document}

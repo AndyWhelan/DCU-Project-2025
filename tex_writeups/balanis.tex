@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\usepackage{amsfonts}
+%\usepackage{glossaries}
+\usepackage{graphicx}
+%\usepackage{longtable}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{subcaption}
+
+\begin{document}
+% newcommand defs {{{
+\newcommand{\angFreq}{\omega}
+\newcommand{\cPoynt}{\mathbf{S}}
+\newcommand{\cond}{\sigma}
+\newcommand{\defeq}{\overset{\mathclap{\text{def}}}{=}}
+\newcommand{\permitt}{\epsilon}
+\newcommand{\eFreq}{\mathbf{E}}
+\newcommand{\eqBy}[1]{\overset{\mathclap{\eqref{#1}}}{=}}
+\newcommand{\eTime}{\mathscr{E}}
+\newcommand{\fourier}{\mathcal{F}}
+\newcommand{\hFreq}{\mathbf{H}}
+\newcommand{\hTime}{\mathscr{H}}
+\newcommand{\im}{j}
+\newcommand{\permeab}{\mu}
+\newcommand{\poynt}{\mathscr{S}}
+\newcommand{\poyntAvg}{\langle \poynt \rangle}
+\newcommand{\propConst}{\gamma}
+\newcommand{\reals}{\mathbb{R}}
+% }}}
+% Title Page {{{
+\begin{titlepage}
+   \centering
+   %\vspace*{\fill}  % Pushes content to vertical center
+
+   {\Large\bfseries Balanis Quick Reference \par}
+
+   {\Large Andrew Whelan \par}
+   \vspace{0.2cm}
+
+   \tableofcontents
+   \vspace*{\fill}  % Pushes remaining space below
+\end{titlepage}
+% }}}
+\section{Time-Varying and Time-Harmonic Electromagnetic Fields}
+\begin{enumerate}
+   \item Circuit theory is only valid when the physical dimensions of the circuit are
+   small compared to the wavelength
+   \item Boundary conditions are derived by considering 
+   \begin{enumerate}
+      \item the integral curl equations on a tiny rectangle along the boundary and
+         taking the limit as the height goes to zero, and
+      \item the integral divergence equations on a cylinder along the boundary and
+         taking the limit as the height goes to zero.
+   \end{enumerate}
+   \item To get conservation of energy relations, consider 
+   \begin{enumerate}
+      \item a finite volume of space $V$,
+      \item scalar multiplying each curl equation by the other field,
+      \item subtracting the equations, and 
+      \item use vector identity for divergence of cross product
+   \end{enumerate}
+   \item Poynting vector $\poynt$ and complex Poynting vector $\cPoynt$ are given by 
+   \begin{align}
+      \poynt & \defeq \eTime \times \hTime \label{eq:poyntDef} \\
+      \cPoynt & \defeq \fourier ( \poynt ) \eqBy{eq:poyntDef} \fourier ( \eTime
+         \times \hTime ) \nonumber \\
+      &= \frac{1}{2\pi} \int_{\reals} \mathbf{E}(\angFreq') \times
+         \mathbf{H}(\angFreq - \angFreq') d\angFreq' \label{eq:cPoyntDef} \\ 
+      \poyntAvg & \defeq \lim_{T \to \infty} \frac{1}{T} \int_{-T/2}^{T/2} \poynt (t)
+      dt = \cPoynt(\angFreq = 0) \nonumber \\
+      & \eqBy{eq:cPoyntDef} \frac{1}{2 \pi} \int_{\reals} \eFreq ( \angFreq' ) \times
+      \hFreq^* (\angFreq') d \angFreq' \label{eq:poyntAvgDef}
+   \end{align}
+\end{enumerate}
+\section{Electrical Properties of Matter}
+\begin{enumerate}
+   \item Dielectric $\implies$ no free charges $\implies$ less resistance to
+      electrical forces, and is quantified by $\permitt$. Think of bound charges
+      storing elastic energy
+   \item Magnetic $\implies$ less resistance to magnetic forces, and is quantified by
+      $\permeab$.
+   \item Conductor $\implies$ free charges and is quantified by $\cond$. Think of
+      free charges and dissipative energy
+   \item Media Properties:
+   \begin{enumerate}
+      \item \emph{Linear} : parameters are not functions of applied field (or are
+         linearly mapped to them)
+      \item \emph{Homogeneous} : parameters not function of position
+      \item \emph{Isotropic} : parameters not function of field direction 
+      \item \emph{Dispersive} : parameters are function of frequency
+   \end{enumerate}
+\end{enumerate}
+\section{Wave Equation and its Solutions}
+\begin{enumerate}
+   \item Assume a source-free, homogeneous medium, then we can derive the Helmholtz
+   equations in the frequency domain:
+   \begin{subequations}
+      \begin{align}
+         ( \nabla^2 - \propConst^2 ) E &= 0 \label{eq:electricHelmholtz} \\
+         ( \nabla^2 - \propConst^2 ) H &= 0 \label{eq:magneticHelmholtz}
+      \end{align}
+   \end{subequations}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,369 @@
+\documentclass{article}
+
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{subcaption}
+
+\DeclareMathOperator{\sign}{sgn}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\begin{document}
+% newcommand defs {{{
+\newcommand{\ampRep}{\vec{A}}
+\newcommand{\ampCoef}{\ampRep_m}
+\newcommand{\freq}{\omega}
+\newcommand{\cPoynt}{\mathbf{S}}
+\newcommand{\cond}{\sigma}
+\newcommand{\curv}{\kappa}
+\newcommand{\defeq}{\overset{\mathclap{\text{def}} }{=}}
+\newcommand{\eFreq}{\mathbf{E}}
+\newcommand{\eFreqMom}{\tilde{\eFreq}}
+\newcommand{\eikonal}{\mathcal{L}}
+\newcommand{\complexNums}{\mathbb{C}}
+\newcommand{\dispRel}{k}
+\newcommand{\eTime}{\mathscr{E}}
+\newcommand{\eqBy}[1]{\overset{\mathclap{\eqref{#1} }}{=}}
+\newcommand{\fourier}{\mathcal{F}}
+\newcommand{\fresnel}{\Gamma}
+\newcommand{\hFreq}{\mathbf{H}}
+\newcommand{\hTime}{\mathscr{H}}
+\newcommand{\im}{j}
+\newcommand{\impedance}{\eta}
+\newcommand{\incField}{\eFreq_i}
+\newcommand{\initField}{\eFreq_0}
+\newcommand{\laplacian}{\nabla^2}
+\newcommand{\permeab}{\mu}
+\newcommand{\permitt}{\epsilon}
+\newcommand{\pos}{\vec{r}}
+\newcommand{\posMag}{r}
+\newcommand{\incPt}{\pos_i}
+\newcommand{\focalPt}{\vec{f}_r}
+\newcommand{\posNorm}{\hat{r}}
+\newcommand{\incPtNorm}{\posNorm_i}
+\newcommand{\poyntAvg}{\langle \poynt \rangle}
+\newcommand{\normV}{\vec{n}}
+\newcommand{\normVNorm}{\hat{n}}
+\newcommand{\poynt}{\mathscr{S}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\surf}{\Sigma}
+\newcommand{\posSurf}{\pos_{\surf}}
+\newcommand{\tx}{\pos_t}
+\newcommand{\txNorm}{\posNorm_t}
+\newcommand{\wavenum}{\dispRel( \freq )}
+\newcommand{\wavevec}{\mathbf{k}}
+\newcommand{\wavevecNorm}{\hat{\wavevec}}
+\newcommand{\reflNorm}{\wavevecNorm_r}
+\newcommand{\reflPt}{\pos_r}
+\newcommand{\txPower}{P_0}
+\newcommand{\unitTang}{\hat{t}}
+\newcommand{\unitNorm}{\hat{n}}
+\newcommand{\kra}{\wavevec_i + 2 \dispRel \cos \theta_i \unitNorm(0)}
+\newcommand{\krb}{(-2 \dispRel \curv_{\surf}(0) \cos \theta_i ) \unitTang(0) + (2
+                  \dispRel \curv_{\surf}(0) \sin \theta _i ) \unitNorm(0) }
+\newcommand{\krca}{\left( - 2 \dispRel \curv_{\surf}'(0) \cos \theta_i - 4 \dispRel
+                   \curv_{\surf}^2(0) \sin \theta_i \right) \unitTang(0)}
+\newcommand{\krcb}{\left( 2 \dispRel \curv_{\surf}'(0) \sin \theta_i  - 4 \dispRel
+                   \curv_{\surf}^2(0) \cos \theta_i \right) \unitNorm(0)}
+% }}}
+\numberwithin{equation}{section}
+\section{Geometrical Optics}
+Geometrical Optics can be derived as a large $\freq$ limit of wave optics. We begin
+with the time-independent Helmholtz equation for a general lossless, homogeneous
+medium: 
+\begin{equation}
+   ( \laplacian + \wavenum^2 ) \eFreq = 0
+   \label{eq:helmholtz}
+\end{equation}
+where $\dispRel : \reals \to \reals$ is the dispersion relation, $\wavenum$
+is the ``wavenumber'', and $\eFreq : \reals^{3} \times \reals \to \complexNums^3$ is
+the electric field in the frequency domain.
+
+Assume a plane-wave Fourier decomposition (ignore the normalization factor as it can
+be factored out of \eqref{eq:helmholtz}):
+\begin{equation}
+   \eFreq( \pos, \freq ) = \iiint_{\reals^3} e^{\im \wavevec \cdot \pos} \ \eFreqMom(
+      \wavevec, \freq ) d^3 \wavevec
+   \label{eq:planeWaveDecomposition}
+\end{equation}
+Then, substituting \eqref{eq:planeWaveDecomposition} into \eqref{eq:helmholtz} we
+ultimately get
+\begin{equation}
+   \norm{\wavevec}^2 - \wavenum^2 = 0
+   \label{eq:waveCond}
+\end{equation}
+\subsection{Rays as Limit of Wave Optics}
+From Maxwell's equations, the dispersion relation in a lossless medium is $\wavenum =
+\freq \sqrt{\permeab \permitt}$, so that in the high frequency limit, the integral in
+\eqref{eq:planeWaveDecomposition} oscillates rapidly and is dominated by
+contributions where $\wavevec \cdot \pos$ is stationary. 
+
+Applying a stationary phase variational principle to find these stationary points,
+subject to the constraint from \eqref{eq:waveCond}, we get
+\begin{align}
+   \delta(\wavevec \cdot \pos) &= 0 \nonumber \\
+   \implies (\delta \wavevec) \cdot \pos &= 0, \quad \forall \delta \wavevec \ \text{
+      satisfying \eqref{eq:waveCond}}
+\label{eq:stationaryCondition}
+\end{align}
+Taking the variation of \eqref{eq:waveCond} gives:
+\begin{align}
+   \delta (\norm{\wavevec}^2 - \wavenum^2) = \delta(\wavevec \cdot \wavevec) &= 0
+      \nonumber \\
+   \implies 2(\wavevec \cdot \delta \wavevec) &= 0 \nonumber \\
+   \implies \wavevec \cdot \delta \wavevec&=0
+\label{eq:constraintCondition}
+\end{align}
+Since the variation is constrained by \eqref{eq:waveCond}, $\delta \wavevec$ spans the
+tangent plane to the sphere defined by \eqref{eq:waveCond}. For
+\eqref{eq:stationaryCondition} and \eqref{eq:constraintCondition} to hold for all
+variations, we must therefore have $\pos$ normal to the tangent plane spanned by
+$\delta \wavevec$, and so we must have
+\begin{equation}
+   \pos \parallel \wavevec_s, \quad \text{for stationary } \wavevec_s
+\label{eq:rayCondition}
+\end{equation}
+This result proves that the field at an observation point $\pos$ is dominated by the
+plane wave component whose wavevector $\wavevec_s$ points along the line connecting
+the origin to $\pos$. This is the mathematical emergence of a ray and the principle
+of straight-line propagation.
+\subsection{Ray Evolution in 2D}
+Condition \eqref{eq:waveCond} combined with already being in $\reals^2$, means we can
+restrict ourselves to a 1d integral. Take a parametrization $\wavevec(s)$, where $s$
+is the arc-length, and expand the phase $\phi(s)$ in a Taylor-series:
+\begin{align}
+   \phi(s) & \defeq \pos \cdot \wavevec (s) \nonumber \\
+   &= \pos \cdot \left( \wavevec( 0 ) + \underbrace{\wavevec'(0)}_{\wavevec'(0) \perp
+      \pos} s + \frac{\wavevec''(0)}{2} s^2 + \underbrace{\ldots}_{\text{small}}
+      \right) \nonumber \\
+   & \approx \pos \cdot \left( \wavevec(0) + \frac{\wavevec ''(0)}{2} s^2 \right)
+   \label{eq:taylorPhi}
+\end{align}
+Now, use the WKB method of assuming the amplitude is slowly varying compared to
+$\phi$, so that $\eFreqMom(s) \approx \eFreqMom(0)$. Then
+\eqref{eq:planeWaveDecomposition} becomes
+\begin{align}
+   \eFreq & \approx \eFreqMom (0) e^{\im \pos \cdot \wavevec(0)} \int_{\reals}
+      e^{\im \pos \cdot \wavevec'' (0) \frac{s^2}{2}} ds \nonumber \\
+   &= \eFreqMom (0) e^{\im \pos \cdot \wavevec(0)} \sqrt{\frac{2\pi}{-j
+      \pos \cdot \wavevec''(0)}} \nonumber \\
+   &= \sqrt{\frac{-2 \pi \dispRel \im }{ \posMag \ \posNorm \cdot
+      \wavevecNorm( 0 ) }} \ \eFreqMom (0) e^{\im \left( \left( \dispRel
+      \posMag \right) \ \posNorm \cdot \wavevecNorm(0) \right)} \nonumber \\
+   \implies \eFreq & \approx \sqrt{\frac{2 \pi \dispRel}{\posMag}} \ \eFreqMom(0) \
+      e^{\pm \im \left( \dispRel \posMag \ - \ \underbrace{\pi/4}_{\text{Guoy shift}}
+      \right) }
+\end{align}
+The term $\eFreqMom(0)$ represents the source's radiation strength in the direction
+of the observer. By conserving power, it can be shown that this term is related to
+the total power radiated by the source, $\txPower$:
+\begin{equation}
+   |\eFreqMom(0)| = \sqrt{\frac{\impedance \txPower F(\wavevecNorm_s)}{2\pi^2 \dispRel}}
+\end{equation}
+where $\impedance$ is the impedance of the medium and $F(\wavevecNorm_s)$ is the dimensionless radiation pattern of the source (equal to 1 for an isotropic radiator). Substituting this back gives the final, physically interpretable result for the electric field:
+\begin{equation}
+   \eFreq(\pos) \approx \sqrt{\frac{\impedance \txPower F(\wavevecNorm_s)}{\pi
+     \posMag}} \ e^{ \pm \im \left( \dispRel \posMag - \pi/4 \right)}
+   \label{eq:rayEvolution2d}
+\end{equation}
+\subsection{Reflection and Caustics}
+
+Due to linearity, planar reflection can always be solved by decomposing fields into
+components parallel and perpendicular to the plane of incidence, and then applying
+the usual Fresnel linear map $\fresnel : \complexNums^2 \to \complexNums^2$.
+
+Curved surfaces are a bit more complicated. For a 2d surface $\surf : \reals \to
+\reals^2$ with curvature $\curv_{\surf}$, the $\posMag_i$ in
+\eqref{eq:rayEvolution2d} will change to $\posMag_r$ after hitting $\surf$.
+Considering high frequency radiation coming from $\Sigma$, the phase to vary is
+\begin{equation}
+   \phi_{r}(s) = ( \pos_r - \posSurf(s) ) \cdot \wavevec_r(s)
+   \label{eq:phaseFromSurface}
+\end{equation}
+Then, expanding analagously to \eqref{eq:quadraticPhaseApprox}:
+\begin{align}
+   \posSurf(s) & \approx \posSurf(0) + s \posSurf \ '(0) + \frac{s^2}{2} \posSurf \
+      ''(0) \nonumber \\
+   &= \posSurf(0) + s \unitTang( 0 ) + \frac{s^2}{2} \curv_{\surf} (0) \unitNorm (0 )
+   \label{eq:surfaceApprox}
+\end{align}
+where $\unitTang$ and $\unitNorm$ are the unit tangent and normal to $\surf$
+respectively, and we have used the arc-length parametrization and applied
+Frenet-Serret formulae. We also have 
+\begin{align}
+   \wavevec_r(s) & \approx \wavevec_r(0) + s \wavevec_r '(0) + \frac{s^2}{2}
+   \wavevec_r ''(0)
+\end{align}
+and by the reflection law identity (using the tangent plane approximation)
+\begin{align}
+   \wavevec_r(s) = \wavevec_i - 2 (\unitNorm(s) \cdot \wavevec_i) \unitNorm(s)
+      \label{eq:reflectionLaw}
+\end{align}
+From \eqref{eq:reflectionLaw} and Frenet-Serret, we get
+\begin{subequations}
+\begin{align}
+   \wavevec_r(0) &= \wavevec_i - 2 (\unitNorm(0) \cdot \wavevec_i) \unitNorm(0) \\
+   \wavevec_r'(0) &= 2 \curv_{\surf}(0) ( \unitNorm(0) \cdot \wavevec_i )
+      \unitTang(0) + 2 \curv_{\surf}(0) (\unitTang(0) \cdot \wavevec_i ) \unitNorm(0) \\
+   \wavevec_r''(0) &= \left( 2 \curv_{\surf}'(0) ( \unitNorm(0) \cdot \wavevec_i ) -
+      4 \curv_{\surf}^2(0) (\unitTang(0) \cdot \wavevec_i) \right) \unitTang(0) \ +
+      \nonumber \\
+   & \quad \ \left( 2 \curv_{\surf}'(0) ( \unitTang(0) \cdot \wavevec_i ) + 4
+      \curv_{\surf}^2(0) (\unitNorm(0) \cdot \wavevec_i) \right) \unitNorm(0)
+\end{align}
+\end{subequations}
+These can be simplified further, since $\unitNorm(0) \cdot \wavevec_i = -\dispRel
+\cos \theta_i$, and $\unitTang(0) \cdot \wavevec_i = \dispRel \sin \theta_i$:
+\begin{subequations}
+\begin{align}
+   \wavevec_r(0) &= \wavevec_i + 2 \dispRel \cos \theta_i \unitNorm(0) \\
+   \wavevec_r'(0) &= (-2 \dispRel \curv_{\surf}(0) \cos \theta_i )
+      \unitTang(0) + (2 \dispRel \curv_{\surf}(0) \sin \theta_i ) \unitNorm(0) \\
+   \wavevec_r''(0) &= \left( - 2 \dispRel \curv_{\surf}'(0) \cos \theta_i -
+      4 \dispRel \curv_{\surf}^2(0) \sin \theta_i \right) \unitTang(0) \ +
+      \nonumber \\
+   & \quad \ \left( 2 \dispRel \curv_{\surf}'(0) \sin \theta_i  - 4
+      \dispRel \curv_{\surf}^2(0) \cos \theta_i \right) \unitNorm(0)
+\end{align}
+\end{subequations}
+Plugging these into \eqref{eq:phaseFromSurface}, and neglecting terms larger than
+$s^2$, we get
+\begin{align}
+   \phi_r(s) & \approx (\pos_r - \pos_{\surf}(0)) \cdot ( \kra ) \nonumber \\
+   &+ s \Large( ( \pos_r - \pos_{\surf}(0) ) \cdot \krb ) ) \nonumber \\
+   &- s \unitTang(0) \cdot ( \kra ) \nonumber \\
+   &+ \frac{s^2}{2} ( \pos_r - \pos_{\surf}(0) ) \cdot ( \krca ) \nonumber \\
+   &+ \frac{s^2}{2} ( \pos_r - \pos_{\surf}(0) ) \cdot ( \krcb ) \nonumber \\
+   &- \frac{s^2}{2}  \curv_{\surf}(0) \unitNorm(0) \cdot ( \kra ) \\
+   &- s^2 \unitTang(0) \cdot( \krb ) 
+   \label{eq:reflectionPhase}
+\end{align}
+Using the following conventions 
+\begin{subequations}
+\begin{align}
+   r_t & \defeq (\pos_r - \pos_{\Sigma}(0)) \cdot \unitTang(0) \\ 
+   r_n & \defeq (\pos_r - \pos_{\Sigma}(0)) \cdot \unitNorm(0)
+\end{align}
+\end{subequations}
+we can then simplify the dot products in terms of angle of incidence, ending up with
+a quadratic phase $as^2 + bs + c$ where 
+\begin{subequations}
+\begin{align}
+   a &= \begin{aligned}[t]
+      \frac{\dispRel}{2} \biggl[ & \left(-2 \curv_{\surf}'(0) \cos\theta_i - 4
+      \curv_{\surf}^2(0) \sin\theta_i \right) r_t \\
+      & + \left(2 \curv_{\surf}'(0)
+      \sin\theta_i - 4 \curv_{\surf}^2(0) \cos\theta_i \right) r_n \\
+      & + 3 \curv_{\surf}(0)\cos\theta_i \biggr]
+   \end{aligned} \\
+   b &= 2 \dispRel \curv_{\surf}(0) (r_n \sin\theta_i - r_t \cos\theta_i) - \dispRel
+   \sin\theta_i \\
+   c &= \dispRel (r_t \sin\theta_i + r_n \cos\theta_i)
+\end{align}
+\end{subequations}
+So, under the WKB approximation as before, \eqref{eq:planeWaveDecomposition} reduces
+to
+\begin{equation}
+   \eFreq(\pos) = \eFreqMom(0) \sqrt{\frac{\pi}{\lvert a \rvert}} \ e^{ \pm j \left(c
+      - \frac{b^2}{4a} + \frac{\pi}{4} \right)}
+   \label{eq:unexpandedReflGO}
+\end{equation}
+The stationary phase assumption tells us $b=0$, but it's left in here because
+Assuming a setup with a fixed transmitter $\tx$ and receiver $\reflPt$, we want to
+use the stationary phase principle to find the stationary points $\incPt$ along a
+planar surface $P$. To do this, the Fourier plane wave representation We can choose a Fourier representation The phase $\wavevec \cdot \pos$ of
+\eqref{eq:planeWaveDecomposition} can be written as 
+\begin{equation}
+   \wavevec \cdot \pos(s) = \wavevec \cdot \left( (\incPt(s) - \tx ) + ( \reflPt -
+      \incPt(s) ) \right)
+   \label{eq:phaseReflection}
+\end{equation}
+\subsection{Scattering from rough surfaces}
+When rays are transmitted from a known point source $\tx$, we will assume the outgoing
+spreading to be symmetric concentric circles. The incident field is then given by 
+\begin{equation}
+   \incField (\incPt) = \sqrt{\frac{P_0 \impedance}{2 \pi \norm{\incPt - \tx}}} e^{- \im k
+   \norm{\incPt - \tx}} \ \wavevecNorm_i
+   \label{eq:incidentGOField}
+\end{equation}
+In the case of a rough surface $\surf:
+\reals \to \reals^2$, incident rays are assumed to reflect in a cylindrical wave
+whose curvature $\curv_r$ (using the convention that $\curv < 0$ corresponds to
+diverging waves) is related to 
+\begin{itemize}
+   \item the curvature of the wavefront $\curv_i = -\frac{1}{\norm{\incPt - \tx}}$,
+      and 
+   \item the curvature of the surface at that point $\curv_{\surf}$
+\end{itemize}
+according to 
+\begin{align}
+   \curv_r &= - 2 \curv_{\surf} \cos \theta_i - \frac{1}{\norm{\incPt - \tx}} \nonumber \\
+   &= - 2 \curv_{\surf} | \wavevecNorm_i \cdot \normVNorm | - \frac{1}{|\incPt - \tx|}
+   \label{eq:outgoingCurvature}
+\end{align}
+This wave will have a corresponding apparent source whose focus will differ, but
+whose spreading factor can be calculated as 
+\begin{align}
+   \text{spread}_{\surf} &= \frac{1}{\sqrt{1 + |\reflPt - \incPt| \ \curv_r }}
+      \nonumber \\
+   &= \frac{1}{\sqrt{1 - |\reflPt - \incPt| \ \left( 2
+      \curv_{\surf} | \wavevecNorm_i \cdot \normVNorm | + \frac{1}{|\incPt -
+      \tx|}\right) }}
+      \label{eq:spreadingFactorObstruction}   
+\end{align}
+This poses a predictive problem for the theory in the case of focusing rays, since we
+can always choose an $\reflPt$ such that the denominator of
+\eqref{eq:spreadingFactorObstruction} is $\leq 0$. This is the classical problem of
+\emph{caustics}, places where rays converge tightly.
+\subsubsection{Wave Theory Correction at a Caustic}
+To resolve the singularity, we must return to the underlying wave theory. The field reflected from the surface $\surf$ to an observation point $\reflPt$ can be expressed by the Kirchhoff-Huygens diffraction integral. For a 2D problem, this takes the form:
+\begin{equation}
+    \eFreq(\reflPt) = \int_{\surf} A(s) e^{\im \Phi(s)} ds
+    \label{eq:kirchhoffIntegral}
+\end{equation}
+where $s$ is the arc length along the surface $\surf$, $A(s)$ is a slowly varying amplitude function, and $\Phi(s)$ is the phase function. The phase is determined by the total optical path length from the source $\tx$ to the observer $\reflPt$ via the point $\incPt(s)$ on the surface:
+\begin{equation}
+    \Phi(s) = \dispRel \left( |\incPt(s) - \tx| + |\reflPt - \incPt(s)| \right)
+\end{equation}
+The method of stationary phase states that for large $\dispRel$, the integral is dominated by points $s_0$ where the phase is stationary, i.e., $\frac{d\Phi}{ds} \big|_{s_0} = 0$. This condition recovers Snell's law of reflection at the specular point $s_0$.
+
+The GO amplitude, and hence the spreading factor in \eqref{eq:spreadingFactorObstruction}, is derived from the second-order term in the Taylor expansion of the phase:
+\begin{equation}
+    \Phi(s) \approx \Phi(s_0) + \frac{1}{2} \Phi''(s_0) (s-s_0)^2
+    \label{eq:quadraticPhaseApprox}
+\end{equation}
+The resulting field amplitude is proportional to $1/\sqrt{|\Phi''(s_0)|}$. The
+spreading factor of \eqref{eq:spreadingFactorObstruction} is precisely this term:
+\begin{equation}
+    |\text{spread}_{\surf}| \propto \frac{1}{\sqrt{|\Phi''(s_0)|}}
+\end{equation}
+The caustic is therefore the locus of points $\reflPt$ for which the corresponding specular point $s_0$ satisfies:
+\begin{equation}
+    \Phi''(s_0) = 0
+    \label{eq:causticCondition}
+\end{equation}
+This is the mathematical root of the GO failure. To find the field at or near the caustic, we must retain the next non-vanishing term in the Taylor expansion of the phase around $s_0$:
+\begin{equation}
+    \Phi(s) \approx \Phi(s_0) + \Phi'(s_0) (s-s_0) + \frac{1}{2}\underbrace{\Phi''(s_0)}_{=0} (s-s_0)^2 + \frac{1}{6} \Phi'''(s_0) (s-s_0)^3
+\end{equation}
+Here, we are at a point $\reflPt$ *near* the caustic, so the stationary phase point $s_0$ on the surface is slightly perturbed, meaning $\Phi'(s_0)$ is a small, non-zero value. It represents the offset of the observation point from the geometric caustic ray. We define:
+\begin{align}
+    \alpha &\defeq \Phi'(s_0) \\
+    \beta &\defeq \frac{1}{6} \Phi'''(s_0)
+\end{align}
+The phase expansion simplifies to a cubic polynomial. Substituting this into the integral \eqref{eq:kirchhoffIntegral} gives:
+\begin{equation}
+    \eFreq(\reflPt) \approx A(s_0) e^{\im \Phi(s_0)} \int_{-\infty}^{\infty} e^{\im (\alpha \xi + \beta \xi^3)} d\xi
+    \label{eq:protoAiry2D}
+\end{equation}
+where we have set $\xi = s-s_0$ and extended the integration limits to infinity, as the contribution is negligible far from $s_0$. The integral in \eqref{eq:protoAiry2D} is the canonical representation of the **Airy function**, $Ai(z)$. With a final change of variables, $t = (3\beta)^{1/3} \xi$, the integral becomes:
+\begin{equation}
+    \int_{-\infty}^{\infty} e^{\im (\alpha \xi + \beta \xi^3)} d\xi = \frac{1}{(3\beta)^{1/3}} \int_{-\infty}^{\infty} e^{\im \left( \frac{\alpha}{(3\beta)^{1/3}} t + \frac{1}{3} t^3 \right)} dt \propto \text{Ai}\left(\frac{\alpha}{(3\beta)^{1/3}}\right)
+\end{equation}
+Thus, the electric field near the caustic is no longer infinite but is described by the Airy function:
+\begin{equation}
+    \eFreq(\reflPt) \propto \text{Ai}\left( \frac{\Phi'(s_0)}{( \frac{1}{2} \Phi'''(s_0) )^{1/3}} \right)
+\end{equation}
+This solution is finite at the caustic (where $\alpha=\Phi'=0$), oscillates on the illuminated side (where multiple rays exist), and decays exponentially into the shadow region, providing a complete and physically accurate description that bridges the gap where geometrical optics fails.
+\end{document}
